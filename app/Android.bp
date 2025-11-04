@@ -19,6 +19,7 @@ android_app {
 
     platform_apis: true,
     privileged: true,
+    privapp_allowlist: "net.pixelos.ota.xml",
     certificate: "platform",
     system_ext_specific: true,
 
@@ -43,18 +44,9 @@ android_app {
     },
 
     required: [
-        "privapp_whitelist_net.pixelos.ota",
         "default-permissions_net.pixelos.ota",
         "init.pixelos-updater.rc"
     ],
-}
-
-prebuilt_etc {
-    name: "privapp_whitelist_net.pixelos.ota",
-    system_ext_specific: true,
-    sub_dir: "permissions",
-    src: "privapp_whitelist_net.pixelos.ota.xml",
-    filename_from_src: true,
 }
 
 prebuilt_etc {
