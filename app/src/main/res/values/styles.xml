@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:windowBackground">@color/background</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:windowLightNavigationBar">@bool/theme_is_light</item>
-        <item name="android:windowLightStatusBar">@bool/theme_is_light</item>
-        <item name="android:actionOverflowButtonStyle">@style/OverflowButtonStyle</item>
-    </style>
+<!--    <style name="AppTheme" parent="Theme.Material3Expressive.DayNight.NoActionBar">-->
+<!--        <item name="android:windowBackground">@color/background</item>-->
+<!--        <item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
+<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+<!--        <item name="android:navigationBarColor">@android:color/transparent</item>-->
+<!--        <item name="android:windowLightNavigationBar">@bool/theme_is_light</item>-->
+<!--        <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>-->
+<!--        <item name="android:windowLightStatusBar">@bool/theme_is_light</item>-->
+<!--        <item name="android:actionOverflowButtonStyle">@style/OverflowButtonStyle</item>-->
+<!--    </style>-->
 
-    <style name="OverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
-        <item name="tint">?attr/colorAccent</item>
-    </style>
+<!--    <style name="OverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">-->
+<!--        <item name="tint">?attr/colorAccent</item>-->
+<!--    </style>-->
 
 </resources>
