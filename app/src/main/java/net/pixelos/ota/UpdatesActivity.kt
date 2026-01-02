@@ -56,7 +56,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -98,7 +97,7 @@ import java.text.NumberFormat
 import java.util.UUID
 
 class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
-    private val mBottomAppBar by lazy { requireViewById<BottomAppBar>(R.id.bottomAppBar) }
+    private val mBottomAppBar by lazy { requireViewById<LinearLayout>(R.id.bottomAppBar) }
     private val mCircularProgress by lazy {
         requireViewById<CircularProgressIndicator>(R.id.updateRefreshProgress)
     }
@@ -185,7 +184,11 @@ class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
         setContentView(R.layout.activity_updates)
 
         setSupportActionBar(toolbar)
-        supportActionBar?.apply { title = null }
+        supportActionBar?.apply {
+            title = null
+            setDisplayHomeAsUpEnabled(true)
+        }
+
 
         setupHeaderProperties()
         updateLastCheckedString()
