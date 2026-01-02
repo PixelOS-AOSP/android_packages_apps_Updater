@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c854c183_35ea4032",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-01-02T09:41:38Z",
+      "side": 1,
+      "message": "```suggestion\nUpdater: Update framework library from Android 16 QPR1\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 29
+      },
+      "revId": "a86ff6cc877c1addca04cb093ff7f82532860a6d",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cac4f841_02200d3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-01-02T09:41:38Z",
+      "side": 1,
+      "message": "Move to sixteen-qpr1, we\u0027re not ready for QPR2 yet.",
+      "revId": "a86ff6cc877c1addca04cb093ff7f82532860a6d",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
