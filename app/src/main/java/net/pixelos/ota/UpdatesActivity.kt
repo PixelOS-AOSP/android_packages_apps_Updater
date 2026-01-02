@@ -44,6 +44,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.Insets
@@ -56,7 +57,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -98,7 +98,7 @@ import java.text.NumberFormat
 import java.util.UUID
 
 class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
-    private val mBottomAppBar by lazy { requireViewById<BottomAppBar>(R.id.bottomAppBar) }
+    private val mBottomAppBar by lazy { requireViewById<LinearLayout>(R.id.bottomAppBar) }
     private val mCircularProgress by lazy {
         requireViewById<CircularProgressIndicator>(R.id.updateRefreshProgress)
     }
@@ -116,6 +116,7 @@ class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
     private val mSecondaryActionButton by lazy {
         requireViewById<MaterialButton>(R.id.secondaryButton)
     }
+    private val mBackButton by lazy { requireViewById<MaterialButton>(R.id.backButton) }
     private val mWarnMeteredConnectionCard by lazy {
         requireViewById<MaterialCardView>(R.id.meteredWarningCard)
     }
@@ -192,6 +193,8 @@ class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
 
         setupSwipeRefresh()
         setupInsets()
+
+        mBackButton.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
     }
 
     private fun setupHeaderProperties() {
@@ -383,6 +386,7 @@ class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
                 clickListener =
                     if (enabled)
                         View.OnClickListener {
+                            Toast.makeText(this, R.string.checking_for_update, Toast.LENGTH_SHORT).show()
                             mUpdateInfoWarning.isVisible = false
                             downloadUpdatesList(true)
                         }
