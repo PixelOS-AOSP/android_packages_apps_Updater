@@ -74,7 +74,7 @@
     <string name="action_download">Download</string>
     <string name="action_pause">Pause</string>
     <string name="action_resume">Resume</string>
-    <string name="action_reboot">Reboot</string>
+    <string name="action_reboot">Перазапуск</string>
     <string name="action_install">Install</string>
     <string name="action_delete">Cancel</string>
     <string name="action_cancel">Cancel</string>
@@ -124,4 +124,17 @@
     <string name="system_update_verifying">Verifying system update</string>
     <string name="local_update_installing">Installing local update</string>
     <string name="general_header">General</string>
+    <string name="play_integrity_header">Play Integrity</string>
+    <string name="text_download_size_unknown">Unknown</string>
+    <string name="certified_prop_status">Certified properties status</string>
+    <string name="certified_prop_check">Check for update</string>
+    <string name="certified_prop_checking">Checking for certified properties update</string>
+    <string name="certified_prop_downloading">Downloading certified properties update</string>
+    <string name="certified_prop_download_failed">Unable to fetch properties from the server</string>
+    <string name="certified_prop_available">Download and install</string>
+    <string name="certified_prop_install_success">Reboot to apply update</string>
+    <string name="certified_prop_install_failed">Failed to install</string>
+    <string name="certified_prop_info" formatted="false">Installed version: %s\n</string>
+    <string name="certified_prop_remote" formatted="false">Latest version: %s</string>
+    <string name="fetch_changelogs_failed">Failed to fetch changelogs</string>
 </resources>

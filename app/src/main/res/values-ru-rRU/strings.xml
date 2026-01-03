@@ -16,8 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Updater</string>
-    <string name="display_name">Updater</string>
+    <string name="app_name">Обновление ПО</string>
+    <string name="display_name">Обновление ПО</string>
     <!-- Directory where the update files will be downloaded and stored.
          WARNING: The application can and will delete any unknown file. -->
     <!--
@@ -25,103 +25,116 @@
       {version} - Build version
       {device} - Device name
     -->
-    <string name="verification_failed_notification">Verification failed</string>
-    <string name="verifying_download_notification">Verifying update</string>
-    <string name="downloading_notification">Downloading</string>
-    <string name="download_paused_notification">Download paused</string>
-    <string name="download_paused_error_notification">Download error</string>
-    <string name="download_completed_notification">Download completed</string>
-    <string name="download_starting_notification">Starting download</string>
-    <string name="update_failed_notification">Update failed</string>
-    <string name="installation_suspended_notification">Installation suspended</string>
-    <string name="new_updates_found_title">New updates</string>
-    <string name="text_download_speed">%1$s, %2$s/s</string>
-    <string name="pause_button">Pause</string>
-    <string name="resume_button">Resume</string>
-    <string name="suspend_button">Suspend</string>
-    <string name="installing_update">Installing update package</string>
-    <string name="installing_update_error">Install error</string>
-    <string name="installing_update_finished">Update installed</string>
-    <string name="finalizing_package">Finalizing package installation</string>
-    <string name="preparing_ota_first_boot">Preparing for first boot</string>
-    <string name="dialog_prepare_zip_message">Preliminary update preparation</string>
-    <string name="dialog_battery_low_title">Low battery</string>
-    <string name="dialog_battery_low_message_pct">The battery level is too low, you need at least <xliff:g id="percent_discharging">%1$d</xliff:g>%% of the battery to continue, <xliff:g id="percent_charging">%2$d</xliff:g>%% if charging.</string>
-    <string name="dialog_scratch_mounted_message"><![CDATA[        Please run the following commands and retry the update:\n
+    <string name="verification_failed_notification">Проверка не удалась</string>
+    <string name="verifying_download_notification">Проверка обновления</string>
+    <string name="downloading_notification">Загрузка</string>
+    <string name="download_paused_notification">Загрузка приостановлена</string>
+    <string name="download_paused_error_notification">Ошибка при загрузке</string>
+    <string name="download_completed_notification">Загрузка завершена</string>
+    <string name="download_starting_notification">Начало загрузки</string>
+    <string name="update_failed_notification">Не удалось обновить</string>
+    <string name="installation_suspended_notification">Установка отложена</string>
+    <string name="new_updates_found_title">Доступно обновление системы</string>
+    <string name="text_download_speed">%1$s, %2$s/с</string>
+    <string name="pause_button">Приостановить</string>
+    <string name="resume_button">Продолжить</string>
+    <string name="suspend_button">Отложить</string>
+    <string name="installing_update">Установка обновлений</string>
+    <string name="installing_update_error">Ошибка установки</string>
+    <string name="installing_update_finished">Обновление установлено</string>
+    <string name="finalizing_package">Завершение установки</string>
+    <string name="preparing_ota_first_boot">Подготовка к первому запуску</string>
+    <string name="dialog_prepare_zip_message">Подготовка обновления</string>
+    <string name="dialog_battery_low_title">Низкий заряд батареи</string>
+    <string name="dialog_battery_low_message_pct">Уровень заряда батареи слишком низкий, для продолжения необходимо хотя бы <xliff:g id="percent_discharging">%1$d</xliff:g>%% заряда или <xliff:g id="percent_charging">%2$d</xliff:g>%% во время зарядки.</string>
+    <string name="dialog_scratch_mounted_message"><![CDATA[        Выполните следующие команды и повторите попытку обновления:\n
         • adb root\n
         • adb enable-verity\n
         • adb reboot
         ]]></string>
-    <string name="dialog_scratch_mounted_title">Cannot install update with OverlayFS mounted</string>
-    <string name="menu_preferences">Preferences</string>
-    <string name="menu_auto_updates_check">Automatic check for updates</string>
-    <string name="menu_ab_perf_mode">A/B performance mode</string>
-    <string name="menu_update_recovery">Update recovery</string>
-    <string name="auto_updates_check_summary">Enable to check for updates automatically once every 14 days.</string>
-    <string name="ab_perf_mode_summary">Increase priority of the update process. Might influence normal usage when an update is in progress.</string>
-    <string name="update_recovery_summary">Enable to update recovery from the build automatically.</string>
-    <string name="snack_updates_check_failed">The update check failed. Please check your internet connection and try again later.</string>
-    <string name="snack_download_failed">The download failed. Please check your internet connection and try again later.</string>
-    <string name="snack_download_verification_failed">The update verification failed.</string>
-    <string name="snack_download_verified">Download completed.</string>
-    <string name="snack_update_not_installable">This update can\'t be installed on top of the current build.</string>
-    <string name="header_android_version">Android version: <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
-    <string name="header_android_security_patch">Android security update: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
-    <string name="header_last_updates_check">Last successful check for update:\n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g> (<xliff:g example="01:23" id="time">%2$s</xliff:g>)</string>
+    <string name="dialog_scratch_mounted_title">Невозможно обновить со смонтированным OverlayFS</string>
+    <string name="menu_preferences">Настройки</string>
+    <string name="menu_auto_updates_check">Автоматическая проверка обновлений</string>
+    <string name="menu_ab_perf_mode">Режим производительности A/B</string>
+    <string name="menu_update_recovery">Обновить Recovery</string>
+    <string name="auto_updates_check_summary">Включите, чтобы проверять обновления автоматически каждые 14 дней.</string>
+    <string name="ab_perf_mode_summary">Повысить приоритет процесса обновления. Может повлиять на производительность во время обновления.</string>
+    <string name="update_recovery_summary">Включите, чтобы автоматически обновлять Recovery из сборки.</string>
+    <string name="snack_updates_check_failed">Не удалось выполнить проверку обновлений. Проверьте подключение к Интернету и повторите попытку.</string>
+    <string name="snack_download_failed">Загрузка не удалась. Проверьте подключение к Интернету и повторите попытку.</string>
+    <string name="snack_download_verification_failed">Ошибка проверки обновления.</string>
+    <string name="snack_download_verified">Загрузка завершена.</string>
+    <string name="snack_update_not_installable">Это обновление не может быть установлено поверх текущей сборки.</string>
+    <string name="header_android_version">Версия Android: <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
+    <string name="header_android_security_patch">Обновление системы защиты Android: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
+    <string name="header_last_updates_check">Последняя успешная проверка обновления:\n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g> (<xliff:g example="01:23" id="time">%2$s</xliff:g>)</string>
     <string name="list_build_version_date">PixelOS <xliff:g example="15" id="version">%1$s</xliff:g> - <xliff:g example="July 11, 2017" id="date">%2$s</xliff:g></string>
-    <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> of <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
-    <string name="list_verifying_update">Verifying update</string>
-    <string name="action_download">Download</string>
-    <string name="action_pause">Pause</string>
-    <string name="action_resume">Resume</string>
-    <string name="action_reboot">Reboot</string>
-    <string name="action_install">Install</string>
-    <string name="action_delete">Cancel</string>
-    <string name="action_cancel">Cancel</string>
-    <string name="confirm_delete_dialog_title">Delete file</string>
-    <string name="confirm_delete_dialog_message">Delete the current downloading file?</string>
-    <string name="apply_update_dialog_title">Apply update</string>
-    <string name="apply_update_dialog_message">You are about to install <xliff:g id="update_name">%1$s</xliff:g>.\n\nIf you press <xliff:g id="ok">%2$s</xliff:g>, the device will restart itself in recovery mode to install the update.\n\nNote: This feature requires a compatible Recovery or updates will need to be installed manually.</string>
-    <string name="apply_update_dialog_message_ab">You are about to install <xliff:g id="update_name">%1$s</xliff:g>.\n\nIf you press <xliff:g id="ok">%2$s</xliff:g>, the device will begin installing in the background.\n\nOnce completed, you will be prompted to reboot.</string>
-    <string name="cancel_installation_dialog_message">Cancel the installation?</string>
-    <string name="reboot_installation_dialog_message">Reboot to complete installation</string>
+    <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> из <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
+    <string name="list_verifying_update">Проверка обновления</string>
+    <string name="action_download">Скачать </string>
+    <string name="action_pause">Приостановить</string>
+    <string name="action_resume">Продолжить</string>
+    <string name="action_reboot">Перезапустить</string>
+    <string name="action_install">Установить</string>
+    <string name="action_delete">Отменить</string>
+    <string name="action_cancel">Отменить</string>
+    <string name="confirm_delete_dialog_title">Удалить файл</string>
+    <string name="confirm_delete_dialog_message">Удалить текущий загружаемый файл?</string>
+    <string name="apply_update_dialog_title">Применить обновление</string>
+    <string name="apply_update_dialog_message">Будет выполнено обновление до версии <xliff:g id="update_name">%1$s</xliff:g>.\n\nПри нажатии кнопки <xliff:g id="ok">%2$s</xliff:g> устройство будет перезагружено и переведено в режим восстановления для установки новой версии.\n\nПримечание: Для этой функции необходим совместимый Recovery. При возникновении ошибки потребуется установить обновление вручную.</string>
+    <string name="apply_update_dialog_message_ab">Будет выполнено обновление до версии <xliff:g id="update_name">%1$s</xliff:g>.\n\nПри нажатии кнопки <xliff:g id="ok">%2$s</xliff:g> будет начата установка в фоновом режиме.\n\nПо завершении вам будет предложено перезапустить устройство.</string>
+    <string name="cancel_installation_dialog_message">Отменить установку?</string>
+    <string name="reboot_installation_dialog_message">Перезагрузите для завершения обновления</string>
     <plurals name="eta_seconds">
-        <item quantity="one">1 second left</item>
+        <item quantity="one">Осталась 1 секунда</item>
         <item quantity="few"><xliff:g id="count">%d</xliff:g> seconds left</item>
         <item quantity="many"><xliff:g id="count">%d</xliff:g> seconds left</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> seconds left</item>
+        <item quantity="other">Осталось <xliff:g id="count">%d</xliff:g> секунд</item>
     </plurals>
     <plurals name="eta_minutes">
-        <item quantity="one">1 minute left</item>
+        <item quantity="one">Осталась 1 минута</item>
         <item quantity="few"><xliff:g id="count">%d</xliff:g> minutes left</item>
         <item quantity="many"><xliff:g id="count">%d</xliff:g> minutes left</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> minutes left</item>
+        <item quantity="other">Осталось <xliff:g id="count">%d</xliff:g> минут</item>
     </plurals>
     <plurals name="eta_hours">
-        <item quantity="one">1 hour left</item>
+        <item quantity="one">Остался 1 час</item>
         <item quantity="few"><xliff:g id="count">%d</xliff:g> hours left</item>
         <item quantity="many"><xliff:g id="count">%d</xliff:g> hours left</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> hours left</item>
+        <item quantity="other">Осталось <xliff:g id="count">%d</xliff:g> часов</item>
     </plurals>
-    <string name="update_over_metered_network_info">Metered connection warning</string>
-    <string name="update_over_metered_network_message">Downloading updates, over a cellular network, metered Wi-Fi, or while roaming may cause additional charges.</string>
-    <string name="new_updates_channel_title">New updates</string>
-    <string name="ongoing_channel_title">Ongoing downloads</string>
-    <string name="update_failed_channel_title">Update failed</string>
-    <string name="local_update_import">Local update</string>
-    <string name="local_update_import_progress">Importing local update\u2026</string>
-    <string name="local_update_import_success">%1$s has been imported. Do you want to install it?</string>
-    <string name="local_update_import_failure">Failed to import local update</string>
-    <string name="local_update_import_install">Install</string>
-    <string name="check_for_update">Check for update</string>
-    <string name="check_for_update_failed">Failed to check for update</string>
-    <string name="system_up_to_date">Your system is up to date</string>
-    <string name="system_update_available">System update available</string>
-    <string name="checking_for_update">Checking for system update\u2026</string>
-    <string name="system_update_downloading">Downloading system update</string>
-    <string name="system_update_downloading_paused">Download paused</string>
-    <string name="system_update_installing">Installing system update</string>
-    <string name="system_update_verifying">Verifying system update</string>
-    <string name="local_update_installing">Installing local update</string>
-    <string name="general_header">General</string>
+    <string name="update_over_metered_network_info">Используется лимитированное подключение</string>
+    <string name="update_over_metered_network_message">Загрузка обновлений через сотовую сеть, Wi-Fi с тарификацией или в роуминге может привести к дополнительной плате.</string>
+    <string name="new_updates_channel_title">Доступно обновление системы</string>
+    <string name="ongoing_channel_title">Текущие загрузки</string>
+    <string name="update_failed_channel_title">Не удалось обновить</string>
+    <string name="local_update_import">Локальное обновление</string>
+    <string name="local_update_import_progress">Импортирование локального обновления\u2026</string>
+    <string name="local_update_import_success">Локальное обновление %1$s было импортировано. Вы хотите установить его?</string>
+    <string name="local_update_import_failure">Не удалось импортировать локальное обновление</string>
+    <string name="local_update_import_install">Установить</string>
+    <string name="check_for_update">Проверить обновления</string>
+    <string name="check_for_update_failed">Не удалось проверить обновления</string>
+    <string name="system_up_to_date">Обновлений нет</string>
+    <string name="system_update_available">Доступно обновление системы</string>
+    <string name="checking_for_update">Проверка обновлений системы</string>
+    <string name="system_update_downloading">Скачивание обновления системы</string>
+    <string name="system_update_downloading_paused">Загрузка приостановлена</string>
+    <string name="system_update_installing">Установка обновления системы</string>
+    <string name="system_update_verifying">Проверка обновления системы</string>
+    <string name="local_update_installing">Установка локального обновления</string>
+    <string name="general_header">Общее</string>
+    <string name="play_integrity_header">Play Integrity</string>
+    <string name="text_download_size_unknown">Неизвестно</string>
+    <string name="certified_prop_status">Статус параметров сертификатов</string>
+    <string name="certified_prop_check">Проверить обновления</string>
+    <string name="certified_prop_checking">Проверка обновлений параметров сертификатов</string>
+    <string name="certified_prop_downloading">Идёт скачивание обновления параметров сертификатов</string>
+    <string name="certified_prop_download_failed">Не удалось получить запрос с сервера</string>
+    <string name="certified_prop_available">Скачать и установить</string>
+    <string name="certified_prop_install_success">Перезагрузите, чтобы применить обновление</string>
+    <string name="certified_prop_install_failed">Не удалось установить обновление</string>
+    <string name="certified_prop_info" formatted="false">Установленная версия: %s\n</string>
+    <string name="certified_prop_remote" formatted="false">Последняя версия: %s</string>
+    <string name="fetch_changelogs_failed">Failed to fetch changelogs</string>
 </resources>

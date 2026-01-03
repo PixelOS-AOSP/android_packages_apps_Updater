@@ -16,8 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Updater</string>
-    <string name="display_name">Updater</string>
+    <string name="app_name">Güncelleyici</string>
+    <string name="display_name">Güncelleyici</string>
     <!-- Directory where the update files will be downloaded and stored.
          WARNING: The application can and will delete any unknown file. -->
     <!--
@@ -25,97 +25,110 @@
       {version} - Build version
       {device} - Device name
     -->
-    <string name="verification_failed_notification">Verification failed</string>
-    <string name="verifying_download_notification">Verifying update</string>
-    <string name="downloading_notification">Downloading</string>
-    <string name="download_paused_notification">Download paused</string>
-    <string name="download_paused_error_notification">Download error</string>
-    <string name="download_completed_notification">Download completed</string>
-    <string name="download_starting_notification">Starting download</string>
-    <string name="update_failed_notification">Update failed</string>
-    <string name="installation_suspended_notification">Installation suspended</string>
-    <string name="new_updates_found_title">New updates</string>
-    <string name="text_download_speed">%1$s, %2$s/s</string>
-    <string name="pause_button">Pause</string>
-    <string name="resume_button">Resume</string>
-    <string name="suspend_button">Suspend</string>
-    <string name="installing_update">Installing update package</string>
-    <string name="installing_update_error">Install error</string>
-    <string name="installing_update_finished">Update installed</string>
-    <string name="finalizing_package">Finalizing package installation</string>
-    <string name="preparing_ota_first_boot">Preparing for first boot</string>
-    <string name="dialog_prepare_zip_message">Preliminary update preparation</string>
-    <string name="dialog_battery_low_title">Low battery</string>
-    <string name="dialog_battery_low_message_pct">The battery level is too low, you need at least <xliff:g id="percent_discharging">%1$d</xliff:g>%% of the battery to continue, <xliff:g id="percent_charging">%2$d</xliff:g>%% if charging.</string>
+    <string name="verification_failed_notification">Doğrulama başarısız</string>
+    <string name="verifying_download_notification">Güncelleme doğrulanıyor</string>
+    <string name="downloading_notification">İndiriliyor</string>
+    <string name="download_paused_notification">İndirme durduruldu</string>
+    <string name="download_paused_error_notification">İndirme hatası</string>
+    <string name="download_completed_notification">İndirme tamamlandı</string>
+    <string name="download_starting_notification">İndirme başlatılıyor</string>
+    <string name="update_failed_notification">Güncelleme başarısız</string>
+    <string name="installation_suspended_notification">Yükleme askıya alındı</string>
+    <string name="new_updates_found_title">Yeni güncellemeler</string>
+    <string name="text_download_speed">%1$s, %2$s/sn</string>
+    <string name="pause_button">Duraklat</string>
+    <string name="resume_button">Devam et</string>
+    <string name="suspend_button">Askıya al</string>
+    <string name="installing_update">Güncelleştirme paketi yükleniyor</string>
+    <string name="installing_update_error">Yükleme hatası</string>
+    <string name="installing_update_finished">Güncelleştirme yüklü</string>
+    <string name="finalizing_package">Paket yükleme tamamlanıyor</string>
+    <string name="preparing_ota_first_boot">Ön yükleme için hazırlanıyor</string>
+    <string name="dialog_prepare_zip_message">Güncelleme ön hazırlığı</string>
+    <string name="dialog_battery_low_title">Düşük pil</string>
+    <string name="dialog_battery_low_message_pct">Pil seviyesi çok düşük, devam etmek için en az %%<xliff:g id="percent_discharging">%1$d</xliff:g> pil gereklidir, %%<xliff:g id="percent_charging">%2$d</xliff:g> şarj ediliyor.</string>
     <string name="dialog_scratch_mounted_message"><![CDATA[        Please run the following commands and retry the update:\n
         • adb root\n
         • adb enable-verity\n
         • adb reboot
         ]]></string>
-    <string name="dialog_scratch_mounted_title">Cannot install update with OverlayFS mounted</string>
-    <string name="menu_preferences">Preferences</string>
-    <string name="menu_auto_updates_check">Automatic check for updates</string>
-    <string name="menu_ab_perf_mode">A/B performance mode</string>
-    <string name="menu_update_recovery">Update recovery</string>
-    <string name="auto_updates_check_summary">Enable to check for updates automatically once every 14 days.</string>
-    <string name="ab_perf_mode_summary">Increase priority of the update process. Might influence normal usage when an update is in progress.</string>
-    <string name="update_recovery_summary">Enable to update recovery from the build automatically.</string>
-    <string name="snack_updates_check_failed">The update check failed. Please check your internet connection and try again later.</string>
-    <string name="snack_download_failed">The download failed. Please check your internet connection and try again later.</string>
-    <string name="snack_download_verification_failed">The update verification failed.</string>
-    <string name="snack_download_verified">Download completed.</string>
-    <string name="snack_update_not_installable">This update can\'t be installed on top of the current build.</string>
-    <string name="header_android_version">Android version: <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
-    <string name="header_android_security_patch">Android security update: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
-    <string name="header_last_updates_check">Last successful check for update:\n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g> (<xliff:g example="01:23" id="time">%2$s</xliff:g>)</string>
+    <string name="dialog_scratch_mounted_title">OverlayFS bağlı iken güncelleştirme yüklenemiyor</string>
+    <string name="menu_preferences">Tercihler</string>
+    <string name="menu_auto_updates_check">Güncellemeleri otomatik olarak denetle</string>
+    <string name="menu_ab_perf_mode">A/B performans modu</string>
+    <string name="menu_update_recovery">Kurtarma modunu güncelle</string>
+    <string name="auto_updates_check_summary">Güncellemeleri 14 günde bir otomatik olarak kontrol etmeyi etkinleştirin.</string>
+    <string name="ab_perf_mode_summary">Güncelleme işleminin önceliğini artırın. Bir güncelleme devam ederken normal kullanımı etkileyebilir.</string>
+    <string name="update_recovery_summary">Derlemeden kurtarmayı otomatik olarak güncellemeyi etkinleştirin.</string>
+    <string name="snack_updates_check_failed">Güncelleme kontrolü başarısız oldu. Lütfen internet bağlantınızı kontrol edin ve daha sonra tekrar deneyin.</string>
+    <string name="snack_download_failed">İndirme başarısız oldu. Lütfen internet bağlantınızı kontrol edin ve daha sonra tekrar deneyin.</string>
+    <string name="snack_download_verification_failed">Güncelleme doğrulaması tamamlanamadi.</string>
+    <string name="snack_download_verified">İndirme tamamlandı.</string>
+    <string name="snack_update_not_installable">Bu güncelleme mevcut yapının üstüne yüklenemez.</string>
+    <string name="header_android_version">Android sürümü <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
+    <string name="header_android_security_patch">Android güvenlik güncellemesi: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
+    <string name="header_last_updates_check">Güncelleme için son başarılı kontrol:\n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g> (<xliff:g example="01:23" id="time">%2$s</xliff:g>)</string>
     <string name="list_build_version_date">PixelOS <xliff:g example="15" id="version">%1$s</xliff:g> - <xliff:g example="July 11, 2017" id="date">%2$s</xliff:g></string>
     <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> of <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
-    <string name="list_verifying_update">Verifying update</string>
-    <string name="action_download">Download</string>
-    <string name="action_pause">Pause</string>
-    <string name="action_resume">Resume</string>
-    <string name="action_reboot">Reboot</string>
-    <string name="action_install">Install</string>
-    <string name="action_delete">Cancel</string>
-    <string name="action_cancel">Cancel</string>
-    <string name="confirm_delete_dialog_title">Delete file</string>
-    <string name="confirm_delete_dialog_message">Delete the current downloading file?</string>
-    <string name="apply_update_dialog_title">Apply update</string>
-    <string name="apply_update_dialog_message">You are about to install <xliff:g id="update_name">%1$s</xliff:g>.\n\nIf you press <xliff:g id="ok">%2$s</xliff:g>, the device will restart itself in recovery mode to install the update.\n\nNote: This feature requires a compatible Recovery or updates will need to be installed manually.</string>
-    <string name="apply_update_dialog_message_ab">You are about to install <xliff:g id="update_name">%1$s</xliff:g>.\n\nIf you press <xliff:g id="ok">%2$s</xliff:g>, the device will begin installing in the background.\n\nOnce completed, you will be prompted to reboot.</string>
-    <string name="cancel_installation_dialog_message">Cancel the installation?</string>
-    <string name="reboot_installation_dialog_message">Reboot to complete installation</string>
+    <string name="list_verifying_update">Güncelleme doğrulanıyor</string>
+    <string name="action_download">İndir</string>
+    <string name="action_pause">Duraklat</string>
+    <string name="action_resume">Devam et</string>
+    <string name="action_reboot">Yeniden başlat</string>
+    <string name="action_install">Yükle</string>
+    <string name="action_delete">Vazgeç</string>
+    <string name="action_cancel">Vazgeç</string>
+    <string name="confirm_delete_dialog_title">Dosyayı sil</string>
+    <string name="confirm_delete_dialog_message">Mevcut indirilen dosya silinsin mi?</string>
+    <string name="apply_update_dialog_title">Güncellemeyi uygula</string>
+    <string name="apply_update_dialog_message">Yüklemek üzeresiniz <xliff:g id="update_name">%1$s</xliff:g>.\n\n Eğer basarsan <xliff:g id="ok">%2$s</xliff:g> güncellemeyi yüklemek için cihaz kendisini kurtarma modunda yeniden başlatacaktır.\n\nNot: Bu özellik uyumlu bir Kurtarma gerektirir veya güncellemelerin manuel olarak yüklenmesi gerekir.</string>
+    <string name="apply_update_dialog_message_ab"><xliff:g id="update_name">%1$s</xliff:g> yüklemek üzeresiniz.\n\n<xliff:g id="ok">%2$s</xliff:g> tuşuna basarsanız, cihaz arka planda yüklemeye başlayacaktır.\n\nİşlem tamamlandığında, yeniden başlatmanız istenir.</string>
+    <string name="cancel_installation_dialog_message">Yükleme iptal edilsin mi?</string>
+    <string name="reboot_installation_dialog_message">Kurulumu tamamlamak için yeniden başlatın</string>
     <plurals name="eta_seconds">
-        <item quantity="one">1 second left</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> seconds left</item>
+        <item quantity="one">1 saniye kaldı</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> saniye kaldı</item>
     </plurals>
     <plurals name="eta_minutes">
-        <item quantity="one">1 minute left</item>
+        <item quantity="one">1 dakika kaldı</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> minutes left</item>
     </plurals>
     <plurals name="eta_hours">
-        <item quantity="one">1 hour left</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> hours left</item>
+        <item quantity="one">1 saat kaldı</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> saat kaldı</item>
     </plurals>
-    <string name="update_over_metered_network_info">Metered connection warning</string>
-    <string name="update_over_metered_network_message">Downloading updates, over a cellular network, metered Wi-Fi, or while roaming may cause additional charges.</string>
-    <string name="new_updates_channel_title">New updates</string>
-    <string name="ongoing_channel_title">Ongoing downloads</string>
-    <string name="update_failed_channel_title">Update failed</string>
-    <string name="local_update_import">Local update</string>
-    <string name="local_update_import_progress">Importing local update\u2026</string>
-    <string name="local_update_import_success">%1$s has been imported. Do you want to install it?</string>
-    <string name="local_update_import_failure">Failed to import local update</string>
-    <string name="local_update_import_install">Install</string>
-    <string name="check_for_update">Check for update</string>
-    <string name="check_for_update_failed">Failed to check for update</string>
-    <string name="system_up_to_date">Your system is up to date</string>
-    <string name="system_update_available">System update available</string>
-    <string name="checking_for_update">Checking for system update\u2026</string>
-    <string name="system_update_downloading">Downloading system update</string>
-    <string name="system_update_downloading_paused">Download paused</string>
-    <string name="system_update_installing">Installing system update</string>
-    <string name="system_update_verifying">Verifying system update</string>
-    <string name="local_update_installing">Installing local update</string>
-    <string name="general_header">General</string>
+    <string name="update_over_metered_network_info">Ölçülü bağlantı uyarısı</string>
+    <string name="update_over_metered_network_message">Güncellemelerin hücresel ağ üzerinden, tarifeli Wi-Fi üzerinden veya dolaşım sırasında indirilmesi ek ücretlere neden olabilir.</string>
+    <string name="new_updates_channel_title">Yeni güncellemeler</string>
+    <string name="ongoing_channel_title">Devam eden indirmeler</string>
+    <string name="update_failed_channel_title">Güncelleme başarısız</string>
+    <string name="local_update_import">Yerel güncelleme</string>
+    <string name="local_update_import_progress">Yerel güncelleme içe aktarılıyor\u2026</string>
+    <string name="local_update_import_success">%1$s içe aktarıldı. Kurmak istiyor musunuz?</string>
+    <string name="local_update_import_failure">Yerel güncelleme içe aktarılamadı</string>
+    <string name="local_update_import_install">Yükle</string>
+    <string name="check_for_update">Güncellemeleri denetle</string>
+    <string name="check_for_update_failed">Güncelleme denetlenemedi</string>
+    <string name="system_up_to_date">Sisteminiz güncel</string>
+    <string name="system_update_available">Sistem güncellemesi mevcut</string>
+    <string name="checking_for_update">Sistem güncellemesi kontrol ediliyor\u2026</string>
+    <string name="system_update_downloading">Sistem güncellemesi indiriliyor</string>
+    <string name="system_update_downloading_paused">İndirme durduruldu</string>
+    <string name="system_update_installing">Sistem güncellemesi yükleniyor</string>
+    <string name="system_update_verifying">Sistem güncellemesi doğrulanıyor</string>
+    <string name="local_update_installing">Yerel güncellemeyi yükleme</string>
+    <string name="general_header">Genel</string>
+    <string name="play_integrity_header">Bütünlük sertifikası</string>
+    <string name="text_download_size_unknown">Bilinmeyen</string>
+    <string name="certified_prop_status">Sertifikalı mülk durumu</string>
+    <string name="certified_prop_check">Güncellemeleri denetle</string>
+    <string name="certified_prop_checking">Sertifikalı mülklerin güncellenmesi kontrol ediliyor</string>
+    <string name="certified_prop_downloading">Sertifikalı özellik güncellemesi indiriliyor</string>
+    <string name="certified_prop_download_failed">Sunucudan özellikler alınamıyor</string>
+    <string name="certified_prop_available">İndir ve yükle</string>
+    <string name="certified_prop_install_success">Güncellemeyi uygulamak için yeniden başlat</string>
+    <string name="certified_prop_install_failed">Yükleme Başarısız</string>
+    <string name="certified_prop_info" formatted="false">Yüklü sürüm: %s\n</string>
+    <string name="certified_prop_remote" formatted="false">Son versiyon: %s</string>
+    <string name="fetch_changelogs_failed">Failed to fetch changelogs</string>
 </resources>

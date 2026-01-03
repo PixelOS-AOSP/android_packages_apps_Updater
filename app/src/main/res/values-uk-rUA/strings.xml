@@ -17,7 +17,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Оновлювач</string>
-    <string name="display_name">Оновлення</string>
+    <string name="display_name">Оновлювач</string>
     <!-- Directory where the update files will be downloaded and stored.
          WARNING: The application can and will delete any unknown file. -->
     <!--
@@ -124,4 +124,17 @@
     <string name="system_update_verifying">Перевірка оновлення системи</string>
     <string name="local_update_installing">Встановлення локального оновлення</string>
     <string name="general_header">Основне</string>
+    <string name="play_integrity_header">Play Integrity</string>
+    <string name="text_download_size_unknown">Невідомо</string>
+    <string name="certified_prop_status">Сертифікований стан властивостей</string>
+    <string name="certified_prop_check">Перевірити оновлення</string>
+    <string name="certified_prop_checking">Перевірка оновлення</string>
+    <string name="certified_prop_downloading">Завантаження оновлення</string>
+    <string name="certified_prop_download_failed">Неможливо отримати з сервера</string>
+    <string name="certified_prop_available">Завантажити та встановити</string>
+    <string name="certified_prop_install_success">Перезавантажте для застосування оновлень</string>
+    <string name="certified_prop_install_failed">Не вдалося встановити</string>
+    <string name="certified_prop_info" formatted="false">Встановлено версію: %s\n</string>
+    <string name="certified_prop_remote" formatted="false">Остання версія: %s</string>
+    <string name="fetch_changelogs_failed">Failed to fetch changelogs</string>
 </resources>
