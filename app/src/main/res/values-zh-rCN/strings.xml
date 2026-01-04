@@ -47,7 +47,7 @@
     <string name="dialog_prepare_zip_message">正在准备更新</string>
     <string name="dialog_battery_low_title">低电量</string>
     <string name="dialog_battery_low_message_pct">电池电量过低，您需要至少 <xliff:g id="percent_discharging">%1$d</xliff:g>%% 的电量才能继续；如果正在充电，则需要 <xliff:g id="percent_charging">%2$d</xliff:g>%% 的电量才能继续。</string>
-    <string name="dialog_scratch_mounted_message"><![CDATA[        请运行以下命令来重新安装更新：\n
+    <string name="dialog_scratch_mounted_message" formatted="false"><![CDATA[        请运行以下命令来重新安装更新：\n
         • adb root\n
         • adb enable-verity\n
         • adb reboot
@@ -115,4 +115,17 @@
     <string name="system_update_verifying">正在验证系统更新</string>
     <string name="local_update_installing">正在安装本地更新包</string>
     <string name="general_header">常规</string>
+    <string name="play_integrity_header">Play Integrity</string>
+    <string name="text_download_size_unknown">未知</string>
+    <string name="certified_prop_status">认证属性状态</string>
+    <string name="certified_prop_check">检查更新</string>
+    <string name="certified_prop_checking">正在检查认证属性更新</string>
+    <string name="certified_prop_downloading">正在下载认证属性更新</string>
+    <string name="certified_prop_download_failed">无法从服务器获取属性</string>
+    <string name="certified_prop_available">下载并安装</string>
+    <string name="certified_prop_install_success">重启以应用更新</string>
+    <string name="certified_prop_install_failed">安装失败</string>
+    <string name="certified_prop_info" formatted="false">已安装的版本：%s\n</string>
+    <string name="certified_prop_remote" formatted="false">最新版本：%s</string>
+    <string name="fetch_changelogs_failed">Failed to fetch changelogs</string>
 </resources>

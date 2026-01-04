@@ -16,8 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Updater</string>
-    <string name="display_name">Updater</string>
+    <string name="app_name">Aktualizátor</string>
+    <string name="display_name">Aktualizátor</string>
     <!-- Directory where the update files will be downloaded and stored.
          WARNING: The application can and will delete any unknown file. -->
     <!--
@@ -47,15 +47,15 @@
     <string name="dialog_prepare_zip_message">Predbežná príprava aktualizácie</string>
     <string name="dialog_battery_low_title">Vybitá batéria</string>
     <string name="dialog_battery_low_message_pct">Úroveň nabitia batérie je príliš nízka, budete potrebovať aspoň <xliff:g id="percent_discharging">%1$d</xliff:g>%% batérie na pokračovanie, <xliff:g id="percent_charging">%2$d</xliff:g>%% pri nabíjaní.</string>
-    <string name="dialog_scratch_mounted_message"><![CDATA[        Spustite nasledujúce príkazy a skúste aktualizáciu znova:\n
+    <string name="dialog_scratch_mounted_message" formatted="false"><![CDATA[        Spustite nasledujúce príkazy a skúste aktualizáciu znova:\n
         • adb root\n
         • adb enable-verity\n
         • adb reboot
         ]]></string>
     <string name="dialog_scratch_mounted_title">Nie je možné nainštalovať aktualizáciu s pripojeným systémom OverlayFS</string>
     <string name="menu_preferences">Predvoľby</string>
-    <string name="menu_auto_updates_check">Automatic check for updates</string>
-    <string name="menu_ab_perf_mode">A/B performance mode</string>
+    <string name="menu_auto_updates_check">Automaticky kontrolovať aktualizácie</string>
+    <string name="menu_ab_perf_mode">A/B režim vysokého výkonu</string>
     <string name="menu_update_recovery">Aktualizovať recovery</string>
     <string name="auto_updates_check_summary">Enable to check for updates automatically once every 14 days.</string>
     <string name="ab_perf_mode_summary">Increase priority of the update process. Might influence normal usage when an update is in progress.</string>
@@ -65,11 +65,11 @@
     <string name="snack_download_verification_failed">Overovanie aktualizácie zlyhalo.</string>
     <string name="snack_download_verified">Sťahovanie dokončené.</string>
     <string name="snack_update_not_installable">Táto aktualizácia sa nedá nainštalovať na aktuálnu zostavu.</string>
-    <string name="header_android_version">Android version: <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
-    <string name="header_android_security_patch">Android security update: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
+    <string name="header_android_version">Verzia Androidu: <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
+    <string name="header_android_security_patch">Bezpečnostná aktualizácia Androidu: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
     <string name="header_last_updates_check">Last successful check for update:\n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g> (<xliff:g example="01:23" id="time">%2$s</xliff:g>)</string>
     <string name="list_build_version_date">PixelOS <xliff:g example="15" id="version">%1$s</xliff:g> - <xliff:g example="July 11, 2017" id="date">%2$s</xliff:g></string>
-    <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> of <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
+    <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> z <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
     <string name="list_verifying_update">Overovanie aktualizácie</string>
     <string name="action_download">Stiahnuť</string>
     <string name="action_pause">Pozastaviť</string>
@@ -79,49 +79,62 @@
     <string name="action_delete">Zrušiť</string>
     <string name="action_cancel">Zrušiť</string>
     <string name="confirm_delete_dialog_title">Vymazať súbor</string>
-    <string name="confirm_delete_dialog_message">Delete the current downloading file?</string>
+    <string name="confirm_delete_dialog_message">Odstrániť aktuálne sťahovaný súbor?</string>
     <string name="apply_update_dialog_title">Aplikovať aktualizáciu</string>
     <string name="apply_update_dialog_message">You are about to install <xliff:g id="update_name">%1$s</xliff:g>.\n\nIf you press <xliff:g id="ok">%2$s</xliff:g>, the device will restart itself in recovery mode to install the update.\n\nNote: This feature requires a compatible Recovery or updates will need to be installed manually.</string>
     <string name="apply_update_dialog_message_ab">You are about to install <xliff:g id="update_name">%1$s</xliff:g>.\n\nIf you press <xliff:g id="ok">%2$s</xliff:g>, the device will begin installing in the background.\n\nOnce completed, you will be prompted to reboot.</string>
     <string name="cancel_installation_dialog_message">Zrušiť inštaláciu?</string>
-    <string name="reboot_installation_dialog_message">Reboot to complete installation</string>
+    <string name="reboot_installation_dialog_message">Reštartovaním dokončíte inštaláciu</string>
     <plurals name="eta_seconds">
         <item quantity="one">Zostáva 1 sekunda</item>
-        <item quantity="few"><xliff:g id="count">%d</xliff:g> seconds left</item>
-        <item quantity="many"><xliff:g id="count">%d</xliff:g> seconds left</item>
+        <item quantity="few">Zostávajú <xliff:g id="count">%d</xliff:g> sekundy</item>
+        <item quantity="many">Zostáva <xliff:g id="count">%d</xliff:g> sekúnd</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> seconds left</item>
     </plurals>
     <plurals name="eta_minutes">
         <item quantity="one">Zostáva 1 minúta</item>
-        <item quantity="few"><xliff:g id="count">%d</xliff:g> minutes left</item>
-        <item quantity="many"><xliff:g id="count">%d</xliff:g> minutes left</item>
+        <item quantity="few">Zostávajú <xliff:g id="count">%d</xliff:g> minúty</item>
+        <item quantity="many">Zostáva <xliff:g id="count">%d</xliff:g> minút</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> minutes left</item>
     </plurals>
     <plurals name="eta_hours">
         <item quantity="one">Zostáva 1 hodina</item>
-        <item quantity="few"><xliff:g id="count">%d</xliff:g> hours left</item>
-        <item quantity="many"><xliff:g id="count">%d</xliff:g> hours left</item>
+        <item quantity="few">Zostávajú <xliff:g id="count">%d</xliff:g> hodiny</item>
+        <item quantity="many">Zostáva <xliff:g id="count">%d</xliff:g> hodín</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> hours left</item>
     </plurals>
-    <string name="update_over_metered_network_info">Metered connection warning</string>
-    <string name="update_over_metered_network_message">Downloading updates, over a cellular network, metered Wi-Fi, or while roaming may cause additional charges.</string>
+    <string name="update_over_metered_network_info">Varovanie na merané pripojenie</string>
+    <string name="update_over_metered_network_message">Sťahovanie aktualizácií cez mobilnú sieť alebo pri roamingu môže spôsobiť dodatočné poplatky.</string>
     <string name="new_updates_channel_title">Nové aktualizácie</string>
     <string name="ongoing_channel_title">Prebiehajúce sťahovania</string>
     <string name="update_failed_channel_title">Aktualizácia zlyhala</string>
     <string name="local_update_import">Lokálna aktualizácia</string>
     <string name="local_update_import_progress">Importuje sa miestna aktualizácia\u2026</string>
-    <string name="local_update_import_success">%1$s has been imported. Do you want to install it?</string>
+    <string name="local_update_import_success">%1$s bol importovaný. Chcete ho nainštalovať?</string>
     <string name="local_update_import_failure">Nepodarilo sa importovať lokálnu aktualizáciu</string>
     <string name="local_update_import_install">Nainštalovať</string>
     <string name="check_for_update">Skontrolovať aktualizácie</string>
-    <string name="check_for_update_failed">Failed to check for update</string>
-    <string name="system_up_to_date">Your system is up to date</string>
+    <string name="check_for_update_failed">Kontrola aktualizácie zlyhala</string>
+    <string name="system_up_to_date">Váš systém je aktuálny</string>
     <string name="system_update_available">Nová aktualizácia je k dispozícii</string>
-    <string name="checking_for_update">Checking for system update\u2026</string>
-    <string name="system_update_downloading">Downloading system update</string>
+    <string name="checking_for_update">Kontroluje sa aktualizácia systému\u2026</string>
+    <string name="system_update_downloading">Sťahovanie aktualizácie systému</string>
     <string name="system_update_downloading_paused">Sťahovanie pozastavené</string>
     <string name="system_update_installing">Inštaluje sa miestna aktualizácia</string>
-    <string name="system_update_verifying">Verifying system update</string>
+    <string name="system_update_verifying">Kontroluje sa aktualuzácia systému</string>
     <string name="local_update_installing">Importuje sa miestna aktualizácia</string>
     <string name="general_header">Všeobecné</string>
+    <string name="play_integrity_header">Play Integrita</string>
+    <string name="text_download_size_unknown">Neuvedené</string>
+    <string name="certified_prop_status">Stav certifikácie</string>
+    <string name="certified_prop_check">Skontrolovať aktualizácie</string>
+    <string name="certified_prop_checking">Kontrola aktualizácie certifikácie</string>
+    <string name="certified_prop_downloading">Preberanie aktualizácie certifikácie</string>
+    <string name="certified_prop_download_failed">Nie je možné získať certifikáciu zo servera</string>
+    <string name="certified_prop_available">Stiahnuť a nainštalovať</string>
+    <string name="certified_prop_install_success">Reštartovať pre dokončenie aktualizácie</string>
+    <string name="certified_prop_install_failed">Inštalácia zlyhala</string>
+    <string name="certified_prop_info" formatted="false">Nainštalovaná verzia: %s\n</string>
+    <string name="certified_prop_remote" formatted="false">Posledná verzia: %s</string>
+    <string name="fetch_changelogs_failed">Nepodarilo sa načítať zoznam zmien</string>
 </resources>

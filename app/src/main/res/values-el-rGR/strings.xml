@@ -47,7 +47,7 @@
     <string name="dialog_prepare_zip_message">Προετοιμασία ενημέρωσης</string>
     <string name="dialog_battery_low_title">Χαμηλή μπαταρία</string>
     <string name="dialog_battery_low_message_pct">Η στάθμη της μπαταρίας είναι πολύ χαμηλή, χρειάζεστε τουλάχιστον <xliff:g id="percent_discharging">%1$d</xliff:g>%% της μπαταρίας για να συνεχίσετε ή <xliff:g id="percent_charging">%2$d</xliff:g>%% κατά την φόρτιση.</string>
-    <string name="dialog_scratch_mounted_message"><![CDATA[        Παρακαλώ εκτελέστε τις ακόλουθες εντολές και δοκιμάστε ξανά την ενημέρωση:\n
+    <string name="dialog_scratch_mounted_message" formatted="false"><![CDATA[        Παρακαλώ εκτελέστε τις ακόλουθες εντολές και δοκιμάστε ξανά την ενημέρωση:\n
         • adb root\n
         • adb enable-verity\n
         • adb reboot
@@ -56,7 +56,7 @@
     <string name="menu_preferences">Προτιμήσεις</string>
     <string name="menu_auto_updates_check">Αυτόματος έλεγχος για ενημερώσεις</string>
     <string name="menu_ab_perf_mode">Λειτουργία απόδοσης A/B</string>
-    <string name="menu_update_recovery">Update recovery</string>
+    <string name="menu_update_recovery">Ενημέρωση αποκατάστασης</string>
     <string name="auto_updates_check_summary">Ενεργοποιήστε για να ελέγξετε για ενημερώσεις αυτόματα μία φορά κάθε 14 ημέρες.</string>
     <string name="ab_perf_mode_summary">Αύξηση προτεραιότητας της διαδικασίας ενημέρωσης. Μπορεί να επηρεάσει την κανονική χρήση όταν μια ενημέρωση βρίσκεται σε εξέλιξη.</string>
     <string name="update_recovery_summary">Ενεργοποιήστε για αυτόματη ενημέρωση της ανάκτησης από την κατασκευή.</string>
@@ -71,51 +71,64 @@
     <string name="list_build_version_date">PixelOS <xliff:g example="15" id="version">%1$s</xliff:g> - <xliff:g example="July 11, 2017" id="date">%2$s</xliff:g></string>
     <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> από <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
     <string name="list_verifying_update">Επαλήθευση ενημέρωσης</string>
-    <string name="action_download">Download</string>
+    <string name="action_download">Λήψη</string>
     <string name="action_pause">Παύση</string>
     <string name="action_resume">Συνέχιση</string>
     <string name="action_reboot">Επανεκκίνηση</string>
-    <string name="action_install">Install</string>
+    <string name="action_install">Εγκατάσταση</string>
     <string name="action_delete">Ακύρωση</string>
     <string name="action_cancel">Ακύρωση</string>
-    <string name="confirm_delete_dialog_title">Delete file</string>
-    <string name="confirm_delete_dialog_message">Delete the current downloading file?</string>
-    <string name="apply_update_dialog_title">Apply update</string>
-    <string name="apply_update_dialog_message">You are about to install <xliff:g id="update_name">%1$s</xliff:g>.\n\nIf you press <xliff:g id="ok">%2$s</xliff:g>, the device will restart itself in recovery mode to install the update.\n\nNote: This feature requires a compatible Recovery or updates will need to be installed manually.</string>
-    <string name="apply_update_dialog_message_ab">You are about to install <xliff:g id="update_name">%1$s</xliff:g>.\n\nIf you press <xliff:g id="ok">%2$s</xliff:g>, the device will begin installing in the background.\n\nOnce completed, you will be prompted to reboot.</string>
-    <string name="cancel_installation_dialog_message">Cancel the installation?</string>
-    <string name="reboot_installation_dialog_message">Reboot to complete installation</string>
+    <string name="confirm_delete_dialog_title">Διαγραφή αρχείου</string>
+    <string name="confirm_delete_dialog_message">Διαγραφή του τρέχοντος αρχείου λήψης;</string>
+    <string name="apply_update_dialog_title">Εφαρμογή ενημέρωσης</string>
+    <string name="apply_update_dialog_message">Πρόκειται να αναβαθμίσετε σε <xliff:g id="update_name">%1$s</xliff:g>.\n\nΑν πατήσετε <xliff:g id="ok">%2$s</xliff:g>, η συσκευή θα κάνει επανεκκίνηση σε λειτουργία recovery για να εγκατασταθεί η ενημέρωση.\n\nΣημείωση: Αυτή η λειτουργία απαιτεί μια συμβατή recovery αλλιώς η ενημέρωση θα πρέπει να εγκατασταθεί χειροκίνητα.</string>
+    <string name="apply_update_dialog_message_ab">Πρόκειται να αναβαθμίσετε σε <xliff:g id="update_name">%1$s</xliff:g>.\n\nΕάν πατήσετε <xliff:g id="ok">%2$s</xliff:g>, η συσκευή θα ξεκινήσει την εγκατάσταση στο παρασκήνιο.\n\nΌταν ολοκληρωθεί, θα σας ζητηθεί να κάνετε επανεκκίνηση.</string>
+    <string name="cancel_installation_dialog_message">Ακύρωση της εγκατάστασης;</string>
+    <string name="reboot_installation_dialog_message">Επανεκκίνηση για ολοκλήρωση της εγκατάστασης</string>
     <plurals name="eta_seconds">
-        <item quantity="one">1 second left</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> seconds left</item>
+        <item quantity="one">Απομένει 1 δευτερόλεπτο</item>
+        <item quantity="other">Απομένουν <xliff:g id="count">%d</xliff:g> δευτερόλεπτα</item>
     </plurals>
     <plurals name="eta_minutes">
-        <item quantity="one">1 minute left</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> minutes left</item>
+        <item quantity="one">Απομένει 1 λεπτό</item>
+        <item quantity="other">Απομένουν <xliff:g id="count">%d</xliff:g> λεπτά</item>
     </plurals>
     <plurals name="eta_hours">
-        <item quantity="one">1 hour left</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> hours left</item>
+        <item quantity="one">Απομένει 1 ώρα</item>
+        <item quantity="other">Απομένουν <xliff:g id="count">%d</xliff:g> ώρες</item>
     </plurals>
-    <string name="update_over_metered_network_info">Metered connection warning</string>
-    <string name="update_over_metered_network_message">Downloading updates, over a cellular network, metered Wi-Fi, or while roaming may cause additional charges.</string>
+    <string name="update_over_metered_network_info">Προειδοποίηση κινητής σύνδεσης</string>
+    <string name="update_over_metered_network_message">Η λήψη ενημερώσεων μέσω δικτύου κινητής τηλεφωνίας, περιορισμένου Wi-Fi, ή κατά την περιαγωγή μπορεί να επιφέρει πρόσθετες χρεώσεις.</string>
     <string name="new_updates_channel_title">Νέες ενημερώσεις</string>
-    <string name="ongoing_channel_title">Ongoing downloads</string>
+    <string name="ongoing_channel_title">Λήψεις σε εξέλιξη</string>
     <string name="update_failed_channel_title">Η ενημέρωση απέτυχε</string>
-    <string name="local_update_import">Local update</string>
-    <string name="local_update_import_progress">Importing local update\u2026</string>
-    <string name="local_update_import_success">%1$s has been imported. Do you want to install it?</string>
-    <string name="local_update_import_failure">Failed to import local update</string>
-    <string name="local_update_import_install">Install</string>
-    <string name="check_for_update">Check for update</string>
-    <string name="check_for_update_failed">Failed to check for update</string>
-    <string name="system_up_to_date">Your system is up to date</string>
-    <string name="system_update_available">System update available</string>
-    <string name="checking_for_update">Checking for system update\u2026</string>
-    <string name="system_update_downloading">Downloading system update</string>
+    <string name="local_update_import">Τοπική ενημέρωση</string>
+    <string name="local_update_import_progress">Εισαγωγή τοπικής ενημέρωσης\u2026</string>
+    <string name="local_update_import_success">%1$s έχει εισαχθεί. Θέλετε να τo εγκαταστήσετε;</string>
+    <string name="local_update_import_failure">Αποτυχία εισαγωγής τοπικής ενημέρωσης</string>
+    <string name="local_update_import_install">Εγκατάσταση</string>
+    <string name="check_for_update">Έλεγχος για ενημερώσεις</string>
+    <string name="check_for_update_failed">Αποτυχία ελέγχου για ενημερώσεις</string>
+    <string name="system_up_to_date">Το σύστημά σας είναι ενημερωμένο</string>
+    <string name="system_update_available">Διαθέσιμη ενημέρωση συστήματος</string>
+    <string name="checking_for_update">Έλεγχος για ενημέρωση συστήματος\u2026</string>
+    <string name="system_update_downloading">Λήψη ενημέρωσης συστήματος</string>
     <string name="system_update_downloading_paused">Λήψη σε παύση</string>
-    <string name="system_update_installing">Installing system update</string>
-    <string name="system_update_verifying">Verifying system update</string>
-    <string name="local_update_installing">Installing local update</string>
-    <string name="general_header">General</string>
+    <string name="system_update_installing">Εγκατάσταση ενημέρωσης συστήματος</string>
+    <string name="system_update_verifying">Επαλήθευση ενημέρωσης συστήματος</string>
+    <string name="local_update_installing">Εγκατάσταση τοπικής ενημέρωσης</string>
+    <string name="general_header">Γενικά</string>
+    <string name="play_integrity_header">Play Integrity</string>
+    <string name="text_download_size_unknown">Άγνωστη</string>
+    <string name="certified_prop_status">Certified properties status</string>
+    <string name="certified_prop_check">Έλεγχος για ενημερώσεις</string>
+    <string name="certified_prop_checking">Checking for certified properties update</string>
+    <string name="certified_prop_downloading">Downloading certified properties update</string>
+    <string name="certified_prop_download_failed">Unable to fetch properties from the server</string>
+    <string name="certified_prop_available">Λήψη και εγκατάσταση</string>
+    <string name="certified_prop_install_success">Κάνετε επανεκκίνηση για εφαρμογή της ενημέρωσης</string>
+    <string name="certified_prop_install_failed">Αποτυχία εγκατάστασης</string>
+    <string name="certified_prop_info" formatted="false">Εγκατεστημένη έκδοση: %s\n</string>
+    <string name="certified_prop_remote" formatted="false">Τελευταία έκδοση: %1$s</string>
+    <string name="fetch_changelogs_failed">Failed to fetch changelogs</string>
 </resources>

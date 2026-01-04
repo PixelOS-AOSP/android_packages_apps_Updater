@@ -16,8 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Updater</string>
-    <string name="display_name">Updater</string>
+    <string name="app_name">المُحدِّث</string>
+    <string name="display_name">المُحدِّث</string>
     <!-- Directory where the update files will be downloaded and stored.
          WARNING: The application can and will delete any unknown file. -->
     <!--
@@ -25,109 +25,122 @@
       {version} - Build version
       {device} - Device name
     -->
-    <string name="verification_failed_notification">Verification failed</string>
-    <string name="verifying_download_notification">Verifying update</string>
-    <string name="downloading_notification">Downloading</string>
-    <string name="download_paused_notification">Download paused</string>
-    <string name="download_paused_error_notification">Download error</string>
-    <string name="download_completed_notification">Download completed</string>
-    <string name="download_starting_notification">Starting download</string>
-    <string name="update_failed_notification">Update failed</string>
-    <string name="installation_suspended_notification">Installation suspended</string>
-    <string name="new_updates_found_title">New updates</string>
-    <string name="text_download_speed">%1$s, %2$s/s</string>
-    <string name="pause_button">Pause</string>
-    <string name="resume_button">Resume</string>
-    <string name="suspend_button">Suspend</string>
-    <string name="installing_update">Installing update package</string>
-    <string name="installing_update_error">Install error</string>
-    <string name="installing_update_finished">Update installed</string>
-    <string name="finalizing_package">Finalizing package installation</string>
-    <string name="preparing_ota_first_boot">Preparing for first boot</string>
-    <string name="dialog_prepare_zip_message">Preliminary update preparation</string>
-    <string name="dialog_battery_low_title">Low battery</string>
-    <string name="dialog_battery_low_message_pct">The battery level is too low, you need at least <xliff:g id="percent_discharging">%1$d</xliff:g>%% of the battery to continue, <xliff:g id="percent_charging">%2$d</xliff:g>%% if charging.</string>
-    <string name="dialog_scratch_mounted_message"><![CDATA[        Please run the following commands and retry the update:\n
+    <string name="verification_failed_notification">فشل التحقق</string>
+    <string name="verifying_download_notification">التحقق من التحديث</string>
+    <string name="downloading_notification">جارٍ التنزيل</string>
+    <string name="download_paused_notification">توقف التنزيل مؤقتاً</string>
+    <string name="download_paused_error_notification">خطأ في التنزيل</string>
+    <string name="download_completed_notification">اكتمل التنزيل</string>
+    <string name="download_starting_notification">بدء التنزيل</string>
+    <string name="update_failed_notification">فشل التحديث</string>
+    <string name="installation_suspended_notification">تم تعليق التثبيت</string>
+    <string name="new_updates_found_title">تحديثات جديدة</string>
+    <string name="text_download_speed">%1$s، %2$s/ث</string>
+    <string name="pause_button">إيقاف مؤقت</string>
+    <string name="resume_button">استئناف</string>
+    <string name="suspend_button">تعليق</string>
+    <string name="installing_update">جارٍ تثبيت حزمة التحديث</string>
+    <string name="installing_update_error">خطأ في التثبيت</string>
+    <string name="installing_update_finished">تم تثبيت التحديث</string>
+    <string name="finalizing_package">جارٍ إنهاء تثبيت الحزمة</string>
+    <string name="preparing_ota_first_boot">الإعداد للتشغيل الأول</string>
+    <string name="dialog_prepare_zip_message">التجهيز للتحديث الأولي</string>
+    <string name="dialog_battery_low_title">البطارية منخفضة</string>
+    <string name="dialog_battery_low_message_pct">مستوى البطارية منخفض للغاية، تحتاج إلى <xliff:g id="percent_discharging">%1$d</xliff:g>%% على الأقل من البطارية للاستمرار، و<xliff:g id="percent_charging">%2$d</xliff:g>%% إذا كنت تقوم بالشحن.</string>
+    <string name="dialog_scratch_mounted_message" formatted="false"><![CDATA[        Please run the following commands and retry the update:\n
         • adb root\n
         • adb enable-verity\n
         • adb reboot
         ]]></string>
-    <string name="dialog_scratch_mounted_title">Cannot install update with OverlayFS mounted</string>
-    <string name="menu_preferences">Preferences</string>
-    <string name="menu_auto_updates_check">Automatic check for updates</string>
-    <string name="menu_ab_perf_mode">A/B performance mode</string>
-    <string name="menu_update_recovery">Update recovery</string>
-    <string name="auto_updates_check_summary">Enable to check for updates automatically once every 14 days.</string>
-    <string name="ab_perf_mode_summary">Increase priority of the update process. Might influence normal usage when an update is in progress.</string>
-    <string name="update_recovery_summary">Enable to update recovery from the build automatically.</string>
-    <string name="snack_updates_check_failed">The update check failed. Please check your internet connection and try again later.</string>
-    <string name="snack_download_failed">The download failed. Please check your internet connection and try again later.</string>
-    <string name="snack_download_verification_failed">The update verification failed.</string>
-    <string name="snack_download_verified">Download completed.</string>
-    <string name="snack_update_not_installable">This update can\'t be installed on top of the current build.</string>
-    <string name="header_android_version">Android version: <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
-    <string name="header_android_security_patch">Android security update: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
-    <string name="header_last_updates_check">Last successful check for update:\n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g> (<xliff:g example="01:23" id="time">%2$s</xliff:g>)</string>
+    <string name="dialog_scratch_mounted_title">لا يمكن تثبيت التحديث مع تثبيت OverlayFS</string>
+    <string name="menu_preferences">الخيارات</string>
+    <string name="menu_auto_updates_check">التحقق التلقائي من وجود تحديثات</string>
+    <string name="menu_ab_perf_mode">وضع الأداء A/B</string>
+    <string name="menu_update_recovery">تحديث الاسترداد</string>
+    <string name="auto_updates_check_summary">تمكين التحقق من وجود تحديثات تلقائياً مرة كل 14 يوماً.</string>
+    <string name="ab_perf_mode_summary">زيادة أولوية عملية التحديث. قد يؤثر على الاستخدام العادي عندما يكون التحديث قيد التقدم.</string>
+    <string name="update_recovery_summary">تمكين تحديث الاسترداد من البناء تلقائياً.</string>
+    <string name="snack_updates_check_failed">فشل التحقق من وجود تحديث. برجاء التحقق من اتصالك بالإنترنت وإعادة المحاولة لاحقًا.</string>
+    <string name="snack_download_failed">فشل التنزيل. برجاء التحقق من اتصالك بالإنترنت وإعادة المحاولة لاحقًا.</string>
+    <string name="snack_download_verification_failed">فشل التحقق من التحديث.</string>
+    <string name="snack_download_verified">اكتمل التنزيل.</string>
+    <string name="snack_update_not_installable">لا يمكن تثبيت هذا التحديث على الاصدار الحالي.</string>
+    <string name="header_android_version">إصدار الأندرويد: <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
+    <string name="header_android_security_patch">تحديث أمان الأندرويد: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
+    <string name="header_last_updates_check">آخر فحص ناجح للتحديث:\n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g> (<xliff:g example="01:23" id="time">%2$s</xliff:g>)</string>
     <string name="list_build_version_date">PixelOS <xliff:g example="15" id="version">%1$s</xliff:g> - <xliff:g example="July 11, 2017" id="date">%2$s</xliff:g></string>
-    <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> of <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
-    <string name="list_verifying_update">Verifying update</string>
-    <string name="action_download">Download</string>
-    <string name="action_pause">Pause</string>
-    <string name="action_resume">Resume</string>
-    <string name="action_reboot">Reboot</string>
-    <string name="action_install">Install</string>
-    <string name="action_delete">Cancel</string>
-    <string name="action_cancel">Cancel</string>
-    <string name="confirm_delete_dialog_title">Delete file</string>
-    <string name="confirm_delete_dialog_message">Delete the current downloading file?</string>
-    <string name="apply_update_dialog_title">Apply update</string>
-    <string name="apply_update_dialog_message">You are about to install <xliff:g id="update_name">%1$s</xliff:g>.\n\nIf you press <xliff:g id="ok">%2$s</xliff:g>, the device will restart itself in recovery mode to install the update.\n\nNote: This feature requires a compatible Recovery or updates will need to be installed manually.</string>
-    <string name="apply_update_dialog_message_ab">You are about to install <xliff:g id="update_name">%1$s</xliff:g>.\n\nIf you press <xliff:g id="ok">%2$s</xliff:g>, the device will begin installing in the background.\n\nOnce completed, you will be prompted to reboot.</string>
-    <string name="cancel_installation_dialog_message">Cancel the installation?</string>
-    <string name="reboot_installation_dialog_message">Reboot to complete installation</string>
+    <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> من <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
+    <string name="list_verifying_update">التحقق من التحديث</string>
+    <string name="action_download">تحميل</string>
+    <string name="action_pause">إيقاف مؤقت</string>
+    <string name="action_resume">استئناف</string>
+    <string name="action_reboot">إعادة التشغيل</string>
+    <string name="action_install">تثبيت</string>
+    <string name="action_delete">إلغاء</string>
+    <string name="action_cancel">إلغاء</string>
+    <string name="confirm_delete_dialog_title">مسح الملف</string>
+    <string name="confirm_delete_dialog_message">حذف ملف التحميل الحالي؟</string>
+    <string name="apply_update_dialog_title">تطبيق التحديث</string>
+    <string name="apply_update_dialog_message">أنت على وشك تثبيت <xliff:g id="update_name">%1$s</xliff:g>.\n\nإذا قمت بالضغط على <xliff:g id="ok">%2$s</xliff:g>، سيقوم الجهاز بإعادة تشغيل نفسه في وضع الاسترداد لتثبيت التحديث.\n\nملاحظة: تتطلب هذه المِيزة استعادة متوافقة أو تحتاج التحديثات إلى تثبيت يدويا.</string>
+    <string name="apply_update_dialog_message_ab">أنت على وشك تثبيت <xliff:g id="update_name">%1$s</xliff:g>.\n\nإذا قمت بالضغط على <xliff:g id="ok">%2$s</xliff:g>، فسيبدأ الجهاز بالتثبيت في الخلفية.\n\nبمجرد اكتماله، سوف يطلب منك إعادة التشغيل.</string>
+    <string name="cancel_installation_dialog_message">إلغاء التثبيت؟</string>
+    <string name="reboot_installation_dialog_message">إعادة التشغيل لإكمال التثبيت</string>
     <plurals name="eta_seconds">
         <item quantity="zero"><xliff:g id="count">%d</xliff:g> seconds left</item>
-        <item quantity="one">1 second left</item>
+        <item quantity="one">ثانية واحدة متبقية</item>
         <item quantity="two"><xliff:g id="count">%d</xliff:g> seconds left</item>
-        <item quantity="few"><xliff:g id="count">%d</xliff:g> seconds left</item>
-        <item quantity="many"><xliff:g id="count">%d</xliff:g> seconds left</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> seconds left</item>
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> ثانية متبقية</item>
+        <item quantity="many"><xliff:g id="count">%d</xliff:g> ثواني متبقية</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> ثواني متبقية</item>
     </plurals>
     <plurals name="eta_minutes">
         <item quantity="zero"><xliff:g id="count">%d</xliff:g> minutes left</item>
-        <item quantity="one">1 minute left</item>
+        <item quantity="one">دقيقة واحدة متبقية</item>
         <item quantity="two"><xliff:g id="count">%d</xliff:g> minutes left</item>
-        <item quantity="few"><xliff:g id="count">%d</xliff:g> minutes left</item>
-        <item quantity="many"><xliff:g id="count">%d</xliff:g> minutes left</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> minutes left</item>
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> دقيقة متبقية</item>
+        <item quantity="many"><xliff:g id="count">%d</xliff:g> دقائق متبقية</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> دقائق متبقية</item>
     </plurals>
     <plurals name="eta_hours">
         <item quantity="zero"><xliff:g id="count">%d</xliff:g> hours left</item>
-        <item quantity="one">1 hour left</item>
+        <item quantity="one">ساعة واحدة متبقية</item>
         <item quantity="two"><xliff:g id="count">%d</xliff:g> hours left</item>
-        <item quantity="few"><xliff:g id="count">%d</xliff:g> hours left</item>
-        <item quantity="many"><xliff:g id="count">%d</xliff:g> hours left</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> hours left</item>
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> ساعة متبقية</item>
+        <item quantity="many"><xliff:g id="count">%d</xliff:g> ساعات متبقية</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> ساعات متبقية</item>
     </plurals>
-    <string name="update_over_metered_network_info">Metered connection warning</string>
-    <string name="update_over_metered_network_message">Downloading updates, over a cellular network, metered Wi-Fi, or while roaming may cause additional charges.</string>
-    <string name="new_updates_channel_title">New updates</string>
-    <string name="ongoing_channel_title">Ongoing downloads</string>
-    <string name="update_failed_channel_title">Update failed</string>
-    <string name="local_update_import">Local update</string>
-    <string name="local_update_import_progress">Importing local update\u2026</string>
-    <string name="local_update_import_success">%1$s has been imported. Do you want to install it?</string>
-    <string name="local_update_import_failure">Failed to import local update</string>
-    <string name="local_update_import_install">Install</string>
-    <string name="check_for_update">Check for update</string>
-    <string name="check_for_update_failed">Failed to check for update</string>
-    <string name="system_up_to_date">Your system is up to date</string>
-    <string name="system_update_available">System update available</string>
-    <string name="checking_for_update">Checking for system update\u2026</string>
-    <string name="system_update_downloading">Downloading system update</string>
-    <string name="system_update_downloading_paused">Download paused</string>
-    <string name="system_update_installing">Installing system update</string>
-    <string name="system_update_verifying">Verifying system update</string>
-    <string name="local_update_installing">Installing local update</string>
-    <string name="general_header">General</string>
+    <string name="update_over_metered_network_info">تحذير اتصال مقاس</string>
+    <string name="update_over_metered_network_message">قد يؤدي تنزيل التحديثات عبر شبكة خلوية أو شبكة Wi-Fi محدودة الاستهلاك أو أثناء التجوال إلى فرض رسوم إضافية.</string>
+    <string name="new_updates_channel_title">تحديثات جديدة</string>
+    <string name="ongoing_channel_title">التنزيلات الجارية</string>
+    <string name="update_failed_channel_title">فشل التحديث</string>
+    <string name="local_update_import">تحديث محلي</string>
+    <string name="local_update_import_progress">استيراد التحديث المحلي\u2026</string>
+    <string name="local_update_import_success">تم استيراد %1$s. هل تريد تثبيته؟</string>
+    <string name="local_update_import_failure">فشل في استيراد التحديث المحلي</string>
+    <string name="local_update_import_install">تثبيت</string>
+    <string name="check_for_update">التحقق من وجود تحديث</string>
+    <string name="check_for_update_failed">فشل التحقق من التحديث</string>
+    <string name="system_up_to_date">النظام الخاص بك محدّث</string>
+    <string name="system_update_available">تحديث جديد متوفر الآن</string>
+    <string name="checking_for_update">جاري التحقق من تحديث النظام\u2026</string>
+    <string name="system_update_downloading">تحميل تحديث النظام</string>
+    <string name="system_update_downloading_paused">توقف التنزيل مؤقتاً</string>
+    <string name="system_update_installing">يتم تثبيت تحديث النظام</string>
+    <string name="system_update_verifying">يتم التحقق من تحديث النظام</string>
+    <string name="local_update_installing">تثبيت التحديث المحلي</string>
+    <string name="general_header">عام</string>
+    <string name="play_integrity_header">سلامة التشغيل</string>
+    <string name="text_download_size_unknown">غير معروف</string>
+    <string name="certified_prop_status">حالة الخصائص المصدّقة</string>
+    <string name="certified_prop_check">التحقق من وجود تحديث</string>
+    <string name="certified_prop_checking">التحقق من تحديث الخصائص المصدق عليها</string>
+    <string name="certified_prop_downloading">تحميل تحديث الخصائص المصدق عليها</string>
+    <string name="certified_prop_download_failed">غير قادر على جلب الخصائص من الخادم</string>
+    <string name="certified_prop_available">تحميل وتثبيت</string>
+    <string name="certified_prop_install_success">أعد التشغيل لتطبيق التحديث</string>
+    <string name="certified_prop_install_failed">فشل التثبيت</string>
+    <string name="certified_prop_info" formatted="false">الإصدار المثبت: %s\n</string>
+    <string name="certified_prop_remote" formatted="false">أحدث إصدار: %s</string>
+    <string name="fetch_changelogs_failed">Failed to fetch changelogs</string>
 </resources>

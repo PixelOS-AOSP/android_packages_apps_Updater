@@ -16,8 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Updater</string>
-    <string name="display_name">Updater</string>
+    <string name="app_name">업데이터</string>
+    <string name="display_name">업데이터</string>
     <!-- Directory where the update files will be downloaded and stored.
          WARNING: The application can and will delete any unknown file. -->
     <!--
@@ -25,94 +25,107 @@
       {version} - Build version
       {device} - Device name
     -->
-    <string name="verification_failed_notification">Verification failed</string>
-    <string name="verifying_download_notification">Verifying update</string>
-    <string name="downloading_notification">Downloading</string>
-    <string name="download_paused_notification">Download paused</string>
-    <string name="download_paused_error_notification">Download error</string>
-    <string name="download_completed_notification">Download completed</string>
-    <string name="download_starting_notification">Starting download</string>
-    <string name="update_failed_notification">Update failed</string>
-    <string name="installation_suspended_notification">Installation suspended</string>
-    <string name="new_updates_found_title">New updates</string>
+    <string name="verification_failed_notification">인증 실패</string>
+    <string name="verifying_download_notification">업데이트 검증 중</string>
+    <string name="downloading_notification">다운로드 중</string>
+    <string name="download_paused_notification">다운로드 일시 중지됨</string>
+    <string name="download_paused_error_notification">다운로드 오류</string>
+    <string name="download_completed_notification">다운로드가 완료되었습니다</string>
+    <string name="download_starting_notification">다운로드 시작</string>
+    <string name="update_failed_notification">업데이트 실패</string>
+    <string name="installation_suspended_notification">설치가 보류됨</string>
+    <string name="new_updates_found_title">새 업데이트</string>
     <string name="text_download_speed">%1$s, %2$s/s</string>
-    <string name="pause_button">Pause</string>
-    <string name="resume_button">Resume</string>
-    <string name="suspend_button">Suspend</string>
-    <string name="installing_update">Installing update package</string>
-    <string name="installing_update_error">Install error</string>
-    <string name="installing_update_finished">Update installed</string>
-    <string name="finalizing_package">Finalizing package installation</string>
-    <string name="preparing_ota_first_boot">Preparing for first boot</string>
-    <string name="dialog_prepare_zip_message">Preliminary update preparation</string>
-    <string name="dialog_battery_low_title">Low battery</string>
-    <string name="dialog_battery_low_message_pct">The battery level is too low, you need at least <xliff:g id="percent_discharging">%1$d</xliff:g>%% of the battery to continue, <xliff:g id="percent_charging">%2$d</xliff:g>%% if charging.</string>
-    <string name="dialog_scratch_mounted_message"><![CDATA[        Please run the following commands and retry the update:\n
+    <string name="pause_button">일시 중지</string>
+    <string name="resume_button">이어 받기</string>
+    <string name="suspend_button">보류</string>
+    <string name="installing_update">업데이트 패키지 설치 중</string>
+    <string name="installing_update_error">설치 오류</string>
+    <string name="installing_update_finished">업데이트 설치됨</string>
+    <string name="finalizing_package">패키지 설치 마무리 중</string>
+    <string name="preparing_ota_first_boot">첫 번째 부팅 준비 중</string>
+    <string name="dialog_prepare_zip_message">예비 업데이트 준비</string>
+    <string name="dialog_battery_low_title">배터리 부족</string>
+    <string name="dialog_battery_low_message_pct">배터리 잔량이 너무 낮습니다. 설치를 계속하려면 배터리가 방전 중일 때는 <xliff:g id="percent_discharging">%1$d</xliff:g>%%, 충전 중일 때는 <xliff:g id="percent_charging">%2$d</xliff:g>%% 이상이어야 합니다.</string>
+    <string name="dialog_scratch_mounted_message" formatted="false"><![CDATA[다음 명령어를 실행하고 업데이트를 다시 시도하세요:\n
         • adb root\n
         • adb enable-verity\n
-        • adb reboot
+        • adb reboot\n
         ]]></string>
-    <string name="dialog_scratch_mounted_title">Cannot install update with OverlayFS mounted</string>
-    <string name="menu_preferences">Preferences</string>
-    <string name="menu_auto_updates_check">Automatic check for updates</string>
-    <string name="menu_ab_perf_mode">A/B performance mode</string>
-    <string name="menu_update_recovery">Update recovery</string>
-    <string name="auto_updates_check_summary">Enable to check for updates automatically once every 14 days.</string>
-    <string name="ab_perf_mode_summary">Increase priority of the update process. Might influence normal usage when an update is in progress.</string>
-    <string name="update_recovery_summary">Enable to update recovery from the build automatically.</string>
-    <string name="snack_updates_check_failed">The update check failed. Please check your internet connection and try again later.</string>
-    <string name="snack_download_failed">The download failed. Please check your internet connection and try again later.</string>
-    <string name="snack_download_verification_failed">The update verification failed.</string>
-    <string name="snack_download_verified">Download completed.</string>
-    <string name="snack_update_not_installable">This update can\'t be installed on top of the current build.</string>
-    <string name="header_android_version">Android version: <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
-    <string name="header_android_security_patch">Android security update: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
-    <string name="header_last_updates_check">Last successful check for update:\n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g> (<xliff:g example="01:23" id="time">%2$s</xliff:g>)</string>
+    <string name="dialog_scratch_mounted_title">OverlayFS가 마운트된 상태에서는 업데이트를 설치할 수 없습니다</string>
+    <string name="menu_preferences">환경 설정</string>
+    <string name="menu_auto_updates_check">업데이트 자동으로 확인</string>
+    <string name="menu_ab_perf_mode">A/B 퍼포먼스 모드</string>
+    <string name="menu_update_recovery">복구 모드 업데이트</string>
+    <string name="auto_updates_check_summary">14일마다 자동으로 업데이트를 확인하도록 설정합니다.</string>
+    <string name="ab_perf_mode_summary">업데이트 프로세스의 우선 순위를 높입니다. 업데이트가 진행 중일 때 정상적인 사용에 영향을 줄 수 있습니다.</string>
+    <string name="update_recovery_summary">빌드에서 리커버리를 자동으로 업데이트하도록 설정합니다.</string>
+    <string name="snack_updates_check_failed">업데이트 확인에 실패했습니다. 인터넷 연결을 확인한 뒤 다시 시도해 주세요.</string>
+    <string name="snack_download_failed">다운로드에 실패했습니다. 인터넷 연결을 확인한 뒤 다시 시도해 주세요.</string>
+    <string name="snack_download_verification_failed">업데이트 검증에 실패했습니다.</string>
+    <string name="snack_download_verified">다운로드 완료</string>
+    <string name="snack_update_not_installable">현재 빌드에서는 이 업데이트를 설치할 수 없습니다.</string>
+    <string name="header_android_version">Android 버전: <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
+    <string name="header_android_security_patch">Android 보안 업데이트: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
+    <string name="header_last_updates_check">마지막으로 업데이트를 확인한 시간:\n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g> (<xliff:g example="01:23" id="time">%2$s</xliff:g>)</string>
     <string name="list_build_version_date">PixelOS <xliff:g example="15" id="version">%1$s</xliff:g> - <xliff:g example="July 11, 2017" id="date">%2$s</xliff:g></string>
-    <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> of <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
-    <string name="list_verifying_update">Verifying update</string>
-    <string name="action_download">Download</string>
-    <string name="action_pause">Pause</string>
-    <string name="action_resume">Resume</string>
-    <string name="action_reboot">Reboot</string>
-    <string name="action_install">Install</string>
-    <string name="action_delete">Cancel</string>
-    <string name="action_cancel">Cancel</string>
-    <string name="confirm_delete_dialog_title">Delete file</string>
-    <string name="confirm_delete_dialog_message">Delete the current downloading file?</string>
-    <string name="apply_update_dialog_title">Apply update</string>
-    <string name="apply_update_dialog_message">You are about to install <xliff:g id="update_name">%1$s</xliff:g>.\n\nIf you press <xliff:g id="ok">%2$s</xliff:g>, the device will restart itself in recovery mode to install the update.\n\nNote: This feature requires a compatible Recovery or updates will need to be installed manually.</string>
-    <string name="apply_update_dialog_message_ab">You are about to install <xliff:g id="update_name">%1$s</xliff:g>.\n\nIf you press <xliff:g id="ok">%2$s</xliff:g>, the device will begin installing in the background.\n\nOnce completed, you will be prompted to reboot.</string>
-    <string name="cancel_installation_dialog_message">Cancel the installation?</string>
-    <string name="reboot_installation_dialog_message">Reboot to complete installation</string>
+    <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> / <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
+    <string name="list_verifying_update">업데이트 검증 중</string>
+    <string name="action_download">다운로드</string>
+    <string name="action_pause">일시 중지</string>
+    <string name="action_resume">이어 받기</string>
+    <string name="action_reboot">다시 시작</string>
+    <string name="action_install">설치</string>
+    <string name="action_delete">삭제</string>
+    <string name="action_cancel">삭제</string>
+    <string name="confirm_delete_dialog_title">파일 삭제</string>
+    <string name="confirm_delete_dialog_message">현재 다운로드 중인 파일을 삭제합니까?</string>
+    <string name="apply_update_dialog_title">업데이트 적용</string>
+    <string name="apply_update_dialog_message"><xliff:g id="update_name">%1$s</xliff:g>을(를) 설치하려고 합니다.\n\n<xliff:g id="ok">%2$s</xliff:g>을(를) 누르면 기기가 복구 모드로 재시작되어 업데이트를 설치합니다.\n\n참고: 이 기능을 사용하려면 호환되는 Recovery가 필요하며, 그렇지 않을 경우 업데이트를 수동으로 설치해야 합니다.</string>
+    <string name="apply_update_dialog_message_ab"><xliff:g id="update_name">%1$s</xliff:g>을(를) 설치하려고 합니다.\n\n<xliff:g id="ok">%2$s</xliff:g>을(를) 누르면 기기가 백그라운드에서 설치를 시작합니다.\n\n설치가 완료되면 재부팅하라는 메시지가 표시됩니다.</string>
+    <string name="cancel_installation_dialog_message">설치를 취소하시겠습니까?</string>
+    <string name="reboot_installation_dialog_message">재부팅하여 설치 완료</string>
     <plurals name="eta_seconds">
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> seconds left</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g>초 남음</item>
     </plurals>
     <plurals name="eta_minutes">
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> minutes left</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g>분 남음</item>
     </plurals>
     <plurals name="eta_hours">
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> hours left</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g>시간 남음</item>
     </plurals>
-    <string name="update_over_metered_network_info">Metered connection warning</string>
-    <string name="update_over_metered_network_message">Downloading updates, over a cellular network, metered Wi-Fi, or while roaming may cause additional charges.</string>
-    <string name="new_updates_channel_title">New updates</string>
-    <string name="ongoing_channel_title">Ongoing downloads</string>
-    <string name="update_failed_channel_title">Update failed</string>
-    <string name="local_update_import">Local update</string>
-    <string name="local_update_import_progress">Importing local update\u2026</string>
-    <string name="local_update_import_success">%1$s has been imported. Do you want to install it?</string>
-    <string name="local_update_import_failure">Failed to import local update</string>
-    <string name="local_update_import_install">Install</string>
-    <string name="check_for_update">Check for update</string>
-    <string name="check_for_update_failed">Failed to check for update</string>
-    <string name="system_up_to_date">Your system is up to date</string>
-    <string name="system_update_available">System update available</string>
-    <string name="checking_for_update">Checking for system update\u2026</string>
-    <string name="system_update_downloading">Downloading system update</string>
-    <string name="system_update_downloading_paused">Download paused</string>
-    <string name="system_update_installing">Installing system update</string>
-    <string name="system_update_verifying">Verifying system update</string>
-    <string name="local_update_installing">Installing local update</string>
-    <string name="general_header">General</string>
+    <string name="update_over_metered_network_info">데이터 요금제 연결 경고</string>
+    <string name="update_over_metered_network_message">모바일 데이터, 종량제 Wi-Fi 또는 로밍 상태에서 업데이트를 다운로드하면 추가 요금이 발생할 수 있습니다.</string>
+    <string name="new_updates_channel_title">새 업데이트</string>
+    <string name="ongoing_channel_title">진행 중인 다운로드</string>
+    <string name="update_failed_channel_title">업데이트 실패</string>
+    <string name="local_update_import">로컬 업데이트</string>
+    <string name="local_update_import_progress">로컬 업데이트 가져오는 중…\u2026</string>
+    <string name="local_update_import_success">%1$s을(를) 가져왔습니다. 설치하시겠습니까?</string>
+    <string name="local_update_import_failure">로컬 업데이트를 가져오지 못했습니다.</string>
+    <string name="local_update_import_install">설치</string>
+    <string name="check_for_update">업데이트 확인</string>
+    <string name="check_for_update_failed">업데이트 확인에 실패했습니다.</string>
+    <string name="system_up_to_date">시스템이 최신 상태입니다.</string>
+    <string name="system_update_available">시스템 업데이트 사용 가능</string>
+    <string name="checking_for_update">시스템 업데이트 확인 중…</string>
+    <string name="system_update_downloading">시스템 업데이트 다운로드 중</string>
+    <string name="system_update_downloading_paused">다운로드 일시 중지됨</string>
+    <string name="system_update_installing">시스템 업데이트 설치 중</string>
+    <string name="system_update_verifying">시스템 업데이트 검증 중</string>
+    <string name="local_update_installing">로컬 업데이트 설치 중</string>
+    <string name="general_header">일반</string>
+    <string name="play_integrity_header">Play Integrity</string>
+    <string name="text_download_size_unknown">알 수 없음</string>
+    <string name="certified_prop_status">인증된 속성 상태</string>
+    <string name="certified_prop_check">업데이트 확인</string>
+    <string name="certified_prop_checking">인증된 속성 업데이트 확인</string>
+    <string name="certified_prop_downloading">인증된 속성 업데이트 다운로드 중</string>
+    <string name="certified_prop_download_failed">서버에서 속성을 가져올 수 없습니다.</string>
+    <string name="certified_prop_available">다운로드 및 설치</string>
+    <string name="certified_prop_install_success">업데이트 적용을 위해 재시작</string>
+    <string name="certified_prop_install_failed">설치에 실패했습니다</string>
+    <string name="certified_prop_info" formatted="false">설치된 버전: %s\n</string>
+    <string name="certified_prop_remote" formatted="false">최신 버전: %s</string>
+    <string name="fetch_changelogs_failed">Failed to fetch changelogs</string>
 </resources>
