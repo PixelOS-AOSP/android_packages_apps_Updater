@@ -119,4 +119,17 @@ illetve, ha éppen tölt, akkor még <xliff:g id="percent_charging">%2$d</xliff:
     <string name="system_update_verifying">A Rendszerfrissítés ellenőrzése</string>
     <string name="local_update_installing">A helyi frissítőfájl telepítése</string>
     <string name="general_header">Általános</string>
+    <string name="play_integrity_header">Google Play Integritás</string>
+    <string name="text_download_size_unknown">Ismeretlen</string>
+    <string name="certified_prop_status">A hitelesített tulajdonságok állapota</string>
+    <string name="certified_prop_check">Frissítéskeresés</string>
+    <string name="certified_prop_checking">A hitelesített tulajdonságok frissítésének keresése</string>
+    <string name="certified_prop_downloading">A hitelesített tulajdonságok frissítésének letöltése</string>
+    <string name="certified_prop_download_failed">Nem sikerült lekérni a tulajdonságokat a szerverről</string>
+    <string name="certified_prop_available">Letöltés és telepítés</string>
+    <string name="certified_prop_install_success">Újraindítás a frissítés érvénybe léptetéséhez</string>
+    <string name="certified_prop_install_failed">Nem sikerült telepíteni</string>
+    <string name="certified_prop_info" formatted="false">A telepített kiadás: %s\n</string>
+    <string name="certified_prop_remote" formatted="false">A legfrissebb kiadás: %s</string>
+    <string name="fetch_changelogs_failed">Failed to fetch changelogs</string>
 </resources>

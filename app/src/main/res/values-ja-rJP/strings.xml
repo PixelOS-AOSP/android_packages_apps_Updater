@@ -16,8 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Updater</string>
-    <string name="display_name">Updater</string>
+    <string name="app_name">アップデーター</string>
+    <string name="display_name">アップデーター</string>
     <!-- Directory where the update files will be downloaded and stored.
          WARNING: The application can and will delete any unknown file. -->
     <!--
@@ -25,94 +25,107 @@
       {version} - Build version
       {device} - Device name
     -->
-    <string name="verification_failed_notification">Verification failed</string>
-    <string name="verifying_download_notification">Verifying update</string>
-    <string name="downloading_notification">Downloading</string>
-    <string name="download_paused_notification">Download paused</string>
-    <string name="download_paused_error_notification">Download error</string>
-    <string name="download_completed_notification">Download completed</string>
-    <string name="download_starting_notification">Starting download</string>
-    <string name="update_failed_notification">Update failed</string>
-    <string name="installation_suspended_notification">Installation suspended</string>
-    <string name="new_updates_found_title">New updates</string>
-    <string name="text_download_speed">%1$s, %2$s/s</string>
-    <string name="pause_button">Pause</string>
-    <string name="resume_button">Resume</string>
-    <string name="suspend_button">Suspend</string>
-    <string name="installing_update">Installing update package</string>
-    <string name="installing_update_error">Install error</string>
-    <string name="installing_update_finished">Update installed</string>
-    <string name="finalizing_package">Finalizing package installation</string>
-    <string name="preparing_ota_first_boot">Preparing for first boot</string>
-    <string name="dialog_prepare_zip_message">Preliminary update preparation</string>
-    <string name="dialog_battery_low_title">Low battery</string>
-    <string name="dialog_battery_low_message_pct">The battery level is too low, you need at least <xliff:g id="percent_discharging">%1$d</xliff:g>%% of the battery to continue, <xliff:g id="percent_charging">%2$d</xliff:g>%% if charging.</string>
-    <string name="dialog_scratch_mounted_message"><![CDATA[        Please run the following commands and retry the update:\n
+    <string name="verification_failed_notification">検証に失敗しました</string>
+    <string name="verifying_download_notification">アップデートを検証中</string>
+    <string name="downloading_notification">ダウンロード中</string>
+    <string name="download_paused_notification">ダウンロード一時停止中</string>
+    <string name="download_paused_error_notification">ダウンロードエラー</string>
+    <string name="download_completed_notification">ダウンロード完了</string>
+    <string name="download_starting_notification">ダウンロードを開始しています</string>
+    <string name="update_failed_notification">アップデートに失敗しました</string>
+    <string name="installation_suspended_notification">インストール一時停止中</string>
+    <string name="new_updates_found_title">新しいアップデート</string>
+    <string name="text_download_speed">%1$s,%2$s/秒</string>
+    <string name="pause_button">一時停止</string>
+    <string name="resume_button">再開</string>
+    <string name="suspend_button">一時停止</string>
+    <string name="installing_update">アップデートパッケージをインストール中</string>
+    <string name="installing_update_error">インストール中にエラーが発生しました</string>
+    <string name="installing_update_finished">アップデートをインストールしました</string>
+    <string name="finalizing_package">パッケージのインストールを完了中</string>
+    <string name="preparing_ota_first_boot">最初の起動の準備中</string>
+    <string name="dialog_prepare_zip_message">アップデートの準備中</string>
+    <string name="dialog_battery_low_title">バッテリー不足</string>
+    <string name="dialog_battery_low_message_pct">バッテリー残量が大幅に不足しています。バッテリーで続行するには<xliff:g id="percent_discharging">%1$d</xliff:g>%必要です。充電しながら続行するには<xliff:g id="percent_charging">%2$d</xliff:g>%が必要です。</string>
+    <string name="dialog_scratch_mounted_message"><![CDATA[次のコマンドを実行してもう一度更新してください:\n
         • adb root\n
         • adb enable-verity\n
         • adb reboot
         ]]></string>
-    <string name="dialog_scratch_mounted_title">Cannot install update with OverlayFS mounted</string>
+    <string name="dialog_scratch_mounted_title">OverlayFSがマウントされているとアップデートをインストールできません</string>
     <string name="menu_preferences">Preferences</string>
-    <string name="menu_auto_updates_check">Automatic check for updates</string>
+    <string name="menu_auto_updates_check">更新を自動チェック</string>
     <string name="menu_ab_perf_mode">A/B performance mode</string>
-    <string name="menu_update_recovery">Update recovery</string>
-    <string name="auto_updates_check_summary">Enable to check for updates automatically once every 14 days.</string>
-    <string name="ab_perf_mode_summary">Increase priority of the update process. Might influence normal usage when an update is in progress.</string>
+    <string name="menu_update_recovery">リカバリーのアップデート</string>
+    <string name="auto_updates_check_summary">14 日ごとに更新を確認することを有効にします。</string>
+    <string name="ab_perf_mode_summary">アップデートプロセスの優先度を上げます。アップデートが進行していると、動作に影響を及ぼす可能性があります。</string>
     <string name="update_recovery_summary">Enable to update recovery from the build automatically.</string>
-    <string name="snack_updates_check_failed">The update check failed. Please check your internet connection and try again later.</string>
-    <string name="snack_download_failed">The download failed. Please check your internet connection and try again later.</string>
-    <string name="snack_download_verification_failed">The update verification failed.</string>
-    <string name="snack_download_verified">Download completed.</string>
+    <string name="snack_updates_check_failed">アップデートの確認に失敗しました。インターネット接続を確認してからもう一度お試しください。</string>
+    <string name="snack_download_failed">ダウンロードに失敗しました。インターネット接続を確認してからもう一度お試しください。</string>
+    <string name="snack_download_verification_failed">アップデートの検証に失敗しました。</string>
+    <string name="snack_download_verified">ダウンロードが完了しました。</string>
     <string name="snack_update_not_installable">This update can\'t be installed on top of the current build.</string>
-    <string name="header_android_version">Android version: <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
-    <string name="header_android_security_patch">Android security update: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
-    <string name="header_last_updates_check">Last successful check for update:\n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g> (<xliff:g example="01:23" id="time">%2$s</xliff:g>)</string>
-    <string name="list_build_version_date">PixelOS <xliff:g example="15" id="version">%1$s</xliff:g> - <xliff:g example="July 11, 2017" id="date">%2$s</xliff:g></string>
+    <string name="header_android_version">Androidバージョン:<xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
+    <string name="header_android_security_patch">Androidセキュリティアップデート:<xliff:g example="1" id="patch">%1$s</xliff:g></string>
+    <string name="header_last_updates_check">最終アップデート確認:\n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g>(<xliff:g example="01:23" id="time">%2$s</xliff:g>)</string>
+    <string name="list_build_version_date">PixelOS<xliff:g example="15" id="version">%1$s</xliff:g>-<xliff:g example="July 11, 2017" id="date">%2$s</xliff:g></string>
     <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> of <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
-    <string name="list_verifying_update">Verifying update</string>
-    <string name="action_download">Download</string>
-    <string name="action_pause">Pause</string>
-    <string name="action_resume">Resume</string>
-    <string name="action_reboot">Reboot</string>
-    <string name="action_install">Install</string>
-    <string name="action_delete">Cancel</string>
-    <string name="action_cancel">Cancel</string>
-    <string name="confirm_delete_dialog_title">Delete file</string>
-    <string name="confirm_delete_dialog_message">Delete the current downloading file?</string>
-    <string name="apply_update_dialog_title">Apply update</string>
-    <string name="apply_update_dialog_message">You are about to install <xliff:g id="update_name">%1$s</xliff:g>.\n\nIf you press <xliff:g id="ok">%2$s</xliff:g>, the device will restart itself in recovery mode to install the update.\n\nNote: This feature requires a compatible Recovery or updates will need to be installed manually.</string>
-    <string name="apply_update_dialog_message_ab">You are about to install <xliff:g id="update_name">%1$s</xliff:g>.\n\nIf you press <xliff:g id="ok">%2$s</xliff:g>, the device will begin installing in the background.\n\nOnce completed, you will be prompted to reboot.</string>
-    <string name="cancel_installation_dialog_message">Cancel the installation?</string>
-    <string name="reboot_installation_dialog_message">Reboot to complete installation</string>
+    <string name="list_verifying_update">アップデートを検証中</string>
+    <string name="action_download">ダウンロード</string>
+    <string name="action_pause">一時停止</string>
+    <string name="action_resume">再開</string>
+    <string name="action_reboot">再起動</string>
+    <string name="action_install">インストール</string>
+    <string name="action_delete">削除</string>
+    <string name="action_cancel">削除</string>
+    <string name="confirm_delete_dialog_title">ファイルを削除</string>
+    <string name="confirm_delete_dialog_message">最新のダウンロードファイルを削除しますか？</string>
+    <string name="apply_update_dialog_title">アップデートを適応</string>
+    <string name="apply_update_dialog_message"><xliff:g id="update_name">%1$s</xliff:g>をインストールしようとしています。\n\n<xliff:g id="ok">%2$s</xliff:g>を押すと、端末はアップデートをインストールするためにリカバリーモードへ再起動します。\n\nメモ:この機能には互換性のあるリカバリーが必要です。そうでない場合、更新プログラムを手動でインストールする必要があります。</string>
+    <string name="apply_update_dialog_message_ab"><xliff:g id="update_name">%1$s</xliff:g>をインストールしようとしています。\n\n<xliff:g id="ok">%2$s</xliff:g>を押すと、端末はバックグラウンドでインストールを開始します。\n\n完了したら再起動することをおすすめします。</string>
+    <string name="cancel_installation_dialog_message">インストールをキャンセルしますか？</string>
+    <string name="reboot_installation_dialog_message">インストールを完了するために再起動します</string>
     <plurals name="eta_seconds">
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> seconds left</item>
+        <item quantity="other">残り<xliff:g id="count">%d</xliff:g>秒</item>
     </plurals>
     <plurals name="eta_minutes">
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> minutes left</item>
+        <item quantity="other">残り<xliff:g id="count">%d</xliff:g>分</item>
     </plurals>
     <plurals name="eta_hours">
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> hours left</item>
+        <item quantity="other">残り<xliff:g id="count">%d</xliff:g>時間</item>
     </plurals>
     <string name="update_over_metered_network_info">Metered connection warning</string>
     <string name="update_over_metered_network_message">Downloading updates, over a cellular network, metered Wi-Fi, or while roaming may cause additional charges.</string>
-    <string name="new_updates_channel_title">New updates</string>
-    <string name="ongoing_channel_title">Ongoing downloads</string>
-    <string name="update_failed_channel_title">Update failed</string>
-    <string name="local_update_import">Local update</string>
-    <string name="local_update_import_progress">Importing local update\u2026</string>
-    <string name="local_update_import_success">%1$s has been imported. Do you want to install it?</string>
-    <string name="local_update_import_failure">Failed to import local update</string>
-    <string name="local_update_import_install">Install</string>
-    <string name="check_for_update">Check for update</string>
-    <string name="check_for_update_failed">Failed to check for update</string>
-    <string name="system_up_to_date">Your system is up to date</string>
-    <string name="system_update_available">System update available</string>
+    <string name="new_updates_channel_title">新しいアップデート</string>
+    <string name="ongoing_channel_title">ダウンロード進行中</string>
+    <string name="update_failed_channel_title">アップデートに失敗しました</string>
+    <string name="local_update_import">ローカルアップデート</string>
+    <string name="local_update_import_progress">ローカルアップデート\u2026をインポート中</string>
+    <string name="local_update_import_success">%1$sがインポートされました。インストールしますか？</string>
+    <string name="local_update_import_failure">ローカルアップデートのインポートに失敗しました</string>
+    <string name="local_update_import_install">インストール</string>
+    <string name="check_for_update">アップデートをチェックする</string>
+    <string name="check_for_update_failed">アップデートのチェックに失敗しました</string>
+    <string name="system_up_to_date">システムは最新です</string>
+    <string name="system_update_available">システムアップデートがあります</string>
     <string name="checking_for_update">Checking for system update\u2026</string>
-    <string name="system_update_downloading">Downloading system update</string>
-    <string name="system_update_downloading_paused">Download paused</string>
-    <string name="system_update_installing">Installing system update</string>
-    <string name="system_update_verifying">Verifying system update</string>
-    <string name="local_update_installing">Installing local update</string>
+    <string name="system_update_downloading">システムアップデートをダウンロードしています</string>
+    <string name="system_update_downloading_paused">ダウンロード一時停止中</string>
+    <string name="system_update_installing">システムアップデートをインストールしています</string>
+    <string name="system_update_verifying">システムアップデートを適応しています</string>
+    <string name="local_update_installing">ローカルアップデートをインストールしています</string>
     <string name="general_header">General</string>
+    <string name="play_integrity_header">Play Integrity</string>
+    <string name="text_download_size_unknown">不明</string>
+    <string name="certified_prop_status">Certified properties status</string>
+    <string name="certified_prop_check">アップデートをチェックする</string>
+    <string name="certified_prop_checking">Checking for certified properties update</string>
+    <string name="certified_prop_downloading">Downloading certified properties update</string>
+    <string name="certified_prop_download_failed">Unable to fetch properties from the server</string>
+    <string name="certified_prop_available">Download and install</string>
+    <string name="certified_prop_install_success">Reboot to apply update</string>
+    <string name="certified_prop_install_failed">インストールに失敗しました</string>
+    <string name="certified_prop_info" formatted="false">インストールされたバージョン:%s\n</string>
+    <string name="certified_prop_remote" formatted="false">最新バージョン:%s</string>
+    <string name="fetch_changelogs_failed">Failed to fetch changelogs</string>
 </resources>

@@ -25,13 +25,13 @@
       {version} - Build version
       {device} - Device name
     -->
-    <string name="verification_failed_notification">Verification failed</string>
-    <string name="verifying_download_notification">Verifying update</string>
-    <string name="downloading_notification">Downloading</string>
-    <string name="download_paused_notification">Download paused</string>
-    <string name="download_paused_error_notification">Download error</string>
-    <string name="download_completed_notification">Download completed</string>
-    <string name="download_starting_notification">Starting download</string>
+    <string name="verification_failed_notification">驗證失敗</string>
+    <string name="verifying_download_notification">正在驗證更新</string>
+    <string name="downloading_notification">下載中</string>
+    <string name="download_paused_notification">下載暫停</string>
+    <string name="download_paused_error_notification">下載錯誤</string>
+    <string name="download_completed_notification">下載完成</string>
+    <string name="download_starting_notification">正在開始下載</string>
     <string name="update_failed_notification">Update failed</string>
     <string name="installation_suspended_notification">Installation suspended</string>
     <string name="new_updates_found_title">New updates</string>
@@ -70,17 +70,17 @@
     <string name="header_last_updates_check">Last successful check for update:\n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g> (<xliff:g example="01:23" id="time">%2$s</xliff:g>)</string>
     <string name="list_build_version_date">PixelOS <xliff:g example="15" id="version">%1$s</xliff:g> - <xliff:g example="July 11, 2017" id="date">%2$s</xliff:g></string>
     <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> of <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
-    <string name="list_verifying_update">Verifying update</string>
-    <string name="action_download">Download</string>
+    <string name="list_verifying_update">正在驗證更新</string>
+    <string name="action_download">下載</string>
     <string name="action_pause">Pause</string>
     <string name="action_resume">Resume</string>
     <string name="action_reboot">重新啟動</string>
-    <string name="action_install">Install</string>
+    <string name="action_install">安裝</string>
     <string name="action_delete">取消</string>
     <string name="action_cancel">取消</string>
-    <string name="confirm_delete_dialog_title">Delete file</string>
+    <string name="confirm_delete_dialog_title">刪除檔案</string>
     <string name="confirm_delete_dialog_message">Delete the current downloading file?</string>
-    <string name="apply_update_dialog_title">Apply update</string>
+    <string name="apply_update_dialog_title">套用更新</string>
     <string name="apply_update_dialog_message">You are about to install <xliff:g id="update_name">%1$s</xliff:g>.\n\nIf you press <xliff:g id="ok">%2$s</xliff:g>, the device will restart itself in recovery mode to install the update.\n\nNote: This feature requires a compatible Recovery or updates will need to be installed manually.</string>
     <string name="apply_update_dialog_message_ab">You are about to install <xliff:g id="update_name">%1$s</xliff:g>.\n\nIf you press <xliff:g id="ok">%2$s</xliff:g>, the device will begin installing in the background.\n\nOnce completed, you will be prompted to reboot.</string>
     <string name="cancel_installation_dialog_message">Cancel the installation?</string>
@@ -103,16 +103,29 @@
     <string name="local_update_import_progress">Importing local update\u2026</string>
     <string name="local_update_import_success">%1$s has been imported. Do you want to install it?</string>
     <string name="local_update_import_failure">Failed to import local update</string>
-    <string name="local_update_import_install">Install</string>
+    <string name="local_update_import_install">安裝</string>
     <string name="check_for_update">Check for update</string>
     <string name="check_for_update_failed">Failed to check for update</string>
     <string name="system_up_to_date">Your system is up to date</string>
     <string name="system_update_available">System update available</string>
     <string name="checking_for_update">Checking for system update\u2026</string>
     <string name="system_update_downloading">Downloading system update</string>
-    <string name="system_update_downloading_paused">Download paused</string>
+    <string name="system_update_downloading_paused">下載暫停</string>
     <string name="system_update_installing">Installing system update</string>
     <string name="system_update_verifying">Verifying system update</string>
     <string name="local_update_installing">Installing local update</string>
     <string name="general_header">General</string>
+    <string name="play_integrity_header">Play Integrity</string>
+    <string name="text_download_size_unknown">Unknown</string>
+    <string name="certified_prop_status">Certified properties status</string>
+    <string name="certified_prop_check">Check for update</string>
+    <string name="certified_prop_checking">Checking for certified properties update</string>
+    <string name="certified_prop_downloading">Downloading certified properties update</string>
+    <string name="certified_prop_download_failed">Unable to fetch properties from the server</string>
+    <string name="certified_prop_available">Download and install</string>
+    <string name="certified_prop_install_success">Reboot to apply update</string>
+    <string name="certified_prop_install_failed">Failed to install</string>
+    <string name="certified_prop_info" formatted="false">Installed version: %s\n</string>
+    <string name="certified_prop_remote" formatted="false">Latest version: %s</string>
+    <string name="fetch_changelogs_failed">Failed to fetch changelogs</string>
 </resources>
