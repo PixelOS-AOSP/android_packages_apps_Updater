@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "626fc2b8_4f1c61b1",
+        "filename": "app/src/main/res/drawable/ic_arrow_back.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-01-05T10:10:23Z",
+      "side": 1,
+      "message": "Use AppBarLayout\u0027s instead.",
+      "revId": "5da94d2aed84265e930710f96bb8dc04328ee43c",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
