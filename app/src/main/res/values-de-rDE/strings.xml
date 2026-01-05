@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2017-2024 The LineageOS Project
+     Copyright (C) 2024 PixelOS
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Updater</string>
+    <string name="display_name">Updater</string>
+    <!-- Directory where the update files will be downloaded and stored.
+         WARNING: The application can and will delete any unknown file. -->
+    <!--
+    Optional placeholders replaced at runtime:
+      {version} - Build version
+      {device} - Device name
+    -->
+    <string name="verification_failed_notification">Überprüfung fehlgeschlagen</string>
+    <string name="verifying_download_notification">Update wird geprüft</string>
+    <string name="downloading_notification">Wird heruntergeladen</string>
+    <string name="download_paused_notification">Herunterladen angehalten</string>
+    <string name="download_paused_error_notification">Fehler beim Herunterladen</string>
+    <string name="download_completed_notification">Herunterladen abgeschlossen</string>
+    <string name="download_starting_notification">Herunterladen wird gestartet</string>
+    <string name="update_failed_notification">Aktualisierung fehlgeschlagen</string>
+    <string name="installation_suspended_notification">Installation abgebrochen</string>
+    <string name="new_updates_found_title">Neue Updates</string>
+    <string name="text_download_speed">%1$s, %2$s/s</string>
+    <string name="pause_button">Anhalten</string>
+    <string name="resume_button">Fortsetzen</string>
+    <string name="suspend_button">Abbrechen</string>
+    <string name="installing_update">Aktualisierung wird installiert</string>
+    <string name="installing_update_error">Installationsfehler</string>
+    <string name="installing_update_finished">Aktualisierung installiert</string>
+    <string name="finalizing_package">Die Paketinstallation wird abgeschlossen</string>
+    <string name="preparing_ota_first_boot">Erster Start wird vorbereitet</string>
+    <string name="dialog_prepare_zip_message">Update wird vorbereitet</string>
+    <string name="dialog_battery_low_title">Niedriger Akkustand</string>
+    <string name="dialog_battery_low_message_pct">Der Akkustand ist zu niedrig. Es werden mindestens <xliff:g id="percent_discharging">%1$d</xliff:g>%% Restkapazität (oder <xliff:g id="percent_charging">%2$d</xliff:g>%% mit angeschlossenem Ladegerät) benötigt, um fortzufahren.</string>
+    <string name="dialog_scratch_mounted_message"><![CDATA[        Please run the following commands and retry the update:\n
+        • adb root\n
+        • adb enable-verity\n
+        • adb reboot
+        ]]></string>
+    <string name="dialog_scratch_mounted_title">Update kann nicht installiert werden, wenn OverlayFS eingebunden ist</string>
+    <string name="menu_preferences">Einstellungen</string>
+    <string name="menu_auto_updates_check">Automatische Suche nach Updates</string>
+    <string name="menu_ab_perf_mode">A/B Performance-Modus</string>
+    <string name="menu_update_recovery">Recovery aktualisieren</string>
+    <string name="auto_updates_check_summary">Aktivieren, um automatisch alle 14 Tage nach Updates zu suchen.</string>
+    <string name="ab_perf_mode_summary">Erhöhe Priorität des Update-Prozesses. Kann die normale Nutzung beeinflussen, wenn eine Aktualisierung läuft.</string>
+    <string name="update_recovery_summary">Aktivieren, um die Recovery vom Build automatisch zu aktualisieren.</string>
+    <string name="snack_updates_check_failed">Die Suche nach Updates ist fehlgeschlagen. Bitte überprüfen Sie die Internetverbindung und versuchen Sie es später erneut.</string>
+    <string name="snack_download_failed">Das Herunterladen ist fehlgeschlagen. Bitte überpüfen sie die Internetverbindung und versuchen Sie es später erneut.</string>
+    <string name="snack_download_verification_failed">Die Überprüfung der Aktualisierung ist fehlgeschlagen.</string>
+    <string name="snack_download_verified">Herunterladen abgeschlossen.</string>
+    <string name="snack_update_not_installable">Diese Aktualisierung kann nicht auf die bestehende Installation angewendet werden.</string>
+    <string name="header_android_version">Android-Version: <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
+    <string name="header_android_security_patch">Android-Sicherheitsupdate: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
+    <string name="header_last_updates_check">Letzte erfolgreiche Überprüfung auf Update:\n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g> (<xliff:g example="01:23" id="time">%2$s</xliff:g>)</string>
+    <string name="list_build_version_date">PixelOS <xliff:g example="15" id="version">%1$s</xliff:g> - <xliff:g example="July 11, 2017" id="date">%2$s</xliff:g></string>
+    <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
+    <string name="list_verifying_update">Update wird geprüft</string>
+    <string name="action_download">Herunterladen</string>
+    <string name="action_pause">Anhalten</string>
+    <string name="action_resume">Fortsetzen</string>
+    <string name="action_reboot">Neustart</string>
+    <string name="action_install">Installieren</string>
+    <string name="action_delete">Abbrechen</string>
+    <string name="action_cancel">Abbrechen</string>
+    <string name="confirm_delete_dialog_title">Datei löschen</string>
+    <string name="confirm_delete_dialog_message">Die derzeit heruntergeladene Datei löschen?</string>
+    <string name="apply_update_dialog_title">Aktualisierung anwenden</string>
+    <string name="apply_update_dialog_message">Sie sind dabei, auf <xliff:g id="update_name">%1$s</xliff:g> zu aktualisieren.\n\nWenn Sie auf <xliff:g id="ok">%2$s</xliff:g> drücken, wird sich das Gerät im Recovery-Modus neu starten, um die Aktualisierung zu installieren.\n\nHinweis: Diese Funktion erfordert eine kompatible Recovery oder Updates müssen manuell installiert werden.</string>
+    <string name="apply_update_dialog_message_ab">Sie sind dabei <xliff:g id="update_name">%1$s</xliff:g>zu installieren.\n\nWenn Sie <xliff:g id="ok">%2$s</xliff:g>drücken, wird das Gerät im Hintergrund mit der Installation beginnen.\n\nNach Abschluss des Vorgangs werden Sie zu einem Neustart aufgefordert.</string>
+    <string name="cancel_installation_dialog_message">Installation abbrechen?</string>
+    <string name="reboot_installation_dialog_message">Neustarten, um die Installation abzuschließen</string>
+    <plurals name="eta_seconds">
+        <item quantity="one">Noch 1 Sekunde</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> Sekunden verbleibend</item>
+    </plurals>
+    <plurals name="eta_minutes">
+        <item quantity="one">Noch 1 Minute</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> Minuten verbleibend</item>
+    </plurals>
+    <plurals name="eta_hours">
+        <item quantity="one">Noch 1 Stunde</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> Stunden verbleibend</item>
+    </plurals>
+    <string name="update_over_metered_network_info">Warnung bei verbrauchsabhängiger Verbindung</string>
+    <string name="update_over_metered_network_message">Das Herunterladen von Aktualisierungen über ein Mobilfunknetz, kostenpflichtigem WLAN oder bei Roaming kann zusätzliche Kosten verursachen.</string>
+    <string name="new_updates_channel_title">Neue Updates</string>
+    <string name="ongoing_channel_title">Laufende Downloads</string>
+    <string name="update_failed_channel_title">Aktualisierung fehlgeschlagen</string>
+    <string name="local_update_import">Lokale Aktualisierung</string>
+    <string name="local_update_import_progress">Lokale Aktualisierung wird importiert\u2026</string>
+    <string name="local_update_import_success">%1$s erfolgreich importiert. Soll es installiert werden?</string>
+    <string name="local_update_import_failure">Fehler beim Importieren der lokalen Aktualisierung</string>
+    <string name="local_update_import_install">Installieren</string>
+    <string name="check_for_update">Nach Aktualisierungen suchen</string>
+    <string name="check_for_update_failed">Prüfung auf Aktualisierung fehlgeschlagen</string>
+    <string name="system_up_to_date">Ihr System ist auf dem neusten Stand</string>
+    <string name="system_update_available">Systemaktualisierung verfügbar</string>
+    <string name="checking_for_update">Suche nach System-Aktualisierung\u2026</string>
+    <string name="system_update_downloading">Systemaktualisierung wird heruntergeladen</string>
+    <string name="system_update_downloading_paused">Herunterladen angehalten</string>
+    <string name="system_update_installing">Systemaktualisierung wird installiert</string>
+    <string name="system_update_verifying">Systemaktualisierung wird überprüft</string>
+    <string name="local_update_installing">Lokale Aktualisierung wird installiert</string>
+    <string name="general_header">Allgemein</string>
+    <string name="play_integrity_header">Play Integrität</string>
+    <string name="text_download_size_unknown">Unbekannt</string>
+    <string name="certified_prop_status">Status der zertifizierten Eigenschaften</string>
+    <string name="certified_prop_check">Nach Aktualisierungen suchen</string>
+    <string name="certified_prop_checking">Prüfung auf Aktualisierung der zertifizierten Eigenschaften</string>
+    <string name="certified_prop_downloading">Herunterladen des Updates für zertifizierte Eigenschaften</string>
+    <string name="certified_prop_download_failed">Eigenschaften können nicht vom Server abgerufen werden</string>
+    <string name="certified_prop_available">Herunterladen und installieren</string>
+    <string name="certified_prop_install_success">Neustarten, um Update anzuwenden</string>
+    <string name="certified_prop_install_failed">Installation fehlgeschlagen</string>
+    <string name="certified_prop_info" formatted="false">Installierte Version: %s\n</string>
+    <string name="certified_prop_remote" formatted="false">Neueste Version: %s</string>
+    <string name="fetch_changelogs_failed">Failed to fetch changelogs</string>
+</resources>

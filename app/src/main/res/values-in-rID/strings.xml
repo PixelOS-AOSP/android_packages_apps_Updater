@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2017-2024 The LineageOS Project
+     Copyright (C) 2024 PixelOS
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Pembaruan</string>
+    <string name="display_name">Pembaruan</string>
+    <!-- Directory where the update files will be downloaded and stored.
+         WARNING: The application can and will delete any unknown file. -->
+    <!--
+    Optional placeholders replaced at runtime:
+      {version} - Build version
+      {device} - Device name
+    -->
+    <string name="verification_failed_notification">Verifikasi gagal</string>
+    <string name="verifying_download_notification">Verifikasi pembaruan</string>
+    <string name="downloading_notification">Sedang mengunduh</string>
+    <string name="download_paused_notification">Unduhan dijeda</string>
+    <string name="download_paused_error_notification">Kesalahan pengunduhan</string>
+    <string name="download_completed_notification">Unduhan selesai</string>
+    <string name="download_starting_notification">Memulai unduhan</string>
+    <string name="update_failed_notification">Pembaruan gagal</string>
+    <string name="installation_suspended_notification">Instalasi ditangguhkan</string>
+    <string name="new_updates_found_title">Pembaruan baru</string>
+    <string name="text_download_speed">%1$s, %2$s/s</string>
+    <string name="pause_button">Jeda</string>
+    <string name="resume_button">Melanjutkan</string>
+    <string name="suspend_button">Tunda</string>
+    <string name="installing_update">Menginstal paket pembaruan</string>
+    <string name="installing_update_error">Kesalahan instalasi</string>
+    <string name="installing_update_finished">Pembaruan telah terinstal</string>
+    <string name="finalizing_package">Menyelesaikan instalasi paket</string>
+    <string name="preparing_ota_first_boot">Mempersiapkan boot pertama</string>
+    <string name="dialog_prepare_zip_message">Persiapan pembaruan awal</string>
+    <string name="dialog_battery_low_title">Baterai lemah</string>
+    <string name="dialog_battery_low_message_pct">Tingkat baterai terlalu rendah, Anda memerlukan setidaknya <xliff:g id="percent_discharging">%1$d</xliff:g>%% baterai untuk melanjutkan, <xliff:g id="percent_charging">%2$d</xliff:g>%% jika mengisi daya.</string>
+    <string name="dialog_scratch_mounted_message"><![CDATA[        Please run the following commands and retry the update:\n
+        • adb root\n
+        • adb enable-verity\n
+        • adb reboot
+        ]]></string>
+    <string name="dialog_scratch_mounted_title">Tidak dapat menginstal pembaruan dengan OverlayFS terpasang</string>
+    <string name="menu_preferences">Preferensi</string>
+    <string name="menu_auto_updates_check">Pemeriksaan otomatis untuk pembaruan</string>
+    <string name="menu_ab_perf_mode">Mode kinerja A/B</string>
+    <string name="menu_update_recovery">Perbarui pemulihan</string>
+    <string name="auto_updates_check_summary">Aktifkan untuk mengecek pembaruan secara otomatis setiap 14 hari.</string>
+    <string name="ab_perf_mode_summary">Increase priority of the update process. Might influence normal usage when an update is in progress.</string>
+    <string name="update_recovery_summary">Aktifkan untuk memperbarui dari build secara otomatis.</string>
+    <string name="snack_updates_check_failed">Pemeriksaan pembaruan gagal. Mohon periksa koneksi internet anda dan coba lagi nanti.</string>
+    <string name="snack_download_failed">Pengunduhan gagal. Mohon periksa koneksi internet anda dan coba lagi nanti.</string>
+    <string name="snack_download_verification_failed">Verifikasi pembaruan gagal.</string>
+    <string name="snack_download_verified">Unduhan selesai.</string>
+    <string name="snack_update_not_installable">Pembaruan ini tidak dapat dipasang di atas build saat ini.</string>
+    <string name="header_android_version">Versi Android: <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
+    <string name="header_android_security_patch">Pembaruan keamanan Android: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
+    <string name="header_last_updates_check">Last successful check for update:\n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g> (<xliff:g example="01:23" id="time">%2$s</xliff:g>)</string>
+    <string name="list_build_version_date">PixelOS <xliff:g example="15" id="version">%1$s</xliff:g> - <xliff:g example="July 11, 2017" id="date">%2$s</xliff:g></string>
+    <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> dari <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
+    <string name="list_verifying_update">Verifikasi pembaruan</string>
+    <string name="action_download">Unduh</string>
+    <string name="action_pause">Jeda</string>
+    <string name="action_resume">Melanjutkan</string>
+    <string name="action_reboot">Memulai ulang</string>
+    <string name="action_install">Pasang</string>
+    <string name="action_delete">Membatalkan</string>
+    <string name="action_cancel">Membatalkan</string>
+    <string name="confirm_delete_dialog_title">Menghapus file</string>
+    <string name="confirm_delete_dialog_message">Hapus file unduhan saat ini?</string>
+    <string name="apply_update_dialog_title">Terapkan pembaruan</string>
+    <string name="apply_update_dialog_message">Anda akan memasang <xliff:g id="update_name">%1$s</xliff:g>.\n\nJika Anda menekan <xliff:g id="ok">%2$s</xliff:g>, perangkat akan mulai ulang sendiri dalam mode recovery untuk memasang pembaruan.\n\nPerhatian: Fitur ini memerlukan Recovery yang kompatibel atau pembaruan perlu dipasang secara manual.</string>
+    <string name="apply_update_dialog_message_ab">Anda akan meningkatkan ke <xliff:g id="update_name">%1$s</xliff:g>.\n\nJika Anda menekan <xliff:g id="ok">%2$s</xliff:g>, perangkat akan mulai memasang di latar belakang.\n\nSetelah selesai, anda akan diminta untuk memulai ulang perangkat.</string>
+    <string name="cancel_installation_dialog_message">Batalkan pemasangan?</string>
+    <string name="reboot_installation_dialog_message">Mulai ulang untuk menyelesaikan pemasangan</string>
+    <plurals name="eta_seconds">
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> detik tersisa</item>
+    </plurals>
+    <plurals name="eta_minutes">
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> menit tersisa</item>
+    </plurals>
+    <plurals name="eta_hours">
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> jam tersisa</item>
+    </plurals>
+    <string name="update_over_metered_network_info">Peringatan koneksi terukur</string>
+    <string name="update_over_metered_network_message">Mengunduh pembaruan, melalui jaringan seluler, Wi-Fi terukur, atau saat roaming dapat menyebabkan biaya tambahan.</string>
+    <string name="new_updates_channel_title">Pembaruan baru</string>
+    <string name="ongoing_channel_title">Unduhan sedang berlangsung</string>
+    <string name="update_failed_channel_title">Pembaruan gagal</string>
+    <string name="local_update_import">Pembaruan lokal</string>
+    <string name="local_update_import_progress">Mengimpor pembaruan lokal\u2026</string>
+    <string name="local_update_import_success">%1$s telah diimpor. Apakah Anda ingin menginstalnya?</string>
+    <string name="local_update_import_failure">Gagal mengimpor pembaruan lokal</string>
+    <string name="local_update_import_install">Pasang</string>
+    <string name="check_for_update">Periksa pembaruan</string>
+    <string name="check_for_update_failed">Gagal memeriksa pembaruan</string>
+    <string name="system_up_to_date">Sistem anda mutakhir</string>
+    <string name="system_update_available">Pembaruan Sistem tersedia</string>
+    <string name="checking_for_update">Memeriksa pembaruan sistem\u2026</string>
+    <string name="system_update_downloading">Mengunduh pembaruan sistem</string>
+    <string name="system_update_downloading_paused">Unduhan dijeda</string>
+    <string name="system_update_installing">Memasang pembaruan sistem</string>
+    <string name="system_update_verifying">Memverifikasi pembaruan sistem</string>
+    <string name="local_update_installing">Memasang pembaruan lokal</string>
+    <string name="general_header">Umum</string>
+    <string name="play_integrity_header">Play Integrity</string>
+    <string name="text_download_size_unknown">Tidak diketahui</string>
+    <string name="certified_prop_status">Status properti tersertifikasi</string>
+    <string name="certified_prop_check">Periksa pembaruan</string>
+    <string name="certified_prop_checking">Mengecek pembaruan properti tersertifikasi</string>
+    <string name="certified_prop_downloading">Mengunduh pembaruan properti tersertifikasi</string>
+    <string name="certified_prop_download_failed">Tidak dapat mengambil properti dari server</string>
+    <string name="certified_prop_available">Unduh dan pasang</string>
+    <string name="certified_prop_install_success">Mulai ulang untuk menerapkan pembaruan</string>
+    <string name="certified_prop_install_failed">Gagal memasang</string>
+    <string name="certified_prop_info" formatted="false">Versi yang terpasang: %s\n</string>
+    <string name="certified_prop_remote" formatted="false">Versi terbaru: %s</string>
+    <string name="fetch_changelogs_failed">Failed to fetch changelogs</string>
+</resources>
