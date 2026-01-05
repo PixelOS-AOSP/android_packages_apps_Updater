@@ -1,30 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-     Copyright (C) 2017-2024 The LineageOS Project
-     Copyright (C) 2024 PixelOS
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Aktualizátor</string>
     <string name="display_name">Aktualizátor</string>
-    <!-- Directory where the update files will be downloaded and stored.
-         WARNING: The application can and will delete any unknown file. -->
-    <!--
-    Optional placeholders replaced at runtime:
-      {version} - Build version
-      {device} - Device name
-    -->
+    
+    
     <string name="verification_failed_notification">Overovanie zlyhalo</string>
     <string name="verifying_download_notification">Overovanie aktualizácie</string>
     <string name="downloading_notification">Sťahovanie</string>
@@ -35,7 +14,6 @@
     <string name="update_failed_notification">Aktualizácia zlyhala</string>
     <string name="installation_suspended_notification">Inštalácia bola pozastavená</string>
     <string name="new_updates_found_title">Nové aktualizácie</string>
-    <string name="text_download_speed">%1$s, %2$s/s</string>
     <string name="pause_button">Pozastaviť</string>
     <string name="resume_button">Pokračovať</string>
     <string name="suspend_button">Pozastaviť</string>
@@ -47,19 +25,16 @@
     <string name="dialog_prepare_zip_message">Predbežná príprava aktualizácie</string>
     <string name="dialog_battery_low_title">Vybitá batéria</string>
     <string name="dialog_battery_low_message_pct">Úroveň nabitia batérie je príliš nízka, budete potrebovať aspoň <xliff:g id="percent_discharging">%1$d</xliff:g>%% batérie na pokračovanie, <xliff:g id="percent_charging">%2$d</xliff:g>%% pri nabíjaní.</string>
-    <string name="dialog_scratch_mounted_message" formatted="false"><![CDATA[        Spustite nasledujúce príkazy a skúste aktualizáciu znova:\n
+    <string name="dialog_scratch_mounted_message" formatted="false">        Spustite nasledujúce príkazy a skúste aktualizáciu znova:\n
         • adb root\n
         • adb enable-verity\n
         • adb reboot
-        ]]></string>
+        </string>
     <string name="dialog_scratch_mounted_title">Nie je možné nainštalovať aktualizáciu s pripojeným systémom OverlayFS</string>
     <string name="menu_preferences">Predvoľby</string>
     <string name="menu_auto_updates_check">Automaticky kontrolovať aktualizácie</string>
     <string name="menu_ab_perf_mode">A/B režim vysokého výkonu</string>
     <string name="menu_update_recovery">Aktualizovať recovery</string>
-    <string name="auto_updates_check_summary">Enable to check for updates automatically once every 14 days.</string>
-    <string name="ab_perf_mode_summary">Increase priority of the update process. Might influence normal usage when an update is in progress.</string>
-    <string name="update_recovery_summary">Enable to update recovery from the build automatically.</string>
     <string name="snack_updates_check_failed">Kontrola aktualizácií zlyhala. Skontrolujte prosím vaše internetové pripojenie a skúste to znova neskôr.</string>
     <string name="snack_download_failed">Sťahovanie zlyhalo. Skontrolujte vaše pripojenie a skúste to znovu.</string>
     <string name="snack_download_verification_failed">Overovanie aktualizácie zlyhalo.</string>
@@ -67,8 +42,6 @@
     <string name="snack_update_not_installable">Táto aktualizácia sa nedá nainštalovať na aktuálnu zostavu.</string>
     <string name="header_android_version">Verzia Androidu: <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
     <string name="header_android_security_patch">Bezpečnostná aktualizácia Androidu: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
-    <string name="header_last_updates_check">Last successful check for update:\n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g> (<xliff:g example="01:23" id="time">%2$s</xliff:g>)</string>
-    <string name="list_build_version_date">PixelOS <xliff:g example="15" id="version">%1$s</xliff:g> - <xliff:g example="July 11, 2017" id="date">%2$s</xliff:g></string>
     <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> z <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
     <string name="list_verifying_update">Overovanie aktualizácie</string>
     <string name="action_download">Stiahnuť</string>
@@ -81,8 +54,6 @@
     <string name="confirm_delete_dialog_title">Vymazať súbor</string>
     <string name="confirm_delete_dialog_message">Odstrániť aktuálne sťahovaný súbor?</string>
     <string name="apply_update_dialog_title">Aplikovať aktualizáciu</string>
-    <string name="apply_update_dialog_message">You are about to install <xliff:g id="update_name">%1$s</xliff:g>.\n\nIf you press <xliff:g id="ok">%2$s</xliff:g>, the device will restart itself in recovery mode to install the update.\n\nNote: This feature requires a compatible Recovery or updates will need to be installed manually.</string>
-    <string name="apply_update_dialog_message_ab">You are about to install <xliff:g id="update_name">%1$s</xliff:g>.\n\nIf you press <xliff:g id="ok">%2$s</xliff:g>, the device will begin installing in the background.\n\nOnce completed, you will be prompted to reboot.</string>
     <string name="cancel_installation_dialog_message">Zrušiť inštaláciu?</string>
     <string name="reboot_installation_dialog_message">Reštartovaním dokončíte inštaláciu</string>
     <plurals name="eta_seconds">

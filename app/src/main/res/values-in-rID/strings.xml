@@ -1,30 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-     Copyright (C) 2017-2024 The LineageOS Project
-     Copyright (C) 2024 PixelOS
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Pembaruan</string>
     <string name="display_name">Pembaruan</string>
-    <!-- Directory where the update files will be downloaded and stored.
-         WARNING: The application can and will delete any unknown file. -->
-    <!--
-    Optional placeholders replaced at runtime:
-      {version} - Build version
-      {device} - Device name
-    -->
+    
+    
     <string name="verification_failed_notification">Verifikasi gagal</string>
     <string name="verifying_download_notification">Verifikasi pembaruan</string>
     <string name="downloading_notification">Sedang mengunduh</string>
@@ -35,7 +14,6 @@
     <string name="update_failed_notification">Pembaruan gagal</string>
     <string name="installation_suspended_notification">Instalasi ditangguhkan</string>
     <string name="new_updates_found_title">Pembaruan baru</string>
-    <string name="text_download_speed">%1$s, %2$s/s</string>
     <string name="pause_button">Jeda</string>
     <string name="resume_button">Melanjutkan</string>
     <string name="suspend_button">Tunda</string>
@@ -47,18 +25,12 @@
     <string name="dialog_prepare_zip_message">Persiapan pembaruan awal</string>
     <string name="dialog_battery_low_title">Baterai lemah</string>
     <string name="dialog_battery_low_message_pct">Tingkat baterai terlalu rendah, Anda memerlukan setidaknya <xliff:g id="percent_discharging">%1$d</xliff:g>%% baterai untuk melanjutkan, <xliff:g id="percent_charging">%2$d</xliff:g>%% jika mengisi daya.</string>
-    <string name="dialog_scratch_mounted_message" formatted="false"><![CDATA[        Please run the following commands and retry the update:\n
-        • adb root\n
-        • adb enable-verity\n
-        • adb reboot
-        ]]></string>
     <string name="dialog_scratch_mounted_title">Tidak dapat menginstal pembaruan dengan OverlayFS terpasang</string>
     <string name="menu_preferences">Preferensi</string>
     <string name="menu_auto_updates_check">Pemeriksaan otomatis untuk pembaruan</string>
     <string name="menu_ab_perf_mode">Mode kinerja A/B</string>
     <string name="menu_update_recovery">Perbarui pemulihan</string>
     <string name="auto_updates_check_summary">Aktifkan untuk mengecek pembaruan secara otomatis setiap 14 hari.</string>
-    <string name="ab_perf_mode_summary">Increase priority of the update process. Might influence normal usage when an update is in progress.</string>
     <string name="update_recovery_summary">Aktifkan untuk memperbarui dari build secara otomatis.</string>
     <string name="snack_updates_check_failed">Pemeriksaan pembaruan gagal. Mohon periksa koneksi internet anda dan coba lagi nanti.</string>
     <string name="snack_download_failed">Pengunduhan gagal. Mohon periksa koneksi internet anda dan coba lagi nanti.</string>
@@ -67,8 +39,6 @@
     <string name="snack_update_not_installable">Pembaruan ini tidak dapat dipasang di atas build saat ini.</string>
     <string name="header_android_version">Versi Android: <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
     <string name="header_android_security_patch">Pembaruan keamanan Android: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
-    <string name="header_last_updates_check">Last successful check for update:\n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g> (<xliff:g example="01:23" id="time">%2$s</xliff:g>)</string>
-    <string name="list_build_version_date">PixelOS <xliff:g example="15" id="version">%1$s</xliff:g> - <xliff:g example="July 11, 2017" id="date">%2$s</xliff:g></string>
     <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> dari <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
     <string name="list_verifying_update">Verifikasi pembaruan</string>
     <string name="action_download">Unduh</string>
@@ -115,7 +85,6 @@
     <string name="system_update_verifying">Memverifikasi pembaruan sistem</string>
     <string name="local_update_installing">Memasang pembaruan lokal</string>
     <string name="general_header">Umum</string>
-    <string name="play_integrity_header">Play Integrity</string>
     <string name="text_download_size_unknown">Tidak diketahui</string>
     <string name="certified_prop_status">Status properti tersertifikasi</string>
     <string name="certified_prop_check">Periksa pembaruan</string>
@@ -127,5 +96,4 @@
     <string name="certified_prop_install_failed">Gagal memasang</string>
     <string name="certified_prop_info" formatted="false">Versi yang terpasang: %s\n</string>
     <string name="certified_prop_remote" formatted="false">Versi terbaru: %s</string>
-    <string name="fetch_changelogs_failed">Failed to fetch changelogs</string>
-</resources>
+    </resources>

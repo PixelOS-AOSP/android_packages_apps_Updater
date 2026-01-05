@@ -1,30 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-     Copyright (C) 2017-2024 The LineageOS Project
-     Copyright (C) 2024 PixelOS
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Güncelleyici</string>
     <string name="display_name">Güncelleyici</string>
-    <!-- Directory where the update files will be downloaded and stored.
-         WARNING: The application can and will delete any unknown file. -->
-    <!--
-    Optional placeholders replaced at runtime:
-      {version} - Build version
-      {device} - Device name
-    -->
+    
+    
     <string name="verification_failed_notification">Doğrulama başarısız</string>
     <string name="verifying_download_notification">Güncelleme doğrulanıyor</string>
     <string name="downloading_notification">İndiriliyor</string>
@@ -47,11 +26,6 @@
     <string name="dialog_prepare_zip_message">Güncelleme ön hazırlığı</string>
     <string name="dialog_battery_low_title">Düşük pil</string>
     <string name="dialog_battery_low_message_pct">Pil seviyesi çok düşük, devam etmek için en az %%<xliff:g id="percent_discharging">%1$d</xliff:g> pil gereklidir, %%<xliff:g id="percent_charging">%2$d</xliff:g> şarj ediliyor.</string>
-    <string name="dialog_scratch_mounted_message" formatted="false"><![CDATA[        Please run the following commands and retry the update:\n
-        • adb root\n
-        • adb enable-verity\n
-        • adb reboot
-        ]]></string>
     <string name="dialog_scratch_mounted_title">OverlayFS bağlı iken güncelleştirme yüklenemiyor</string>
     <string name="menu_preferences">Tercihler</string>
     <string name="menu_auto_updates_check">Güncellemeleri otomatik olarak denetle</string>
@@ -68,8 +42,6 @@
     <string name="header_android_version">Android sürümü <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
     <string name="header_android_security_patch">Android güvenlik güncellemesi: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
     <string name="header_last_updates_check">Güncelleme için son başarılı kontrol:\n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g> (<xliff:g example="01:23" id="time">%2$s</xliff:g>)</string>
-    <string name="list_build_version_date">PixelOS <xliff:g example="15" id="version">%1$s</xliff:g> - <xliff:g example="July 11, 2017" id="date">%2$s</xliff:g></string>
-    <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> of <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
     <string name="list_verifying_update">Güncelleme doğrulanıyor</string>
     <string name="action_download">İndir</string>
     <string name="action_pause">Duraklat</string>
@@ -130,5 +102,4 @@
     <string name="certified_prop_install_failed">Yükleme Başarısız</string>
     <string name="certified_prop_info" formatted="false">Yüklü sürüm: %s\n</string>
     <string name="certified_prop_remote" formatted="false">Son versiyon: %s</string>
-    <string name="fetch_changelogs_failed">Failed to fetch changelogs</string>
-</resources>
+    </resources>

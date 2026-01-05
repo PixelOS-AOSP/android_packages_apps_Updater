@@ -1,30 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-     Copyright (C) 2017-2024 The LineageOS Project
-     Copyright (C) 2024 PixelOS
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Instalator aktualizacji</string>
     <string name="display_name">Instalator aktualizacji</string>
-    <!-- Directory where the update files will be downloaded and stored.
-         WARNING: The application can and will delete any unknown file. -->
-    <!--
-    Optional placeholders replaced at runtime:
-      {version} - Build version
-      {device} - Device name
-    -->
+    
+    
     <string name="verification_failed_notification">Weryfikacja nie powiodła się</string>
     <string name="verifying_download_notification">Weryfikowanie aktualizacji</string>
     <string name="downloading_notification">Pobieranie</string>
@@ -35,7 +14,6 @@
     <string name="update_failed_notification">Aktualizacja nie powiodła się</string>
     <string name="installation_suspended_notification">Instalacja zatrzymana</string>
     <string name="new_updates_found_title">Nowe aktualizacje</string>
-    <string name="text_download_speed">%1$s, %2$s/s</string>
     <string name="pause_button">Wstrzymaj</string>
     <string name="resume_button">Wznów</string>
     <string name="suspend_button">Zatrzymaj</string>
@@ -47,11 +25,6 @@
     <string name="dialog_prepare_zip_message">Wstępne przygotowywanie aktualizacji</string>
     <string name="dialog_battery_low_title">Niski poziom baterii</string>
     <string name="dialog_battery_low_message_pct">Poziom naładowania baterii jest zbyt niski, musisz mieć co najmniej <xliff:g id="percent_discharging">%1$d</xliff:g>%% baterii lub <xliff:g id="percent_charging">%2$d</xliff:g>%% w trakcie ładowania.</string>
-    <string name="dialog_scratch_mounted_message" formatted="false"><![CDATA[        Please run the following commands and retry the update:\n
-        • adb root\n
-        • adb enable-verity\n
-        • adb reboot
-        ]]></string>
     <string name="dialog_scratch_mounted_title">Nie można zainstalować aktualizacji z aktywnym OverlayFS</string>
     <string name="menu_preferences">Preferencje</string>
     <string name="menu_auto_updates_check">Automatyczne wyszukiwanie aktualizacji</string>
@@ -68,7 +41,6 @@
     <string name="header_android_version">Wersja Androida: <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
     <string name="header_android_security_patch">Aktualizacja bezpieczeństwa Androida: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
     <string name="header_last_updates_check">Ostatnie pomyślne sprawdzenie aktualizacji:\n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g> (<xliff:g example="01:23" id="time">%2$s</xliff:g>)</string>
-    <string name="list_build_version_date">PixelOS <xliff:g example="15" id="version">%1$s</xliff:g> - <xliff:g example="July 11, 2017" id="date">%2$s</xliff:g></string>
     <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> z <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
     <string name="list_verifying_update">Weryfikowanie aktualizacji</string>
     <string name="action_download">Pobierz</string>
@@ -124,17 +96,11 @@
     <string name="system_update_verifying">Weryfikowanie aktualizacji systemu</string>
     <string name="local_update_installing">Instalowanie aktualizacji lokalnej</string>
     <string name="general_header">Ogólne</string>
-    <string name="play_integrity_header">Play Integrity</string>
     <string name="text_download_size_unknown">Nieznana</string>
-    <string name="certified_prop_status">Certified properties status</string>
     <string name="certified_prop_check">Sprawdź dostępność aktualizacji</string>
-    <string name="certified_prop_checking">Checking for certified properties update</string>
-    <string name="certified_prop_downloading">Downloading certified properties update</string>
-    <string name="certified_prop_download_failed">Unable to fetch properties from the server</string>
     <string name="certified_prop_available">Pobierz i zainstaluj</string>
     <string name="certified_prop_install_success">Uruchom ponownie aby zastosować aktualizację</string>
     <string name="certified_prop_install_failed">Nie udało się zainstalować</string>
     <string name="certified_prop_info" formatted="false">Zainstalowana wersja: %s\n</string>
     <string name="certified_prop_remote" formatted="false">Najnowsza wersja: %s</string>
-    <string name="fetch_changelogs_failed">Failed to fetch changelogs</string>
-</resources>
+    </resources>

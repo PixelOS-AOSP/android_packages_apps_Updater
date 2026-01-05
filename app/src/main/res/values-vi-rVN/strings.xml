@@ -1,30 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-     Copyright (C) 2017-2024 The LineageOS Project
-     Copyright (C) 2024 PixelOS
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Cập nhật hệ thống</string>
     <string name="display_name">Cập nhật hệ thống</string>
-    <!-- Directory where the update files will be downloaded and stored.
-         WARNING: The application can and will delete any unknown file. -->
-    <!--
-    Optional placeholders replaced at runtime:
-      {version} - Build version
-      {device} - Device name
-    -->
+    
+    
     <string name="verification_failed_notification">Xác thực không thành công</string>
     <string name="verifying_download_notification">Đang xác minh bản cập nhật</string>
     <string name="downloading_notification">Đang tải xuống</string>
@@ -35,7 +14,6 @@
     <string name="update_failed_notification">Cập nhật thất bại</string>
     <string name="installation_suspended_notification">Cài đặt đã gián đoạn</string>
     <string name="new_updates_found_title">Đã có bản cập nhật mới</string>
-    <string name="text_download_speed">%1$s, %2$s/s</string>
     <string name="pause_button">Tạm dừng</string>
     <string name="resume_button">Tiếp tục</string>
     <string name="suspend_button">Đình chỉ</string>
@@ -47,11 +25,11 @@
     <string name="dialog_prepare_zip_message">Đang chuẩn bị cập nhật</string>
     <string name="dialog_battery_low_title">Pin yếu</string>
     <string name="dialog_battery_low_message_pct">Mức pin quá thấp, bạn cần tối thiểu <xliff:g id="percent_discharging">%1$d</xliff:g>%% pin để tiếp tục, <xliff:g id="percent_charging">%2$d</xliff:g>%% nếu đang sạc.</string>
-    <string name="dialog_scratch_mounted_message" formatted="false"><![CDATA[        Vui lòng chạy các lệnh sau và thử cập nhật lại:\n
+    <string name="dialog_scratch_mounted_message" formatted="false">        Vui lòng chạy các lệnh sau và thử cập nhật lại:\n
         • adb root\n
         • adb enable-verity\n
         • adb reboot
-        ]]></string>
+        </string>
     <string name="dialog_scratch_mounted_title">Không thể cài đặt cập nhật khi OverlayFS đang được gắn kết</string>
     <string name="menu_preferences">Tùy chỉnh</string>
     <string name="menu_auto_updates_check">Kiểm tra cập nhật tự động</string>
@@ -68,7 +46,6 @@
     <string name="header_android_version">Phiên bản Android: <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
     <string name="header_android_security_patch">Cập nhật bản vá bảo mật Android: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
     <string name="header_last_updates_check">Lần kiểm tra cập nhật thành công cuối cùng: \n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g>（<xliff:g example="01:23" id="time">%2$s</xliff:g>）</string>
-    <string name="list_build_version_date">PixelOS <xliff:g example="15" id="version">%1$s</xliff:g> - <xliff:g example="July 11, 2017" id="date">%2$s</xliff:g></string>
     <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> đã tải xuống, tổng số <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
     <string name="list_verifying_update">Đang xác minh bản cập nhật</string>
     <string name="action_download">Trình tải firmware</string>
@@ -115,7 +92,6 @@
     <string name="system_update_verifying">Đang xác minh bản cập nhật hệ thống</string>
     <string name="local_update_installing">Đang cài đặt bản cập nhật cục bộ</string>
     <string name="general_header">Tổng quan</string>
-    <string name="play_integrity_header">Play Integrity</string>
     <string name="text_download_size_unknown">Không rõ</string>
     <string name="certified_prop_status">Trạng thái thuộc tính được xác thực</string>
     <string name="certified_prop_check">Kiểm tra cập nhật</string>
