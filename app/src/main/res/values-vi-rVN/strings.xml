@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2017-2024 The LineageOS Project
+     Copyright (C) 2024 PixelOS
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Cập nhật hệ thống</string>
+    <string name="display_name">Cập nhật hệ thống</string>
+    <!-- Directory where the update files will be downloaded and stored.
+         WARNING: The application can and will delete any unknown file. -->
+    <!--
+    Optional placeholders replaced at runtime:
+      {version} - Build version
+      {device} - Device name
+    -->
+    <string name="verification_failed_notification">Xác thực không thành công</string>
+    <string name="verifying_download_notification">Đang xác minh bản cập nhật</string>
+    <string name="downloading_notification">Đang tải xuống</string>
+    <string name="download_paused_notification">Đã tạm dừng tải xuống</string>
+    <string name="download_paused_error_notification">Lỗi tải xuống</string>
+    <string name="download_completed_notification">Tải xuống hoàn tất</string>
+    <string name="download_starting_notification">Đang bắt đầu tải xuống</string>
+    <string name="update_failed_notification">Cập nhật thất bại</string>
+    <string name="installation_suspended_notification">Cài đặt đã gián đoạn</string>
+    <string name="new_updates_found_title">Đã có bản cập nhật mới</string>
+    <string name="text_download_speed">%1$s, %2$s/s</string>
+    <string name="pause_button">Tạm dừng</string>
+    <string name="resume_button">Tiếp tục</string>
+    <string name="suspend_button">Đình chỉ</string>
+    <string name="installing_update">Đang cài đặt gói cập nhật</string>
+    <string name="installing_update_error">Lỗi cài đặt</string>
+    <string name="installing_update_finished">Đã cài đặt bản cập nhật</string>
+    <string name="finalizing_package">Đang hoàn tất gói cài đặt</string>
+    <string name="preparing_ota_first_boot">Đang chuẩn bị cho lần khởi động đầu tiên</string>
+    <string name="dialog_prepare_zip_message">Đang chuẩn bị cập nhật</string>
+    <string name="dialog_battery_low_title">Pin yếu</string>
+    <string name="dialog_battery_low_message_pct">Mức pin quá thấp, bạn cần tối thiểu <xliff:g id="percent_discharging">%1$d</xliff:g>%% pin để tiếp tục, <xliff:g id="percent_charging">%2$d</xliff:g>%% nếu đang sạc.</string>
+    <string name="dialog_scratch_mounted_message"><![CDATA[        Vui lòng chạy các lệnh sau và thử cập nhật lại:\n
+        • adb root\n
+        • adb enable-verity\n
+        • adb reboot
+        ]]></string>
+    <string name="dialog_scratch_mounted_title">Không thể cài đặt cập nhật khi OverlayFS đang được gắn kết</string>
+    <string name="menu_preferences">Tùy chỉnh</string>
+    <string name="menu_auto_updates_check">Kiểm tra cập nhật tự động</string>
+    <string name="menu_ab_perf_mode">Chế độ hiệu suất A/B</string>
+    <string name="menu_update_recovery">Cập nhật trình khôi phục</string>
+    <string name="auto_updates_check_summary">Sau khi được bật, tính năng này sẽ tự động kiểm tra cập nhật sau mỗi 14 ngày.</string>
+    <string name="ab_perf_mode_summary">Tăng mức độ ưu tiên của quá trình cập nhật. Trong khi quá trình cập nhật đang diễn ra, việc sử dụng thông thường có thể bị ảnh hưởng.</string>
+    <string name="update_recovery_summary">Cho phép tự động cập nhật trình khôi phục từ bản dựng.</string>
+    <string name="snack_updates_check_failed">Kiểm tra bản cập nhật không thành công. Vui lòng kiểm tra kết nối internet của bạn và thử lại sau.</string>
+    <string name="snack_download_failed">Tải xuống không thành công. Vui lòng kiểm tra kết nối internet của bạn và thử lại sau.</string>
+    <string name="snack_download_verification_failed">Xác minh cập nhật không thành công.</string>
+    <string name="snack_download_verified">Tải xuống hoàn tất.</string>
+    <string name="snack_update_not_installable">Không thể cài đặt bản cập nhật này trên bản dựng hiện tại.</string>
+    <string name="header_android_version">Phiên bản Android: <xliff:g example="7.1.2" id="version">%1$s</xliff:g></string>
+    <string name="header_android_security_patch">Cập nhật bản vá bảo mật Android: <xliff:g example="1" id="patch">%1$s</xliff:g></string>
+    <string name="header_last_updates_check">Lần kiểm tra cập nhật thành công cuối cùng: \n<xliff:g example="1 January 1970" id="date">%1$s</xliff:g>（<xliff:g example="01:23" id="time">%2$s</xliff:g>）</string>
+    <string name="list_build_version_date">PixelOS <xliff:g example="15" id="version">%1$s</xliff:g> - <xliff:g example="July 11, 2017" id="date">%2$s</xliff:g></string>
+    <string name="list_download_progress_newer"><xliff:g example="12.2" id="filesize_without_unit">%1$s</xliff:g> đã tải xuống, tổng số <xliff:g example="310 MB" id="filesize_without_unit">%2$s</xliff:g></string>
+    <string name="list_verifying_update">Đang xác minh bản cập nhật</string>
+    <string name="action_download">Trình tải firmware</string>
+    <string name="action_pause">Tạm dừng</string>
+    <string name="action_resume">Tiếp tục</string>
+    <string name="action_reboot">Khởi động lại</string>
+    <string name="action_install">Cài đặt</string>
+    <string name="action_delete">Hủy</string>
+    <string name="action_cancel">Hủy</string>
+    <string name="confirm_delete_dialog_title">Xóa tập tin</string>
+    <string name="confirm_delete_dialog_message">Xóa tệp đang tải xuống hiện tại?</string>
+    <string name="apply_update_dialog_title">Áp dụng cập nhật</string>
+    <string name="apply_update_dialog_message">Bạn sắp cài đặt <xliff:g id="update_name">%1$s</xliff:g>.\n\nNếu bạn nhấn <xliff:g id="ok">%2$s</xliff:g>, thiết bị sẽ tự khởi động lại ở chế độ recovery để cài đặt bản cập nhật.\n\nLưu ý: Tính năng này yêu cầu Recovery tương thích hoặc các bản cập nhật sẽ cần được cài đặt theo cách thủ công.</string>
+    <string name="apply_update_dialog_message_ab">Bạn sắp cài đặt <xliff:g id="update_name">%1$s</xliff:g>.\n\nNếu bạn nhấn <xliff:g id="ok">%2$s</xliff:g>, thiết bị sẽ bắt đầu cài đặt trong nền.\n\nSau khi hoàn tất, bạn sẽ được nhắc khởi động lại.</string>
+    <string name="cancel_installation_dialog_message">Huỷ cài đặt?</string>
+    <string name="reboot_installation_dialog_message">Khởi động lại để hoàn tất cài đặt</string>
+    <plurals name="eta_seconds">
+        <item quantity="other">Còn lại <xliff:g id="count">%d</xliff:g> giây</item>
+    </plurals>
+    <plurals name="eta_minutes">
+        <item quantity="other">Còn lại <xliff:g id="count">%d</xliff:g> phút</item>
+    </plurals>
+    <plurals name="eta_hours">
+        <item quantity="other">Còn lại <xliff:g id="count">%d</xliff:g> giờ</item>
+    </plurals>
+    <string name="update_over_metered_network_info">Cảnh báo kết nối mạng có giới hạn</string>
+    <string name="update_over_metered_network_message">Tải xuống các bản cập nhật qua mạng di động, Wi-Fi được đo hoặc trong khi chuyển vùng có thể gây ra các khoản phí bổ sung.</string>
+    <string name="new_updates_channel_title">Đã có bản cập nhật mới</string>
+    <string name="ongoing_channel_title">Đang tải xuống</string>
+    <string name="update_failed_channel_title">Cập nhật thất bại</string>
+    <string name="local_update_import">Cập nhật cục bộ</string>
+    <string name="local_update_import_progress">Đang nhập bản cập nhật cục bộ\u2026</string>
+    <string name="local_update_import_success">%1$sđã được nhập. Bạn có muốn cài đặt không?</string>
+    <string name="local_update_import_failure">Không nhập được bản cập nhật cục bộ</string>
+    <string name="local_update_import_install">Cài đặt</string>
+    <string name="check_for_update">Kiểm tra cập nhật</string>
+    <string name="check_for_update_failed">Không kiểm tra được bản cập nhật</string>
+    <string name="system_up_to_date">Hệ thống đã được cập nhật</string>
+    <string name="system_update_available">Có bản cập nhật mới</string>
+    <string name="checking_for_update">Kiểm tra cập nhật hệ thống\u2026</string>
+    <string name="system_update_downloading">Đang tải về bản cập nhật hệ thống</string>
+    <string name="system_update_downloading_paused">Đã tạm dừng tải xuống</string>
+    <string name="system_update_installing">Đang cài đặt bản cập nhật hệ thống</string>
+    <string name="system_update_verifying">Đang xác minh bản cập nhật hệ thống</string>
+    <string name="local_update_installing">Đang cài đặt bản cập nhật cục bộ</string>
+    <string name="general_header">Tổng quan</string>
+    <string name="play_integrity_header">Play Integrity</string>
+    <string name="text_download_size_unknown">Không rõ</string>
+    <string name="certified_prop_status">Trạng thái thuộc tính được xác thực</string>
+    <string name="certified_prop_check">Kiểm tra cập nhật</string>
+    <string name="certified_prop_checking">Kiểm tra cập nhật thuộc tính xác thực</string>
+    <string name="certified_prop_downloading">Đang tải xuống cập nhật thuộc tính xác thực</string>
+    <string name="certified_prop_download_failed">Không thể lấy được thuộc tính từ máy chủ</string>
+    <string name="certified_prop_available">Tải xuống và cài đặt</string>
+    <string name="certified_prop_install_success">Khởi động lại để áp dụng cập nhật</string>
+    <string name="certified_prop_install_failed">Cài đặt không thành công</string>
+    <string name="certified_prop_info" formatted="false">Phiên bản đã cài đặt：%s\n</string>
+    <string name="certified_prop_remote" formatted="false">Phiên bản mới nhất: %s</string>
+    <string name="fetch_changelogs_failed">Không thể tải nhật ký thay đổi</string>
+</resources>
