@@ -381,6 +381,7 @@ public class UpdaterController {
         if (!mDownloads.containsKey(downloadId) || isDownloading(downloadId)) {
             return;
         }
+        pauseActiveDownloads();
         DownloadEntry entry = mDownloads.get(downloadId);
         if (entry == null) {
             Log.e(TAG, "Could not get download entry");
@@ -434,6 +435,7 @@ public class UpdaterController {
         if (!mDownloads.containsKey(downloadId) || isDownloading(downloadId)) {
             return;
         }
+        pauseActiveDownloads();
         DownloadEntry entry = mDownloads.get(downloadId);
         if (entry == null) {
             Log.e(TAG, "Could not get download entry");
@@ -587,6 +589,14 @@ public class UpdaterController {
             return;
         }
         ABUpdateInstaller.getInstance(mContext, this).setPerformanceMode(enable);
+    }
+
+    private void pauseActiveDownloads() {
+        for (DownloadEntry entry : mDownloads.values()) {
+            if (isDownloading(entry.mUpdate.getDownloadId())) {
+                pauseDownload(entry.mUpdate.getDownloadId());
+            }
+        }
     }
 
     private static class DownloadEntry {
