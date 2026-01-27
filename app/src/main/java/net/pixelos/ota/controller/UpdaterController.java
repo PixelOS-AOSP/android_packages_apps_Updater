@@ -21,26 +21,41 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.PowerManager;
 import android.os.SystemClock;
+import android.os.SystemProperties;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import net.pixelos.ota.MirrorsDbHelper;
 import net.pixelos.ota.UpdatesDbHelper;
 import net.pixelos.ota.download.DownloadClient;
+import net.pixelos.ota.misc.Constants;
 import net.pixelos.ota.misc.Utils;
 import net.pixelos.ota.model.Update;
 import net.pixelos.ota.model.UpdateInfo;
 import net.pixelos.ota.model.UpdateStatus;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class UpdaterController {
 
@@ -50,8 +65,9 @@ public class UpdaterController {
     public static final String ACTION_UPDATE_STATUS = "action_update_status_change";
     public static final String EXTRA_DOWNLOAD_ID = "extra_download_id";
     private static final int MAX_REPORT_INTERVAL_MS = 1000;
+    private static final String TAG = "UpdaterController";
     private static UpdaterController sUpdaterController;
-    private final String TAG = "UpdaterController";
+    private static MirrorsDbHelper sMirrorsDbHelper;
     private final Context mContext;
     private final LocalBroadcastManager mBroadcastManager;
     private final UpdatesDbHelper mUpdatesDbHelper;
@@ -60,12 +76,19 @@ public class UpdaterController {
 
     private final File mDownloadRoot;
     private final Set<String> mVerifyingUpdates = new HashSet<>();
-    private final Map<String, DownloadEntry> mDownloads = new HashMap<>();
+    private static final Map<String, DownloadEntry> mDownloads = new HashMap<>();
     private int mActiveDownloads = 0;
+
+    // Sourceforge mirror variables
+    private static Map<String, String> sMirrorLinks;
+    private static Map<Double, String> sRankedMirrors;
+    private static Map<String, String> sSortedSfMirrors;
+    public static Map<Double, String> sSortedRankedMirrors;
 
     private UpdaterController(Context context) {
         mBroadcastManager = LocalBroadcastManager.getInstance(context);
         mUpdatesDbHelper = new UpdatesDbHelper(context);
+        sMirrorsDbHelper = MirrorsDbHelper.getInstance(context);
         mDownloadRoot = Utils.getDownloadPath(context);
         PowerManager powerManager = context.getSystemService(PowerManager.class);
         mWakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Updater:wakelock");
@@ -324,6 +347,7 @@ public class UpdaterController {
             Log.d(TAG, downloadId + " no longer available online, removing");
             mDownloads.remove(downloadId);
             notifyUpdateDelete(downloadId);
+            sMirrorsDbHelper.delUpdate(downloadId);
         }
     }
 
@@ -339,7 +363,15 @@ public class UpdaterController {
             if (entry != null) {
                 Update updateAdded = entry.mUpdate;
                 updateAdded.setAvailableOnline(availableOnline && updateAdded.getAvailableOnline());
-                updateAdded.setDownloadUrl(updateInfo.getDownloadUrl());
+                // Check if there's a saved mirror URL
+                String mirrorUrl = sMirrorsDbHelper.getMirrorUrl(updateInfo.getDownloadId());
+                if (mirrorUrl != null && !mirrorUrl.isEmpty()) {
+                    updateAdded.setDownloadUrl(mirrorUrl);
+                    Log.d(TAG, "Using previous mirror: " + mirrorUrl);
+                } else {
+                    updateAdded.setDownloadUrl(updateInfo.getDownloadUrl());
+                    Log.d(TAG, "Using default server url: " + updateInfo.getDownloadUrl());
+                }
             }
             return false;
         }
@@ -352,6 +384,18 @@ public class UpdaterController {
         }
         update.setAvailableOnline(availableOnline);
         mDownloads.put(update.getDownloadId(), new DownloadEntry(update));
+        // Add to mirrors database if not exists
+        if (!sMirrorsDbHelper.isUpdateExists(updateInfo.getDownloadId())) {
+            sMirrorsDbHelper.setUpdate(updateInfo.getDownloadId());
+            Log.d(TAG, "Adding new update to mirrors database: " + update.getDownloadId());
+        } else {
+            // Set previous mirror url if update already exists in mirrorsDB
+            String mirrorUrl = sMirrorsDbHelper.getMirrorUrl(updateInfo.getDownloadId());
+            if (mirrorUrl != null && !mirrorUrl.isEmpty()) {
+                update.setDownloadUrl(mirrorUrl);
+                Log.d(TAG, "Setting previous mirror: " + mirrorUrl);
+            }
+        }
         return true;
     }
 
@@ -492,6 +536,7 @@ public class UpdaterController {
                 Log.d(TAG, "Download no longer available online, removing");
                 mDownloads.remove(downloadId);
                 notifyUpdateDelete(downloadId);
+                sMirrorsDbHelper.delUpdate(downloadId);
             } else {
                 notifyUpdateChange(downloadId);
             }
@@ -556,6 +601,246 @@ public class UpdaterController {
             return;
         }
         ABUpdateInstaller.getInstance(mContext, this).setPerformanceMode(enable);
+    }
+
+    // SourceForge mirror methods
+
+    public static void setSfMirror(UpdateInfo updateInfo, Context context, String mirror) {
+        if (mDownloads.containsKey(updateInfo.getDownloadId())) {
+            DownloadEntry entry = mDownloads.get(updateInfo.getDownloadId());
+            if (entry == null) return;
+            Update updateAdded = entry.mUpdate;
+            // Default to server URL if mirror not found
+            String mirrorUrl = updateInfo.getDownloadUrl();
+
+            if (sSortedSfMirrors != null && !sSortedSfMirrors.isEmpty()) {
+                for (Map.Entry<String, String> sortedMirrors : sSortedSfMirrors.entrySet()) {
+                    if (mirror.equals(sortedMirrors.getKey())) {
+                        mirrorUrl = sortedMirrors.getValue();
+                        sMirrorsDbHelper.setMirrorUrl(sortedMirrors.getValue(), updateInfo.getDownloadId());
+                        break;
+                    }
+                }
+            } else if (sMirrorLinks != null && !sMirrorLinks.isEmpty()) {
+                for (Map.Entry<String, String> sfMirrors : sMirrorLinks.entrySet()) {
+                    if (mirror.equals(sfMirrors.getKey())) {
+                        mirrorUrl = sfMirrors.getValue();
+                        sMirrorsDbHelper.setMirrorUrl(sfMirrors.getValue(), updateInfo.getDownloadId());
+                        break;
+                    }
+                }
+            }
+
+            updateAdded.setDownloadUrl(mirrorUrl);
+            sMirrorsDbHelper.setMirrorName(mirror, updateInfo.getDownloadId());
+            Log.d(TAG, "Mirror for: " + updateInfo.getName() + " set to " + mirrorUrl);
+        }
+    }
+
+    public static Map<String, String> sourceforgeMirrors(UpdateInfo update) {
+        sMirrorLinks = new LinkedHashMap<>();
+        sRankedMirrors = new LinkedHashMap<>();
+        sSortedSfMirrors = new LinkedHashMap<>();
+        Map<String, String> rankLinks = new LinkedHashMap<>();
+
+        String downloadUrl = update.getDownloadUrl();
+        if (downloadUrl == null || downloadUrl.isEmpty()) {
+            Log.e(TAG, "Cannot fetch mirrors: download URL is null or empty");
+            return null;
+        }
+
+        // Parse SourceForge URL to extract project name and filepath
+        // Format 1: https://sourceforge.net/projects/{project}/files/{filepath}
+        // Format 2: https://sourceforge.net/projects/{project}/files/{filepath}/download
+        // Format 3: https://{mirror}.dl.sourceforge.net/project/{project}/{filepath}
+        String projectName = null;
+        String filepath = null;
+
+        try {
+            if (downloadUrl.contains("sourceforge.net/projects/")) {
+                // Format: https://sourceforge.net/projects/{project}/files/{filepath}[/download]
+                int projectStart = downloadUrl.indexOf("/projects/") + 10;
+                int projectEnd = downloadUrl.indexOf("/files/", projectStart);
+                if (projectEnd == -1) projectEnd = downloadUrl.indexOf("/", projectStart);
+                projectName = downloadUrl.substring(projectStart, projectEnd);
+
+                int filesStart = downloadUrl.indexOf("/files/") + 6; // Keep the leading /
+                String remaining = downloadUrl.substring(filesStart);
+                // Remove trailing /download if present
+                if (remaining.endsWith("/download")) {
+                    remaining = remaining.substring(0, remaining.length() - 9);
+                }
+                filepath = remaining;
+            } else if (downloadUrl.contains(".dl.sourceforge.net/project/")) {
+                // Format: https://{mirror}.dl.sourceforge.net/project/{project}/{filepath}
+                int projectStart = downloadUrl.indexOf("/project/") + 9;
+                int projectEnd = downloadUrl.indexOf("/", projectStart);
+                projectName = downloadUrl.substring(projectStart, projectEnd);
+                filepath = downloadUrl.substring(projectStart + projectName.length());
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            Log.e(TAG, "Failed to parse SourceForge URL: " + downloadUrl, e);
+            return null;
+        }
+
+        if (projectName == null || filepath == null) {
+            Log.e(TAG, "Could not extract project/filepath from URL: " + downloadUrl);
+            Log.e(TAG, "URL must be a SourceForge download link");
+            return null;
+        }
+
+        Log.d(TAG, "Parsed from URL - Project: " + projectName + ", Filepath: " + filepath);
+
+        String mirrorsUrl = "https://sourceforge.net/settings/mirror_choices?projectname=" + projectName + "&filename=" + filepath;
+        Log.d(TAG, "Fetching mirrors from: " + mirrorsUrl);
+
+        final String finalProjectName = projectName;
+        final String finalFilepath = filepath;
+        final Exception[] fetchException = {null};
+
+        Thread mirrorFetch = new Thread(() -> {
+            try {
+                Log.d(TAG, "Starting mirror fetch request...");
+                Document doc = Jsoup.connect(mirrorsUrl)
+                        .userAgent("Mozilla/5.0")
+                        .timeout(15000)
+                        .get();
+                Elements links = doc.select("#mirrorList li");
+
+                Log.d(TAG, "Found " + links.size() + " mirror elements");
+
+                if (links.isEmpty()) {
+                    Log.w(TAG, "No mirrors found in response. HTML snippet: " +
+                            doc.body().html().substring(0, Math.min(500, doc.body().html().length())));
+                }
+
+                for (Element link : links) {
+                    String mirrorName = link.attr("id");
+                    String mirrorPlace = link.text();
+                    if (!mirrorName.equals("autoselect")) {
+                        try {
+                            mirrorPlace = mirrorPlace.substring(mirrorPlace.lastIndexOf("(") + 1,
+                                            mirrorPlace.lastIndexOf(")"))
+                                    .split(",", 2)[0]
+                                    .trim();
+                            sMirrorLinks.put(mirrorPlace, "https://" + mirrorName + ".dl.sourceforge.net/project/" + finalProjectName + finalFilepath);
+                            rankLinks.put(mirrorPlace, mirrorName + ".dl.sourceforge.net");
+                            Log.d(TAG, "Mirror: " + mirrorName + " (" + mirrorPlace + ")");
+                        } catch (StringIndexOutOfBoundsException e) {
+                            Log.w(TAG, "Failed to parse mirror place for: " + mirrorName + ", text: " + mirrorPlace);
+                        }
+                    }
+                }
+                Log.d(TAG, "Successfully parsed " + sMirrorLinks.size() + " mirrors");
+            } catch (IOException e) {
+                Log.e(TAG, "Failed to fetch sourceforge mirrors: " + e.getMessage(), e);
+                fetchException[0] = e;
+            } catch (Exception e) {
+                Log.e(TAG, "Unexpected error fetching mirrors: " + e.getMessage(), e);
+                fetchException[0] = e;
+            }
+        });
+
+        try {
+            mirrorFetch.start();
+            mirrorFetch.join();
+
+            if (fetchException[0] != null) {
+                Log.e(TAG, "Mirror fetch failed with exception: " + fetchException[0].getMessage());
+                return null;
+            }
+
+            if (sMirrorLinks.isEmpty()) {
+                Log.w(TAG, "No mirrors were found");
+                return null;
+            }
+
+            return cookRankMirrorsData(rankLinks);
+        } catch (InterruptedException e) {
+            Log.e(TAG, "Mirror fetch thread interrupted!", e);
+            return null;
+        }
+    }
+
+    private static Map<String, String> cookRankMirrorsData(Map<String, String> rankLinks) {
+        ExecutorService executor = Executors.newCachedThreadPool();
+
+        for (Map.Entry<String, String> rlinks : rankLinks.entrySet()) {
+            String rankUrl = rlinks.getValue();
+            String rankName = rlinks.getKey();
+            executor.execute(new RankMirrors(rankUrl, rankName));
+        }
+
+        executor.shutdown();
+        try {
+            executor.awaitTermination(30, TimeUnit.SECONDS);
+            return sortMirrors(sRankedMirrors);
+        } catch (InterruptedException e) {
+            Log.e(TAG, "Executor interrupted!", e);
+            return null;
+        }
+    }
+
+    private static Map<String, String> sortMirrors(Map<Double, String> rankedMirrors) {
+        sSortedRankedMirrors = new TreeMap<>(rankedMirrors);
+        for (Map.Entry<Double, String> rankLinks : sSortedRankedMirrors.entrySet()) {
+            for (Map.Entry<String, String> mirrorLinks : sMirrorLinks.entrySet()) {
+                if (rankLinks.getValue().equals(mirrorLinks.getKey())) {
+                    sSortedSfMirrors.put(rankLinks.getValue(), mirrorLinks.getValue());
+                    Log.d(TAG, "Sorted mirrors list: " + rankLinks.getValue());
+                }
+            }
+        }
+        return sSortedSfMirrors;
+    }
+
+    private static class RankMirrors implements Runnable {
+        private final String rankUrl;
+        private final String rankName;
+
+        RankMirrors(String rankUrl, String rankName) {
+            this.rankUrl = rankUrl;
+            this.rankName = rankName;
+        }
+
+        @Override
+        public void run() {
+            try {
+                String[] pingCmd = {"ping", "-c", "5", rankUrl};
+                String pingOutput;
+                double pingResult;
+                Runtime runtime = Runtime.getRuntime();
+                Process process = runtime.exec(pingCmd);
+                BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                pingOutput = in.readLine();
+
+                while (pingOutput != null) {
+                    if (pingOutput.contains("rtt") || pingOutput.contains("round-trip")) {
+                        // Parse mdev value from ping output
+                        int lastSlash = pingOutput.lastIndexOf("/");
+                        int msIndex = pingOutput.lastIndexOf(" ms");
+                        if (lastSlash != -1 && msIndex != -1 && lastSlash < msIndex) {
+                            try {
+                                pingResult = Double.parseDouble(pingOutput.substring(lastSlash + 1, msIndex).trim());
+                                if (pingResult != 0) {
+                                    sRankedMirrors.put(pingResult, rankName);
+                                }
+                                Log.d(TAG, "mdev of sourceforge mirror " + rankName + ": " + pingResult);
+                            } catch (NumberFormatException ignored) {
+                            }
+                        }
+                    }
+                    pingOutput = in.readLine();
+                }
+                in.close();
+            } catch (IOException e) {
+                Log.e(TAG, "Failed to rank sourceforge mirror " + rankName, e);
+            }
+        }
+    }
+
+    public static MirrorsDbHelper getMirrorsDbHelper() {
+        return sMirrorsDbHelper;
     }
 
     private static class DownloadEntry {

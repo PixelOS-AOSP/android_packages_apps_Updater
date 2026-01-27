@@ -78,6 +78,16 @@
     <string name="update_recovery_summary">Enable to update recovery from the build automatically.</string>
 
     <string name="snack_updates_check_failed">The update check failed. Please check your internet connection and try again later.</string>
+
+    <!-- Sourceforge mirrors -->
+    <string name="sf_dialog_title">Available Mirrors</string>
+    <string name="snack_failed_sf_mirrors">Failed to fetch sourceforge mirrors.</string>
+    <string name="snack_set_sf_mirror">Mirror set to %1$s!</string>
+    <string name="select_mirror">Select mirror</string>
+    <string name="mirror_loading">Loading mirrors…</string>
+    <string name="mirror_current">Current: %1$s</string>
+    <string name="mirror_default">Default</string>
+
     <string name="snack_download_failed">The download failed. Please check your internet connection and try again later.</string>
     <string name="snack_download_verification_failed">The update verification failed.</string>
     <string name="snack_download_verified">Download completed.</string>

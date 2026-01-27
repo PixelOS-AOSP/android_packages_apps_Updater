@@ -59,6 +59,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.progressindicator.LinearProgressIndicator
@@ -127,10 +128,13 @@ class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
     private val mUpdateStatus by lazy { requireViewById<TextView>(R.id.updateStatus) }
     private val toolbar by lazy { requireViewById<MaterialToolbar>(R.id.toolbar) }
     private val mNestedScrollView by lazy { requireViewById<NestedScrollView>(R.id.nestedScrollView) }
+    private val mMirrorChip by lazy { requireViewById<Chip>(R.id.mirrorChip) }
 
     private var mBroadcastReceiver: BroadcastReceiver
     private var mLatestDownloadId: String
     private var mUpdateImporter: UpdateImporter
+    private var mCachedMirrors: Map<String, String>? = null
+    private var mMirrorsLoading = false
 
     private var mUpdaterController: UpdaterController? = null
     private var mUpdaterService: UpdaterService? = null
@@ -195,6 +199,7 @@ class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
         updateLastCheckedString()
 
         setupSwipeRefresh()
+        setupMirrorChip()
         setupInsets()
     }
 
@@ -705,6 +710,7 @@ class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
             mUpdateStatus.setText(R.string.system_up_to_date)
             mCurrentBuildInfo.isVisible = true
             mSwipeRefresh.isEnabled = false
+            mMirrorChip.isVisible = false
             return
         }
 
@@ -714,6 +720,7 @@ class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
         mProgress.isVisible = false
         mCurrentBuildInfo.isVisible = false
         setChangelogs(mChangelogSection)
+        updateMirrorChipState(update)
 
         val activeLayout: Boolean =
             update.persistentStatus == UpdateStatus.Persistent.INCOMPLETE ||
@@ -777,6 +784,7 @@ class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
             mProgressText.setText(R.string.list_verifying_update)
             mProgressBar.isIndeterminate = true
         } else {
+            // Paused state
             showCancelButton = true
             canDelete = true
             setupButtonAction(Action.RESUME, mPrimaryActionButton, !isBusy)
@@ -802,6 +810,7 @@ class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
 
         mProgress.isVisible = true
         mSwipeRefresh.isEnabled = false
+        mMirrorChip.isVisible = false
     }
 
     private fun handleNotActiveStatus(update: UpdateInfo) {
@@ -817,6 +826,8 @@ class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
             showCancelButton = true
             if (canInstall(update)) {
                 setupButtonAction(Action.INSTALL, mPrimaryActionButton, !isBusy)
+                // Allow deleting the downloaded update before installing
+                setupButtonAction(Action.DELETE, mSecondaryActionButton, !isBusy)
             } else {
                 mPrimaryActionButton.isVisible = false
                 setupButtonAction(Action.DELETE, mSecondaryActionButton, !isBusy)
@@ -833,6 +844,7 @@ class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
     private fun removeUpdate(downloadId: String) {
         if (mLatestDownloadId == downloadId) {
             mLatestDownloadId = ""
+            mCachedMirrors = null
             updateUI(mLatestDownloadId)
         }
     }
@@ -950,6 +962,146 @@ class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
                 else resources.getInteger(R.integer.battery_ok_percentage_discharging)
             return percent >= required
         }
+
+    private fun setupMirrorChip() {
+        mMirrorChip.setOnClickListener {
+            if (mLatestDownloadId.isEmpty()) return@setOnClickListener
+            val update = mUpdaterController?.getUpdate(mLatestDownloadId) ?: return@setOnClickListener
+
+            if (mCachedMirrors != null && mCachedMirrors!!.isNotEmpty()) {
+                showMirrorSelectionDialog(mCachedMirrors!!, update)
+            } else {
+                fetchMirrorsAndShow(update)
+            }
+        }
+    }
+
+    private fun updateMirrorChipState(update: UpdateInfo?) {
+        if (update == null || mLatestDownloadId.isEmpty()) {
+            mMirrorChip.isVisible = false
+            return
+        }
+
+        // Only show chip when update is available and not yet downloading/installing
+        val showChip = update.persistentStatus != UpdateStatus.Persistent.VERIFIED &&
+                !mUpdaterController!!.isDownloading(update.downloadId) &&
+                !mUpdaterController!!.isInstallingUpdate(update.downloadId) &&
+                !mUpdaterController!!.isWaitingForReboot(update.downloadId)
+
+        mMirrorChip.isVisible = showChip
+
+        if (showChip) {
+            val mirrorsDbHelper = MirrorsDbHelper.getInstance(this)
+            val currentMirror = mirrorsDbHelper.getMirrorName(update.downloadId)
+            if (currentMirror.isNullOrEmpty()) {
+                mMirrorChip.text = getString(R.string.select_mirror)
+            } else {
+                mMirrorChip.text = getString(R.string.mirror_current, currentMirror)
+            }
+
+            // Auto-fetch mirrors if not cached
+            if (mCachedMirrors == null && !mMirrorsLoading) {
+                fetchMirrors(update)
+            }
+        }
+    }
+
+    private fun fetchMirrors(update: UpdateInfo) {
+        mMirrorsLoading = true
+        Log.d(TAG, "Auto-fetching mirrors for: ${update.name}")
+
+        lifecycleScope.launch {
+            val mirrors = withContext(Dispatchers.IO) {
+                UpdaterController.sourceforgeMirrors(update)
+            }
+            mMirrorsLoading = false
+            if (mirrors != null && mirrors.isNotEmpty()) {
+                mCachedMirrors = mirrors
+                Log.d(TAG, "Fetched ${mirrors.size} mirrors")
+            } else {
+                Log.w(TAG, "No mirrors returned for update: ${update.name}")
+            }
+        }
+    }
+
+    private fun fetchMirrorsAndShow(update: UpdateInfo) {
+        mMirrorChip.text = getString(R.string.mirror_loading)
+        mMirrorChip.isEnabled = false
+        Log.d(TAG, "Fetching mirrors to show for: ${update.name}")
+
+        lifecycleScope.launch {
+            val mirrors = withContext(Dispatchers.IO) {
+                UpdaterController.sourceforgeMirrors(update)
+            }
+
+            mMirrorChip.isEnabled = true
+            if (mirrors != null && mirrors.isNotEmpty()) {
+                mCachedMirrors = mirrors
+                showMirrorSelectionDialog(mirrors, update)
+            } else {
+                mMirrorChip.text = getString(R.string.select_mirror)
+                showMirrorError()
+            }
+        }
+    }
+
+    private fun showMirrorSelectionDialog(mirrors: Map<String, String>, update: UpdateInfo) {
+        val mirrorsDbHelper = MirrorsDbHelper.getInstance(this)
+        val mirrorNames = mirrors.keys.toTypedArray()
+        val downloadId = update.downloadId
+        val currentMirrorName = mirrorsDbHelper.getMirrorName(downloadId)
+
+        // Build display names with ping values
+        val displayNames: Array<String> = if (UpdaterController.sSortedRankedMirrors != null) {
+            val rankedMirrors = UpdaterController.sSortedRankedMirrors
+            mirrorNames.mapIndexed { index, name ->
+                val ping = rankedMirrors.keys.elementAtOrNull(index)
+                if (ping != null) "$name (${String.format("%.1f", ping)} ms)" else name
+            }.toTypedArray()
+        } else {
+            mirrorNames
+        }
+
+        // Add default option at the beginning
+        val allNames = arrayOf(getString(R.string.mirror_default)) + displayNames
+        val allMirrorKeys = arrayOf("") + mirrorNames
+
+        // Find current selection
+        var selectedIndex = 0
+        if (!currentMirrorName.isNullOrEmpty()) {
+            val idx = mirrorNames.indexOf(currentMirrorName)
+            if (idx >= 0) selectedIndex = idx + 1
+        }
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.sf_dialog_title)
+            .setSingleChoiceItems(allNames, selectedIndex) { dialog, which ->
+                val selectedKey = allMirrorKeys[which]
+                if (selectedKey.isEmpty()) {
+                    // Default - clear mirror preference
+                    mirrorsDbHelper.setMirrorName("", downloadId)
+                    mirrorsDbHelper.setMirrorUrl("", downloadId)
+                    val update = mUpdaterController?.getUpdate(downloadId)
+                    // Reset to original URL would require storing it - for now just clear
+                    mMirrorChip.text = getString(R.string.select_mirror)
+                } else {
+                    mirrorsDbHelper.setMirrorName(selectedKey, downloadId)
+                    UpdaterController.setSfMirror(update, this, selectedKey)
+                    mMirrorChip.text = getString(R.string.mirror_current, selectedKey)
+                }
+                dialog.dismiss()
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+
+    private fun showMirrorError() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.sf_dialog_title)
+            .setMessage(R.string.snack_failed_sf_mirrors)
+            .setPositiveButton(android.R.string.ok, null)
+            .show()
+    }
 
     private enum class Action {
         CHECK_UPDATES,
