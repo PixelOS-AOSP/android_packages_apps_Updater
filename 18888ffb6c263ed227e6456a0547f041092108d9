@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e594502b_ec6860ca",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/UpdaterController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-01-29T06:31:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "767b3e3c_888f7441",
+      "revId": "18888ffb6c263ed227e6456a0547f041092108d9",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27b14b3a_ab30ecba",
         "filename": "app/src/main/res/layout/activity_updates.xml",
         "patchSetId": 1
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e407d826_2c3084c3",
+        "filename": "app/src/main/res/layout/activity_updates.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-01-29T06:31:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "27b14b3a_ab30ecba",
+      "revId": "18888ffb6c263ed227e6456a0547f041092108d9",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcb49214_c3ae03d9",
         "filename": "app/src/main/res/values/strings.xml",
         "patchSetId": 1
@@ -65,6 +101,24 @@
       "writtenOn": "2026-01-29T03:20:24Z",
       "side": 1,
       "message": "can we make these not just not hardcode sourceforge here?",
+      "revId": "18888ffb6c263ed227e6456a0547f041092108d9",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9142a8cf_56526ca2",
+        "filename": "app/src/main/res/values/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-01-29T06:31:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "dcb49214_c3ae03d9",
       "revId": "18888ffb6c263ed227e6456a0547f041092108d9",
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
     }
