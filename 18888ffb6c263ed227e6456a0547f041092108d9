@@ -18,6 +18,24 @@
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a509755_7cfaa679",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-01-29T13:19:49Z",
+      "side": 1,
+      "message": "we will have to figure out how the other provider handles mirrors..",
+      "parentUuid": "b859298a_23b023ee",
+      "revId": "18888ffb6c263ed227e6456a0547f041092108d9",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "767b3e3c_888f7441",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "767b3e3c_888f7441",
+      "revId": "18888ffb6c263ed227e6456a0547f041092108d9",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2b8c006_644d2eaf",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/UpdaterController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-01-29T13:19:49Z",
+      "side": 1,
+      "message": "Marked as resolved.",
+      "parentUuid": "e594502b_ec6860ca",
       "revId": "18888ffb6c263ed227e6456a0547f041092108d9",
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
     },
@@ -88,6 +124,24 @@
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd2b7a37_7b91a641",
+        "filename": "app/src/main/res/layout/activity_updates.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-01-29T13:19:49Z",
+      "side": 1,
+      "message": "Marked as resolved.",
+      "parentUuid": "e407d826_2c3084c3",
+      "revId": "18888ffb6c263ed227e6456a0547f041092108d9",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcb49214_c3ae03d9",
@@ -119,6 +173,24 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "dcb49214_c3ae03d9",
+      "revId": "18888ffb6c263ed227e6456a0547f041092108d9",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d694fa0_1b70a642",
+        "filename": "app/src/main/res/values/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-01-29T13:19:49Z",
+      "side": 1,
+      "message": "Marked as resolved.",
+      "parentUuid": "9142a8cf_56526ca2",
       "revId": "18888ffb6c263ed227e6456a0547f041092108d9",
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
     }
