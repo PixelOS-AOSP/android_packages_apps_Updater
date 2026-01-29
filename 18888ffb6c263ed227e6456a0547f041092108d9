@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b859298a_23b023ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-01-29T03:20:24Z",
+      "side": 1,
+      "message": "Is it not possible to make it download provider agnostics? like let\u0027s say in future, we add more providers which is not just SourceForge.",
+      "revId": "18888ffb6c263ed227e6456a0547f041092108d9",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "767b3e3c_888f7441",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/UpdaterController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-01-29T03:20:24Z",
+      "side": 1,
+      "message": "Move these new changes to DownloadMirrorController instead? UpdaterController should have nothing to do with downloads.",
+      "revId": "18888ffb6c263ed227e6456a0547f041092108d9",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27b14b3a_ab30ecba",
+        "filename": "app/src/main/res/layout/activity_updates.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-01-29T03:20:24Z",
+      "side": 1,
+      "message": "Please no, move it to the settings within Updater instead. Probably we can have some sort of indicator or just the chip but not a chip that opens up the popup.",
+      "revId": "18888ffb6c263ed227e6456a0547f041092108d9",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcb49214_c3ae03d9",
+        "filename": "app/src/main/res/values/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-01-29T03:20:24Z",
+      "side": 1,
+      "message": "can we make these not just not hardcode sourceforge here?",
+      "revId": "18888ffb6c263ed227e6456a0547f041092108d9",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
