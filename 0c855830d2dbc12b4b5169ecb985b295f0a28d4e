@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f445ddc_3ae20e93",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-01-29T03:14:05Z",
+      "side": 1,
+      "message": "it\u0027s not a refactor",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 2
+      },
+      "revId": "0c855830d2dbc12b4b5169ecb985b295f0a28d4e",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7e419bd_2a2e5b05",
+        "filename": "app/src/main/res/layout/activity_updates.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-01-29T03:14:05Z",
+      "side": 1,
+      "message": "is there any reason for this to be exactly 56dp, else we can just make it 2/3rd of the primary button?",
+      "revId": "0c855830d2dbc12b4b5169ecb985b295f0a28d4e",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c3c474a_29bb9349",
+        "filename": "app/src/main/res/layout/activity_updates.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-01-29T03:14:05Z",
+      "side": 1,
+      "message": "add it to the layout instead.",
+      "revId": "0c855830d2dbc12b4b5169ecb985b295f0a28d4e",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
