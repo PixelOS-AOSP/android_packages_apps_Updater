@@ -16,6 +16,46 @@
       "message": "Can we add a detectMirror method which takes in the hostname? This helps to make sure we can add multiple mirrors apart from sf in future easier.\n\nOR\n\nSomething similar which can help add new mirrors in future.",
       "revId": "f7a91937bae17ca626aee7175af879f3bac5d9ea",
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e86fe6c0_031464db",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/DownloadMirrorController.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-01-30T03:31:57Z",
+      "side": 1,
+      "message": "Are those numbers intentional? What are these for? Can we do something better here?",
+      "range": {
+        "startLine": 81,
+        "startChar": 13,
+        "endLine": 92,
+        "endChar": 37
+      },
+      "revId": "f7a91937bae17ca626aee7175af879f3bac5d9ea",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d9f4cae_23a76048",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/DownloadMirrorController.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-01-30T03:31:57Z",
+      "side": 1,
+      "message": "Please lets not do this.",
+      "revId": "f7a91937bae17ca626aee7175af879f3bac5d9ea",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
     }
   ]
 }
