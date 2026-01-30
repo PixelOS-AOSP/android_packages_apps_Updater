@@ -36,6 +36,24 @@
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00405a30_2c071512",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-01-30T06:05:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "59b30095_fe7fcda6",
+      "revId": "f7a91937bae17ca626aee7175af879f3bac5d9ea",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e86fe6c0_031464db",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "it finds the index of the start of \"/projects/\", and then moves 10 chars to skip over that. Similarly for \"/files/\", but 6 instead of 7 to keep the leading \"/\"\n\nif the URL ends with /download, it subtracts 9 from the total length to remove that bit \n\nfrom the link \"https://sourceforge.net/projects/pixelos-releases/files/sixteen/sunny/PixelOS_sunny-16.1-20260128-1031.zip\", we parse \"pixelos-releases\" and \"/files/sixteen/sunny/PixelOS_sunny-16.1-20260128-1031.zip\"\n\nThe project name was hardcoded in the original commit.\n\n\nhttps://github.com/ProjectSakura/packages_apps_Updater/commit/1aadbfafad44daa25e6f3c366028303357e26c94#diff-e791d7499035cafc55a1416166fead5b9667264e94842024017e765812d7c860R23\n\nWe can do a regex match if you want.",
       "parentUuid": "e86fe6c0_031464db",
+      "range": {
+        "startLine": 81,
+        "startChar": 13,
+        "endLine": 92,
+        "endChar": 37
+      },
+      "revId": "f7a91937bae17ca626aee7175af879f3bac5d9ea",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdd000b0_4c05b978",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/DownloadMirrorController.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-01-30T06:05:31Z",
+      "side": 1,
+      "message": "lets go with regex then",
+      "parentUuid": "414c2023_70902c8a",
       "range": {
         "startLine": 81,
         "startChar": 13,
