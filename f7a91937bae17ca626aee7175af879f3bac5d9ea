@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43b27316_492aea37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-01-30T03:28:53Z",
+      "side": 1,
+      "message": "Can we add a detectMirror method which takes in the hostname? This helps to make sure we can add multiple mirrors apart from sf in future easier.\n\nOR\n\nSomething similar which can help add new mirrors in future.",
+      "revId": "f7a91937bae17ca626aee7175af879f3bac5d9ea",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
