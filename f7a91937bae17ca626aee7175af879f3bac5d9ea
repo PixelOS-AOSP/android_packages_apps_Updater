@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59b30095_fe7fcda6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-01-30T05:13:51Z",
+      "side": 1,
+      "message": "and, after doing that, the only available mirror would be SF. Isn\u0027t it better that we cross that bridge when we get to it",
+      "parentUuid": "43b27316_492aea37",
+      "revId": "f7a91937bae17ca626aee7175af879f3bac5d9ea",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e86fe6c0_031464db",
         "filename": "app/src/main/java/net/pixelos/ota/controller/DownloadMirrorController.java",
         "patchSetId": 3
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "414c2023_70902c8a",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/DownloadMirrorController.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-01-30T05:13:51Z",
+      "side": 1,
+      "message": "it finds the index of the start of \"/projects/\", and then moves 10 chars to skip over that. Similarly for \"/files/\", but 6 instead of 7 to keep the leading \"/\"\n\nif the URL ends with /download, it subtracts 9 from the total length to remove that bit \n\nfrom the link \"https://sourceforge.net/projects/pixelos-releases/files/sixteen/sunny/PixelOS_sunny-16.1-20260128-1031.zip\", we parse \"pixelos-releases\" and \"/files/sixteen/sunny/PixelOS_sunny-16.1-20260128-1031.zip\"\n\nThe project name was hardcoded in the original commit.\n\n\nhttps://github.com/ProjectSakura/packages_apps_Updater/commit/1aadbfafad44daa25e6f3c366028303357e26c94#diff-e791d7499035cafc55a1416166fead5b9667264e94842024017e765812d7c860R23\n\nWe can do a regex match if you want.",
+      "parentUuid": "e86fe6c0_031464db",
+      "range": {
+        "startLine": 81,
+        "startChar": 13,
+        "endLine": 92,
+        "endChar": 37
+      },
+      "revId": "f7a91937bae17ca626aee7175af879f3bac5d9ea",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d9f4cae_23a76048",
         "filename": "app/src/main/java/net/pixelos/ota/controller/DownloadMirrorController.java",
         "patchSetId": 3
@@ -54,6 +96,24 @@
       "writtenOn": "2026-01-30T03:31:57Z",
       "side": 1,
       "message": "Please lets not do this.",
+      "revId": "f7a91937bae17ca626aee7175af879f3bac5d9ea",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "028ca48c_6746c41e",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/DownloadMirrorController.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-01-30T05:13:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2d9f4cae_23a76048",
       "revId": "f7a91937bae17ca626aee7175af879f3bac5d9ea",
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
     }
