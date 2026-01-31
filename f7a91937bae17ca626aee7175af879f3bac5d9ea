@@ -125,6 +125,30 @@
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b69ccc20_11ca4b11",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/DownloadMirrorController.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-01-31T04:44:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdd000b0_4c05b978",
+      "range": {
+        "startLine": 81,
+        "startChar": 13,
+        "endLine": 92,
+        "endChar": 37
+      },
+      "revId": "f7a91937bae17ca626aee7175af879f3bac5d9ea",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d9f4cae_23a76048",
@@ -156,6 +180,24 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "2d9f4cae_23a76048",
+      "revId": "f7a91937bae17ca626aee7175af879f3bac5d9ea",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7abb0c65_1e5a43ad",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/DownloadMirrorController.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-01-31T04:44:04Z",
+      "side": 1,
+      "message": "Removed \"ping\" [ie. RTT] based ranking because in my testing I found that the RTT did not matter, many times a higher RTT server gave faster DL speeds than lower RTT.",
+      "parentUuid": "028ca48c_6746c41e",
       "revId": "f7a91937bae17ca626aee7175af879f3bac5d9ea",
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
     }
