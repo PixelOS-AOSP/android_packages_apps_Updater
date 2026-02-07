@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c663b822_598c7f83",
+        "filename": "app/src/main/res/xml/preferences.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-02-07T03:55:12Z",
+      "side": 1,
+      "message": "Move to the end.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 25
+      },
+      "revId": "064c04b887bef62b605c84bf1d05c65ca9ec6a29",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
