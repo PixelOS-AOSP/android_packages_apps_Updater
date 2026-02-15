@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7618a172_167f5be2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-02-15T09:13:49Z",
+      "side": 1,
+      "message": "not a big fan of the change, but it looks fine to me.",
+      "revId": "064c04b887bef62b605c84bf1d05c65ca9ec6a29",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c663b822_598c7f83",
