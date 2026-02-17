@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab392202_c815e851",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-02-17T17:43:58Z",
+      "side": 1,
+      "message": "Did all the testings, works fine. Works as expected on vAB devices, \n\n- Stream OTA works\n- Disabling Stream OTA gracefully switches to Downloading and Installing",
+      "revId": "013213267b779b48b49837233d438b7588154b91",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
