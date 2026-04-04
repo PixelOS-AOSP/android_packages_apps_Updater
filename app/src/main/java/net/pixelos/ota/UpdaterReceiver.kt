@@ -29,6 +29,7 @@ import androidx.preference.PreferenceManager
 import net.pixelos.ota.controller.UpdaterService
 import net.pixelos.ota.misc.Constants
 import net.pixelos.ota.misc.StringGenerator.getDateLocalizedUTC
+import net.pixelos.ota.misc.Utils
 import java.text.DateFormat
 
 class UpdaterReceiver : BroadcastReceiver() {
@@ -37,6 +38,7 @@ class UpdaterReceiver : BroadcastReceiver() {
             val pm = context.getSystemService(PowerManager::class.java)!!
             pm.reboot(null)
         } else if (Intent.ACTION_BOOT_COMPLETED == intent.action) {
+            Utils.removeUncryptFiles(Utils.getDownloadPath(context))
             val pref = PreferenceManager.getDefaultSharedPreferences(context)
             val downloadId = pref.getString(Constants.PREF_NEEDS_REBOOT_ID, null)
             pref.edit().remove(Constants.PREF_NEEDS_REBOOT_ID).apply()

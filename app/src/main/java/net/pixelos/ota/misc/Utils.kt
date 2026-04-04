@@ -267,7 +267,8 @@ object Utils {
         throw IllegalArgumentException("The given entry was not found")
     }
 
-    private fun removeUncryptFiles(downloadPath: File) {
+    @JvmStatic
+    fun removeUncryptFiles(downloadPath: File) {
         val uncryptFiles: Array<File>? =
             downloadPath.listFiles { _: File?, name: String -> name.endsWith(Constants.UNCRYPT_FILE_EXT) }
         if (uncryptFiles == null) {
@@ -287,8 +288,6 @@ object Utils {
     fun cleanupDownloadsDir(context: Context) {
         val downloadPath: File = getDownloadPath(context)
         val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-
-        removeUncryptFiles(downloadPath)
 
         val buildTimestamp: Long = SystemProperties.getLong(Constants.PROP_BUILD_DATE, 0)
         val prevTimestamp: Long = preferences.getLong(Constants.PREF_INSTALL_OLD_TIMESTAMP, 0)
