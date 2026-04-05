@@ -366,7 +366,7 @@ class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
         mUpdateStatusLayout.isVisible = false
         mBottomAppBar.isVisible = false
         mUpdateStatus.setText(R.string.checking_for_update)
-        mCircularProgress.indicatorSize = 600
+        mCircularProgress.indicatorSize = 400
         mCircularProgress.animate().alpha(1f).start()
         mCircularProgress.show()
     }

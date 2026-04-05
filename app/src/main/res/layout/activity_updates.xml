@@ -114,12 +114,11 @@
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/updateRefreshProgress"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/Widget.Material3.CircularProgressIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:indeterminate="true"
-            app:trackCornerRadius="24dp"
-            app:trackThickness="12dp" />
+            android:indeterminate="true" />
     </FrameLayout>
 
     <com.google.android.material.bottomappbar.BottomAppBar
