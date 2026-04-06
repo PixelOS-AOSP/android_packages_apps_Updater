@@ -4,112 +4,196 @@
     android:id="@+id/mainContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:background="@color/background">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/background"
+        android:fitsSystemWindows="true"
+        app:liftOnScroll="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
+            style="?attr/collapsingToolbarLayoutLargeStyle"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
+            app:collapsedTitleGravity="center_vertical|end"
+            app:collapsedTitleTextAppearance="@style/TextAppearance.Material3.TitleLarge"
+            app:contentScrim="@color/background"
+            app:expandedTitleGravity="bottom|end"
+            app:expandedTitleMarginBottom="24dp"
+            app:expandedTitleMarginEnd="24dp"
+            app:expandedTitleMarginStart="24dp"
+            app:expandedTitleTextAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:title="@string/system_up_to_date"
+            app:titleCollapseMode="scale"
+            app:maxLines="3"
+            app:toolbarId="@+id/toolbar">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:navigationIconTint="?attr/colorOnSurface"
+                app:titleCentered="false" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="24dp"
-        android:orientation="vertical">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefresh"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:elevation="8dp">
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:paddingBottom="220dp">
 
-            <androidx.core.widget.NestedScrollView
-                android:id="@+id/nestedScrollView"
+            <LinearLayout
+                android:id="@+id/updateStatusLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="24dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="24dp">
 
-                <LinearLayout
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/updateInfoWarningCard"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.appbar.AppBarLayout
-                        android:id="@+id/appbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@android:color/transparent">
-
-                        <com.google.android.material.appbar.MaterialToolbar
-                            android:id="@+id/toolbar"
-                            android:layout_width="match_parent"
-                            android:layout_marginHorizontal="4dp"
-                            android:layout_height="wrap_content"
-                            app:menu="@menu/menu_toolbar">
-
-                            <ImageView
-                                android:id="@+id/updateIcon"
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:layout_gravity="center"
-                                android:contentDescription="@string/app_name"
-                                android:src="@drawable/ic_system_update"
-                                app:tint="?attr/colorPrimary" />
-
-                        </com.google.android.material.appbar.MaterialToolbar>
-
-                    </com.google.android.material.appbar.AppBarLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="?attr/colorErrorContainer"
+                    android:visibility="gone"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp">
 
                     <LinearLayout
-                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_marginHorizontal="24dp"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@string/snack_updates_check_failed"
+                            android:src="@drawable/ic_info"
+                            app:tint="?attr/colorOnErrorContainer" />
 
                         <TextView
-                            android:id="@+id/updateStatus"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/updateInfoWarning"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="@string/system_up_to_date"
-                            android:textAppearance="@style/TextAppearance.Material3.DisplaySmall.Emphasized"
-                            android:textColor="?attr/colorOnSurface" />
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:text="@string/snack_updates_check_failed"
+                            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                            android:textColor="?attr/colorOnErrorContainer" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                        <LinearLayout
-                            android:id="@+id/updateStatusLayout"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/currentBuildCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="?attr/colorSurfaceContainerLow"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:gravity="center_horizontal"
+                            android:text="@string/section_current_device"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
 
-                            <TextView
-                                android:id="@+id/updateInfoWarning"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="16dp"
-                                android:text="@string/snack_updates_check_failed"
-                                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-                                android:textColor="?attr/colorError"
-                                android:visibility="gone" />
-
-                            <include layout="@layout/build_info_layout" />
-
-                            <include layout="@layout/progress_info_layout" />
-
-                            <TextView
-                                android:id="@+id/changelogSection"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="16dp"
-                                android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
-
-                            <include layout="@layout/metered_card_warning_card" />
-                        </LinearLayout>
+                        <include layout="@layout/build_info_layout" />
                     </LinearLayout>
-                </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/progressCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="?attr/colorSurfaceContainerLow"
+                    android:visibility="gone"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/section_update_progress"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+
+                        <include layout="@layout/progress_info_layout" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/changelogCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="?attr/colorSurfaceContainerLow"
+                    android:visibility="gone"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/section_changelog"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+
+                        <TextView
+                            android:id="@+id/changelogSection"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <include layout="@layout/metered_card_warning_card" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <FrameLayout
         android:id="@+id/updateRefreshProgressContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="16dp"
         android:visibility="gone">
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
@@ -122,38 +206,48 @@
             app:trackThickness="12dp" />
     </FrameLayout>
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomAppBar"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/actionShelf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:contentInsetStart="0dp"
-        android:layout_gravity="bottom">
+        android:layout_gravity="bottom"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="?attr/colorSurfaceContainerHigh"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="8dp"
+        app:strokeWidth="0dp">
 
         <LinearLayout
-            android:paddingHorizontal="16dp"
+            android:id="@+id/actionShelfContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="8dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/secondaryButton"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/Widget.Material3Expressive.Button.OutlinedButton"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:minHeight="56dp"
                 android:text="@string/action_cancel"
                 android:textSize="16sp"
                 android:visibility="gone" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/primaryButton"
-                style="@style/Widget.Material3.Button.TonalButton"
+                style="@style/Widget.Material3Expressive.Button"
                 android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:backgroundTint="?colorPrimary"
+                android:layout_height="wrap_content"
+                android:minHeight="64dp"
                 android:text="@string/check_for_update"
-                android:textColor="?colorOnPrimary"
                 android:textSize="16sp" />
         </LinearLayout>
-    </com.google.android.material.bottomappbar.BottomAppBar>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
