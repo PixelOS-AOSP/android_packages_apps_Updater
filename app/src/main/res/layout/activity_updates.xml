@@ -38,22 +38,26 @@
                         <com.google.android.material.appbar.MaterialToolbar
                             android:id="@+id/toolbar"
                             android:layout_width="match_parent"
-                            android:layout_marginHorizontal="4dp"
                             android:layout_height="wrap_content"
-                            app:menu="@menu/menu_toolbar">
-
-                            <ImageView
-                                android:id="@+id/updateIcon"
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:layout_gravity="center"
-                                android:contentDescription="@string/app_name"
-                                android:src="@drawable/ic_system_update"
-                                app:tint="?attr/colorPrimary" />
-
-                        </com.google.android.material.appbar.MaterialToolbar>
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="8dp"
+                            android:minHeight="64dp"
+                            android:paddingHorizontal="8dp"
+                            android:title="@string/local_update_import"
+                            app:menu="@menu/menu_toolbar"
+                            app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge" />
 
                     </com.google.android.material.appbar.AppBarLayout>
+
+                    <ImageView
+                        android:id="@+id/updateIcon"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/ic_system_update"
+                        app:tint="?attr/colorPrimary" />
 
                     <LinearLayout
                         android:orientation="vertical"
