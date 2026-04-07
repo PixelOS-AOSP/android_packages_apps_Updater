@@ -38,9 +38,12 @@
                         <com.google.android.material.appbar.MaterialToolbar
                             android:id="@+id/toolbar"
                             android:layout_width="match_parent"
-                            android:layout_marginHorizontal="4dp"
                             android:layout_height="wrap_content"
-                            app:menu="@menu/menu_toolbar">
+                            android:layout_marginHorizontal="4dp"
+                            android:title="@string/local_update_import"
+                            app:menu="@menu/menu_toolbar"
+                            app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge"
+                            app:titleTextColor="?attr/colorOnSurface">
 
                             <ImageView
                                 android:id="@+id/updateIcon"

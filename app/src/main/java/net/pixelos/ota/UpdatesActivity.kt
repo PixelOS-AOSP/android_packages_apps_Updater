@@ -37,7 +37,6 @@ import android.os.PowerManager
 import android.text.format.Formatter
 import android.util.Log
 import android.util.TypedValue
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
@@ -185,17 +184,35 @@ class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
         setContentView(R.layout.activity_updates)
 
         setSupportActionBar(toolbar)
-        supportActionBar?.apply {
-            title = null
-            setDisplayHomeAsUpEnabled(true)
-        }
-
-
+        setupToolbar()
         setupHeaderProperties()
         updateLastCheckedString()
 
         setupSwipeRefresh()
         setupInsets()
+    }
+
+    private fun setupToolbar() {
+        supportActionBar?.title = getString(R.string.local_update_import)
+        toolbar.navigationIcon = getDrawable(R.drawable.ic_local_update)
+        toolbar.navigationContentDescription = getString(R.string.local_update_import)
+        toolbar.setNavigationOnClickListener { mUpdateImporter.openImportPicker() }
+        toolbar.setOnMenuItemClickListener { item ->
+            if (item.itemId == R.id.menu_preferences) {
+                startActivity(Intent(this, SettingsActivity::class.java))
+                true
+            } else {
+                false
+            }
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menu_preferences) {
+            startActivity(Intent(this, SettingsActivity::class.java))
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setupHeaderProperties() {
@@ -272,29 +289,6 @@ class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
             unbindService(mConnection)
         }
         super.onStop()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_toolbar, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val itemId: Int = item.itemId
-        if (itemId == R.id.menu_local_update) {
-            mUpdateImporter.openImportPicker()
-            return true
-        } else if (itemId == R.id.menu_preferences) {
-            val settingsActivity = Intent(this, SettingsActivity::class.java)
-            startActivity(settingsActivity)
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressedDispatcher.onBackPressed()
-        return true
     }
 
     override fun onActivityResult(
