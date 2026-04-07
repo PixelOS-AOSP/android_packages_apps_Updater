@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4004537_1d7510cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000090
+      },
+      "writtenOn": "2026-04-07T10:34:31Z",
+      "side": 1,
+      "message": "Looks like this https://t.me/XAGASupport/798137",
+      "revId": "d1faff9ad8121a7a371b52145c2468d5de07c3ab",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
