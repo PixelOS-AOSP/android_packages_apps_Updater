@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf8f953f_f4f6e3db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000090
+      },
+      "writtenOn": "2026-04-07T12:55:42Z",
+      "side": 1,
+      "message": "These were the warning i got from soong \n```\n[ 77% 83/107 2m11s remaining] //packages/apps/Updater/app:Updater kotlinc\npackages/apps/Updater/app/src/main/java/net/pixelos/ota/PackageInstallerStatusReceiver.kt:29:49: warning: \u0027fun \u003cT : Parcelable!\u003e getParcelableExtra(p0: String!): T?\u0027 is deprecated. Deprecated in Java.\n                val confirmationIntent \u003d intent.getParcelableExtra\u003cIntent\u003e(Intent.EXTRA_INTENT)\n                                                ^^^^^^^^^^^^^^^^^^\npackages/apps/Updater/app/src/main/java/net/pixelos/ota/SettingsActivity.kt:73:37: warning: this annotation is currently applied to the value parameter only, but in the future it will also be applied to field.\n- To opt in to applying to both value parameter and field, add \u0027-Xannotation-default-target\u003dparam-property\u0027 to your compiler arguments.\n- To keep applying to the value parameter only, use the \u0027@param:\u0027 annotation target.\n\nSee https://youtrack.jetbrains.com/issue/KT-73255 for more details.\n    abstract class SettingsFragment(@XmlRes private val preferencesResId: Int) :\n                                    ^^^^^^^\npackages/apps/Updater/app/src/main/java/net/pixelos/ota/UpdatesActivity.kt:55:8: warning: \u0027class LocalBroadcastManager : Any\u0027 is deprecated. Deprecated in Java.\nimport androidx.localbroadcastmanager.content.LocalBroadcastManager\n       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\npackages/apps/Updater/app/src/main/java/net/pixelos/ota/UpdatesActivity.kt:256:9: warning: \u0027class LocalBroadcastManager : Any\u0027 is deprecated. Deprecated in Java.\n        LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, intentFilter)\n        ^^^^^^^^^^^^^^^^^^^^^\npackages/apps/Updater/app/src/main/java/net/pixelos/ota/UpdatesActivity.kt:270:9: warning: \u0027class LocalBroadcastManager : Any\u0027 is deprecated. Deprecated in Java.\n        LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver)\n        ^^^^^^^^^^^^^^^^^^^^^\n```",
+      "revId": "f07e445c9e14e3aa87a780ff8e666c1ca14aca60",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
