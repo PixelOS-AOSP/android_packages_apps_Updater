@@ -35,23 +35,29 @@
                         android:layout_marginTop="8dp"
                         android:background="@android:color/transparent">
 
-                        <com.google.android.material.appbar.MaterialToolbar
-                            android:id="@+id/toolbar"
+                        <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_marginHorizontal="4dp"
                             android:layout_height="wrap_content"
-                            app:menu="@menu/menu_toolbar">
+                            android:layout_marginHorizontal="4dp">
+
+                            <com.google.android.material.appbar.MaterialToolbar
+                                android:id="@+id/toolbar"
+                                android:layout_width="match_parent"
+                                android:layout_height="?attr/actionBarSize"
+                                app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge"
+                                app:titleTextColor="?attr/colorOnSurface" />
 
                             <ImageView
                                 android:id="@+id/updateIcon"
                                 android:layout_width="48dp"
                                 android:layout_height="48dp"
-                                android:layout_gravity="center"
+                                android:layout_gravity="center_horizontal|bottom"
+                                android:layout_marginBottom="-12dp"
                                 android:contentDescription="@string/app_name"
                                 android:src="@drawable/ic_system_update"
                                 app:tint="?attr/colorPrimary" />
 
-                        </com.google.android.material.appbar.MaterialToolbar>
+                        </FrameLayout>
 
                     </com.google.android.material.appbar.AppBarLayout>
 
