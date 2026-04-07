@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffcdfc9c_c77bd54a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000090
+      },
+      "writtenOn": "2026-04-07T13:06:19Z",
+      "side": 1,
+      "message": "just noticed there was this [commit](https://github.com/PixelOS-AOSP/android_packages_apps_Updater/commit/e4d85e4f37cc0d632cf974112ac2ad9bee89bddb)\nand the same issue is still present well this change fixes it anyway :)",
+      "revId": "c1398545317f8c45dc4a51c571fa625e0e41bc3c",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
