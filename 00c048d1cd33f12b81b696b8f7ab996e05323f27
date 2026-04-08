@@ -16,6 +16,24 @@
       "message": "just curious, did you face this issue specifically on OnePlus devices or others as well?",
       "revId": "00c048d1cd33f12b81b696b8f7ab996e05323f27",
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a75c0b6_e8c93091",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000090
+      },
+      "writtenOn": "2026-04-08T14:48:08Z",
+      "side": 1,
+      "message": "I only use pixelos on my xaga(aka Redmi k50i) where I faced this issue",
+      "parentUuid": "1e1b9c78_c3e5b98c",
+      "revId": "00c048d1cd33f12b81b696b8f7ab996e05323f27",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
     }
   ]
 }
