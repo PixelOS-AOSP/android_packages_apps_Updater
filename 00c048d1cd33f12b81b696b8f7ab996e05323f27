@@ -34,6 +34,24 @@
       "parentUuid": "1e1b9c78_c3e5b98c",
       "revId": "00c048d1cd33f12b81b696b8f7ab996e05323f27",
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c2ef022_bb6bdc55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-08T15:19:52Z",
+      "side": 1,
+      "message": "@info.hridayaprajapati@gmail.com I have faced the issue as well. I will test this patch and drop my review",
+      "parentUuid": "5a75c0b6_e8c93091",
+      "revId": "00c048d1cd33f12b81b696b8f7ab996e05323f27",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
     }
   ]
 }
