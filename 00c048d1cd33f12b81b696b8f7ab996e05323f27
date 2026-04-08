@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e1b9c78_c3e5b98c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-04-08T14:32:49Z",
+      "side": 1,
+      "message": "just curious, did you face this issue specifically on OnePlus devices or others as well?",
+      "revId": "00c048d1cd33f12b81b696b8f7ab996e05323f27",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
