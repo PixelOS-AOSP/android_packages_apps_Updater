@@ -150,7 +150,7 @@ class UpdateImporter(private val activity: Activity, private val callbacks: Call
 
     private fun addUpdate(update: Update) {
         val controller = UpdaterController.getInstance(activity)
-        controller.addUpdate(update, false)
+        controller.addLocalUpdate(update)
     }
 
     private fun getTimeStamp(file: File): Long {

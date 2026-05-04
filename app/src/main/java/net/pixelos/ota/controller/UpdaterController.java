@@ -345,6 +345,12 @@ public class UpdaterController {
         return addUpdate(update, true);
     }
 
+    public void addLocalUpdate(Update update) {
+        update.setAvailableOnline(false);
+        mDownloads.put(update.getDownloadId(), new DownloadEntry(update));
+        mUpdatesDbHelper.addUpdateWithOnConflict(update, SQLiteDatabase.CONFLICT_REPLACE);
+    }
+
     public boolean addUpdate(final UpdateInfo updateInfo, boolean availableOnline) {
         Log.d(TAG, "Adding download: " + updateInfo.getDownloadId());
         if (mDownloads.containsKey(updateInfo.getDownloadId())) {
@@ -513,8 +519,7 @@ public class UpdaterController {
             update.setPersistentStatus(UpdateStatus.Persistent.UNKNOWN);
             deleteUpdateAsync(update);
 
-            final boolean isLocalUpdate = Update.LOCAL_ID.equals(downloadId);
-            if (!isLocalUpdate && !update.getAvailableOnline()) {
+            if (!update.getAvailableOnline()) {
                 Log.d(TAG, "Download no longer available online, removing");
                 mDownloads.remove(downloadId);
                 notifyUpdateDelete(downloadId);
