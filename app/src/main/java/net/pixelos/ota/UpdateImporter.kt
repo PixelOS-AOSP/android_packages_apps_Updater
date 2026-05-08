@@ -24,7 +24,6 @@ import android.net.Uri
 import android.os.RecoverySystem
 import android.util.Log
 import net.pixelos.ota.controller.UpdaterController
-import net.pixelos.ota.misc.StringGenerator
 import net.pixelos.ota.misc.Utils
 import net.pixelos.ota.model.Update
 import net.pixelos.ota.model.UpdateStatus
@@ -35,7 +34,6 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
 import java.nio.charset.StandardCharsets
-import java.text.DateFormat
 import java.util.zip.ZipFile
 
 class UpdateImporter(private val activity: Activity, private val callbacks: Callbacks) {
@@ -119,7 +117,6 @@ class UpdateImporter(private val activity: Activity, private val callbacks: Call
 
     private fun buildLocalUpdate(file: File): Update {
         val timeStamp = getTimeStamp(file)
-        val buildDate = StringGenerator.getDateLocalizedUTC(activity, DateFormat.MEDIUM, timeStamp)
         val name = activity.getString(R.string.local_update_import)
         val update = Update()
         update.availableOnline = false
@@ -130,7 +127,7 @@ class UpdateImporter(private val activity: Activity, private val callbacks: Call
         update.timestamp = timeStamp
         update.status = UpdateStatus.VERIFIED
         update.persistentStatus = UpdateStatus.Persistent.VERIFIED
-        update.version = String.format("%s (%s)", name, buildDate)
+        update.version = name
         return update
     }
 
