@@ -524,6 +524,26 @@ public class UpdaterController {
         }
     }
 
+    public void removeUpdate(String downloadId) {
+        Log.d(TAG, "Removing update: " + downloadId);
+        if (!mDownloads.containsKey(downloadId) || isDownloading(downloadId)) {
+            return;
+        }
+        DownloadEntry entry = mDownloads.get(downloadId);
+        if (entry != null) {
+            Update update = entry.mUpdate;
+            update.setStatus(UpdateStatus.DELETED);
+            update.setProgress(0);
+            update.setPersistentStatus(UpdateStatus.Persistent.UNKNOWN);
+            new Thread(
+                    () -> mUpdatesDbHelper.removeUpdate(update.getDownloadId()))
+                    .start();
+            mDownloads.remove(downloadId);
+            notifyUpdateDelete(downloadId);
+        }
+    }
+
+
     public List<UpdateInfo> getUpdates() {
         List<UpdateInfo> updates = new ArrayList<>();
         for (DownloadEntry entry : mDownloads.values()) {

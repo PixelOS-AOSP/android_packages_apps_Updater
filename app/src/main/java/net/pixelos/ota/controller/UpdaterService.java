@@ -599,6 +599,8 @@ public class UpdaterService extends Service {
         boolean isLocal = Update.LOCAL_ID.equals(downloadId);
         if (deleteUpdate || isLocal) {
             mUpdaterController.deleteUpdate(downloadId);
+        } else {
+            mUpdaterController.removeUpdate(downloadId);
         }
     }
 }
