@@ -592,13 +592,7 @@ public class UpdaterService extends Service {
 
         Log.d(TAG, "Post-reboot cleanup for: " + downloadId);
 
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean deleteUpdate = pref.getBoolean(Constants.PREF_AUTO_DELETE_UPDATES, false);
-
-        // Always delete local updates
-        boolean isLocal = Update.LOCAL_ID.equals(downloadId);
-        if (deleteUpdate || isLocal) {
-            mUpdaterController.deleteUpdate(downloadId);
-        }
+        // Always delete the update after a successful installation
+        mUpdaterController.deleteUpdate(downloadId);
     }
 }
