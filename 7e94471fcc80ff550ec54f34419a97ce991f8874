@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "779d0374_6003741c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-05-28T04:16:38Z",
+      "side": 1,
+      "message": "Donot introduce a new function just for this, rather remove it when the update fails.",
+      "revId": "7e94471fcc80ff550ec54f34419a97ce991f8874",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
