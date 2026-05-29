@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39072d30_fe89d7ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-05-29T07:35:34Z",
+      "side": 1,
+      "message": "Provide a better description, something like \"We don\u0027t have option for keeping updates even after installation making the preference unrequired unlike previous setup where we had option to keep the update file even after the successful installation.....\"",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 1
+      },
+      "revId": "c9012f6dea7f3fec4c9b187a6894e5e81b9f5c3b",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0decf410_22d67b3a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
