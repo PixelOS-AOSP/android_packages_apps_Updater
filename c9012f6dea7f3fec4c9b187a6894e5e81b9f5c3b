@@ -24,6 +24,30 @@
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cc7b488_9966ce84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000090
+      },
+      "writtenOn": "2026-05-29T18:16:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39072d30_fe89d7ad",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 1
+      },
+      "revId": "c9012f6dea7f3fec4c9b187a6894e5e81b9f5c3b",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0decf410_22d67b3a",
@@ -37,6 +61,24 @@
       "writtenOn": "2026-05-29T07:32:56Z",
       "side": 1,
       "message": "We can remove the const as whole since it\u0027s not used anywhere else.",
+      "revId": "c9012f6dea7f3fec4c9b187a6894e5e81b9f5c3b",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "049236e3_8071f10a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000090
+      },
+      "writtenOn": "2026-05-29T18:16:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0decf410_22d67b3a",
       "revId": "c9012f6dea7f3fec4c9b187a6894e5e81b9f5c3b",
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
     }
