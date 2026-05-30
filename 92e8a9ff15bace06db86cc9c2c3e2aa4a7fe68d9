@@ -16,6 +16,24 @@
       "message": "Everything except the commit message looks good to me",
       "revId": "92e8a9ff15bace06db86cc9c2c3e2aa4a7fe68d9",
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e3da206_5adfb798",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000090
+      },
+      "writtenOn": "2026-05-30T12:31:58Z",
+      "side": 1,
+      "message": "same here man :)",
+      "parentUuid": "018d0ba3_ce0f90c3",
+      "revId": "92e8a9ff15bace06db86cc9c2c3e2aa4a7fe68d9",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
     }
   ]
 }
