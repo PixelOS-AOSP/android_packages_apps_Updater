@@ -347,6 +347,16 @@ class UpdatesActivity : AppCompatActivity(), UpdateImporter.Callbacks {
         // where progress updates arrive before the UI is ready
         updateUI(update.downloadId)
 
+        if (!canInstall(update)) {
+            showUpdateInfo(R.string.snack_update_not_installable)
+            MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.local_update_import)
+                .setMessage(R.string.snack_update_not_installable)
+                .setPositiveButton(android.R.string.ok, null)
+                .show()
+            return
+        }
+
         val deleteUpdate = Runnable {
             UpdaterController.getInstance(this).deleteUpdate(update.downloadId)
         }
