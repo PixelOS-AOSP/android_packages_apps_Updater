@@ -206,6 +206,10 @@ public class UpdaterService extends Service {
                 Log.e(TAG, "Update not found: " + downloadId);
                 return START_NOT_STICKY;
             }
+            if (!Utils.canInstall(update)) {
+                Log.e(TAG, "Update blocked: " + downloadId);
+                return START_NOT_STICKY;
+            }
             if (update.getPersistentStatus() != UpdateStatus.Persistent.VERIFIED) {
                 throw new IllegalArgumentException(update.getDownloadId() + " is not verified");
             }
