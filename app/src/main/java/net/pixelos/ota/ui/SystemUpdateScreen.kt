@@ -30,7 +30,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.SystemUpdate
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -52,8 +51,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.font.DeviceFontFamilyName
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.core.net.toUri
 import com.android.settingslib.spa.debug.UiModePreviews
@@ -70,7 +73,7 @@ import java.util.Date
 
 private val ContentMaxWidth = 560.dp
 private val HorizontalPadding = 24.dp
-private val IconSize = 40.dp
+private val IconSize = 48.dp
 private val ButtonHeight = 56.dp
 
 @Composable
@@ -92,7 +95,7 @@ fun SystemUpdateScreen(
 ) {
     Scaffold(
         modifier = modifier.fillMaxSize(),
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = MaterialTheme.colorScheme.surfaceContainer,
         topBar = {
             SystemUpdateTopBar(
                 onBackClick = onBackClick,
@@ -371,10 +374,16 @@ private fun ScreenHeader(headline: String) {
     Text(
         text = headline,
         style = MaterialTheme.typography.displaySmall,
+        fontFamily = FontFamily(
+            Font(
+                familyName = DeviceFontFamilyName("variable-display-small-emphasized"),
+                weight = FontWeight.Medium,
+            ),
+        ),
         color = MaterialTheme.colorScheme.onSurface,
         modifier = Modifier.padding(
             start = HorizontalPadding,
-            top = 40.dp,
+            top = 20.dp,
             end = HorizontalPadding,
         ),
     )
@@ -395,14 +404,14 @@ private fun SystemUpdateTopBar(
         modifier = Modifier
             .fillMaxWidth()
             .statusBarsPadding()
-            .padding(horizontal = 8.dp, vertical = 8.dp),
+            .padding(horizontal = HorizontalPadding, vertical = 8.dp),
     ) {
         FilledTonalIconButton(
             onClick = onBackClick,
             modifier = Modifier.align(Alignment.CenterStart),
             colors = IconButtonDefaults.filledTonalIconButtonColors(
-                containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                contentColor = MaterialTheme.colorScheme.onSurface,
+                containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+                contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
             ),
         ) {
             Icon(
@@ -412,20 +421,20 @@ private fun SystemUpdateTopBar(
         }
 
         Icon(
-            imageVector = Icons.Outlined.SystemUpdate,
+            painter = painterResource(R.drawable.ic_system_update),
             contentDescription = null,
             modifier = Modifier
                 .align(Alignment.Center)
                 .size(IconSize),
-            tint = MaterialTheme.colorScheme.onSurface,
+            tint = MaterialTheme.colorScheme.primary,
         )
 
         Box(modifier = Modifier.align(Alignment.CenterEnd)) {
             FilledTonalIconButton(
                 onClick = { menuExpanded = true },
                 colors = IconButtonDefaults.filledTonalIconButtonColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                    contentColor = MaterialTheme.colorScheme.onSurface,
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
                 ),
             ) {
                 Icon(
