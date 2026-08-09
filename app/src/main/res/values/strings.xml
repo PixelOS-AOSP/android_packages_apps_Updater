@@ -130,6 +130,18 @@
     <string name="menu_update_recovery">Update recovery</string>
     <string name="menu_update_recovery_summary">Update recovery partition along with the OS</string>
 
+    <!-- Developer options -->
+    <string name="pref_category_developer_options">Developer options</string>
+    <string name="developer_update_feed_url">Update feed URL</string>
+    <string name="developer_changelog_url">Changelog URL</string>
+    <string name="developer_certified_props_url">Certified properties APK URL</string>
+    <string name="developer_url_default_summary">Using the PixelOS default</string>
+    <string name="developer_url_dialog_message">Enter an absolute HTTPS URL. Leave the field empty to use the PixelOS default. Optional variables: {branch}, {device}, and {type}.</string>
+    <string name="developer_url_hint">HTTPS URL</string>
+    <string name="developer_url_invalid">Enter a valid HTTPS URL without embedded credentials or unsupported variables.</string>
+    <string name="developer_url_use_default">Use default</string>
+    <string name="developer_url_save">Save</string>
+
     <string name="play_integrity_header">Play Integrity</string>
     <string name="text_download_size_unknown">Unknown</string>
     <string name="certified_prop_overlay_name" translatable="false">net.pixelos.certifiedprops.overlay</string>
