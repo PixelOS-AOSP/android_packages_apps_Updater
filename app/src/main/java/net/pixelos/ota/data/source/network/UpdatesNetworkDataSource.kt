@@ -4,44 +4,24 @@
  */
 package net.pixelos.ota.data.source.network
 
-import android.content.Context
 import kotlinx.serialization.json.Json
+import net.pixelos.ota.data.UpdateEndpointProvider
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import net.pixelos.ota.R
-import net.pixelos.ota.deviceinfo.DeviceInfoUtils
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
-class UpdatesNetworkDataSource(private val context: Context) {
-    private val serverUrl: String
-        get() {
-            val base = context.getString(R.string.updater_server_url)
-            require(base.startsWith("https://")) {
-                "Update server URL must use HTTPS: $base"
-            }
-            require(DeviceInfoUtils.device.isNotBlank()) {
-                "Missing ro.custom.device"
-            }
-            require(DeviceInfoUtils.otaBranch.isNotBlank()) {
-                "Missing net.pixelos.version"
-            }
-            require(DeviceInfoUtils.buildType.isNotBlank()) {
-                "Missing net.pixelos.build_type"
-            }
-            return base
-                .replace("{device}", DeviceInfoUtils.device)
-                .replace("{branch}", DeviceInfoUtils.otaBranch)
-        }
-
+class UpdatesNetworkDataSource(
+    private val updateEndpointProvider: UpdateEndpointProvider,
+) {
     private val client = OkHttpClient.Builder()
         .callTimeout(10, TimeUnit.SECONDS)
         .followRedirects(false)
         .build()
 
-    fun fetchUpdates(): List<NetworkUpdate> {
+    suspend fun fetchUpdates(): List<NetworkUpdate> {
         val request = Request.Builder()
-            .url(serverUrl)
+            .url(updateEndpointProvider.updateFeedUrl())
             .build()
 
         val responseBody = client.newCall(request).execute().use { response ->
