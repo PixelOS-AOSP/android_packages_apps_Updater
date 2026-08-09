@@ -116,9 +116,7 @@ class UpdatesViewModel(
     }
 
     private fun loadChangelog() {
-        if (changelogJob?.isActive == true ||
-            _uiState.value.changelogState is ChangelogState.Loaded
-        ) {
+        if (changelogJob?.isActive == true) {
             return
         }
         changelogJob = viewModelScope.launch {
