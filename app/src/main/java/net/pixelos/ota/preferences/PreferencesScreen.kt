@@ -201,6 +201,8 @@ private fun PreferencesContent(
     }
 
     CertifiedPropsPreferences(certifiedPropsRepository, coroutineScope)
+
+    DeveloperOptions(repository = repository, showCertifiedProps = true)
 }
 
 @Composable
