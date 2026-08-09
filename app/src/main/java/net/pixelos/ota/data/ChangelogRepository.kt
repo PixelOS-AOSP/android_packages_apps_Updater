@@ -5,11 +5,8 @@
 
 package net.pixelos.ota.data
 
-import android.content.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import net.pixelos.ota.R
-import net.pixelos.ota.deviceinfo.DeviceInfoUtils
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.IOException
@@ -22,7 +19,9 @@ sealed interface ChangelogState {
     data object Error : ChangelogState
 }
 
-class ChangelogRepository(private val context: Context) {
+class ChangelogRepository(
+    private val updateEndpointProvider: UpdateEndpointProvider,
+) {
     private val client = OkHttpClient.Builder()
         .callTimeout(10, TimeUnit.SECONDS)
         .followRedirects(false)
@@ -35,20 +34,10 @@ class ChangelogRepository(private val context: Context) {
     private var cachedMarkdown: String? = null
 
     suspend fun fetchChangelog(): String = withContext(Dispatchers.IO) {
-        val device = DeviceInfoUtils.device
-        val branch = DeviceInfoUtils.otaBranch
-        require(device.isNotBlank()) { "Missing ro.custom.device" }
-        require(branch.isNotBlank()) { "Missing net.pixelos.version" }
-
-        val key = "$branch/$device"
-        if (cachedKey == key) {
+        val url = updateEndpointProvider.changelogUrl()
+        if (cachedKey == url) {
             cachedMarkdown?.let { return@withContext it }
         }
-
-        val url = context.getString(R.string.changelog_url)
-            .replace("{branch}", branch)
-            .replace("{device}", device)
-        require(url.startsWith("https://")) { "Changelog URL must use HTTPS" }
 
         val markdown = client.newCall(Request.Builder().url(url).build()).execute().use { response ->
             if (!response.isSuccessful) {
@@ -66,7 +55,7 @@ class ChangelogRepository(private val context: Context) {
             bytes.decodeToString().trim()
         }
 
-        cachedKey = key
+        cachedKey = url
         cachedMarkdown = markdown
         markdown
     }
