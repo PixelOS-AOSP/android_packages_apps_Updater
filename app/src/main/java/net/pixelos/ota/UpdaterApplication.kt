@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import net.pixelos.ota.certifiedprops.CertifiedPropsRepository
 import net.pixelos.ota.data.AppStateRepository
 import net.pixelos.ota.data.ChangelogRepository
+import net.pixelos.ota.data.UpdateEndpointProvider
 import net.pixelos.ota.data.UpdatesRepository
 import net.pixelos.ota.data.UserPreferencesRepository
 import net.pixelos.ota.data.source.local.UpdatesDatabase
@@ -27,9 +28,11 @@ import net.pixelos.ota.util.NetworkMonitor
 class UpdaterApplication : Application() {
     private val coroutineScope = MainScope()
     private val database by lazy { UpdatesDatabase.getInstance(applicationContext) }
-    private val networkDataSource by lazy { UpdatesNetworkDataSource(applicationContext) }
+    private val updateEndpointProvider by lazy {
+        UpdateEndpointProvider(applicationContext, userPreferencesRepository)
+    }
+    private val networkDataSource by lazy { UpdatesNetworkDataSource(updateEndpointProvider) }
     private val localDataSource by lazy { UpdatesLocalDataSource(database.updateDao()) }
-
 
     val batteryMonitor by lazy {
         BatteryMonitor(applicationContext, coroutineScope, userPreferencesRepository)
@@ -37,8 +40,10 @@ class UpdaterApplication : Application() {
     val networkMonitor by lazy { NetworkMonitor(applicationContext, coroutineScope) }
     val notificationHelper by lazy { NotificationHelper(applicationContext) }
     val appStateRepository by lazy { AppStateRepository(applicationContext) }
-    val changelogRepository by lazy { ChangelogRepository(applicationContext) }
-    val certifiedPropsRepository by lazy { CertifiedPropsRepository(applicationContext) }
+    val changelogRepository by lazy { ChangelogRepository(updateEndpointProvider) }
+    val certifiedPropsRepository by lazy {
+        CertifiedPropsRepository(applicationContext, updateEndpointProvider)
+    }
     val userPreferencesRepository by lazy { UserPreferencesRepository(applicationContext) }
     val updatesRepository by lazy {
         UpdatesRepository(
