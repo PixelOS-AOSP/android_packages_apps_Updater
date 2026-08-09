@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.withContext
 import net.pixelos.ota.PackageInstallerStatusReceiver
 import net.pixelos.ota.R
-import net.pixelos.ota.deviceinfo.DeviceInfoUtils
+import net.pixelos.ota.data.UpdateEndpointProvider
 import net.pixelos.ota.download.APKDownloader
 import java.io.File
 import java.io.FileInputStream
@@ -52,7 +52,10 @@ sealed interface CertifiedPropsState {
     ) : CertifiedPropsState
 }
 
-class CertifiedPropsRepository(private val context: Context) {
+class CertifiedPropsRepository(
+    private val context: Context,
+    private val updateEndpointProvider: UpdateEndpointProvider,
+) {
     private val packageName = context.getString(R.string.certified_prop_overlay_name)
     private val apkPath = File(context.getExternalFilesDir(null), APK_FILE_NAME).absolutePath
 
@@ -74,8 +77,15 @@ class CertifiedPropsRepository(private val context: Context) {
         val file = File(apkPath)
         if (file.exists()) file.delete()
 
-        val url = context.getString(R.string.certified_prop_url)
-            .replace("{branch}", DeviceInfoUtils.otaBranch)
+        val url = try {
+            updateEndpointProvider.certifiedPropsUrl()
+        } catch (_: IllegalArgumentException) {
+            _state.value = CertifiedPropsState.Error(
+                installedVersion,
+                CertifiedPropsError.DOWNLOAD_FAILED,
+            )
+            return
+        }
         if (!APKDownloader.downloadApk(apkPath, url)) {
             _state.value = CertifiedPropsState.Error(
                 installedVersion,
