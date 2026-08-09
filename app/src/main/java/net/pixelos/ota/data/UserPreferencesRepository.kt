@@ -41,6 +41,10 @@ private object UserPreferencesKeys {
     val METERED_NETWORK_WARNING = booleanPreferencesKey("metered_network_warning")
     val PERIODIC_CHECK_ENABLED = booleanPreferencesKey("periodic_check_enabled")
     val STREAM_UPDATES = booleanPreferencesKey("stream_updates")
+    val UPDATE_FEED_URL_OVERRIDE = stringPreferencesKey("update_feed_url_override")
+    val CHANGELOG_URL_OVERRIDE = stringPreferencesKey("changelog_url_override")
+    val CERTIFIED_PROPS_URL_OVERRIDE =
+        stringPreferencesKey("certified_props_url_override")
     val LEGACY_PREFERENCES_MIGRATED = booleanPreferencesKey("legacy_preferences_migrated")
 }
 
@@ -181,6 +185,49 @@ class UserPreferencesRepository(context: Context) {
 
     suspend fun setStreamUpdates(value: Boolean) {
         userPreferences.edit { it[UserPreferencesKeys.STREAM_UPDATES] = value }
+    }
+
+    val updateFeedUrlOverrideFlow: Flow<String> = userPreferencesFlow.map { preferences ->
+        preferences[UserPreferencesKeys.UPDATE_FEED_URL_OVERRIDE].orEmpty()
+    }
+
+    suspend fun getUpdateFeedUrlOverride(): String = updateFeedUrlOverrideFlow.first()
+
+    suspend fun setUpdateFeedUrlOverride(value: String) {
+        setUrlOverride(UserPreferencesKeys.UPDATE_FEED_URL_OVERRIDE, value)
+    }
+
+    val changelogUrlOverrideFlow: Flow<String> = userPreferencesFlow.map { preferences ->
+        preferences[UserPreferencesKeys.CHANGELOG_URL_OVERRIDE].orEmpty()
+    }
+
+    suspend fun getChangelogUrlOverride(): String = changelogUrlOverrideFlow.first()
+
+    suspend fun setChangelogUrlOverride(value: String) {
+        setUrlOverride(UserPreferencesKeys.CHANGELOG_URL_OVERRIDE, value)
+    }
+
+    val certifiedPropsUrlOverrideFlow: Flow<String> =
+        userPreferencesFlow.map { preferences ->
+            preferences[UserPreferencesKeys.CERTIFIED_PROPS_URL_OVERRIDE].orEmpty()
+        }
+
+    suspend fun getCertifiedPropsUrlOverride(): String =
+        certifiedPropsUrlOverrideFlow.first()
+
+    suspend fun setCertifiedPropsUrlOverride(value: String) {
+        setUrlOverride(UserPreferencesKeys.CERTIFIED_PROPS_URL_OVERRIDE, value)
+    }
+
+    private suspend fun setUrlOverride(key: Preferences.Key<String>, value: String) {
+        userPreferences.edit { preferences ->
+            val normalized = value.trim()
+            if (normalized.isEmpty()) {
+                preferences.remove(key)
+            } else {
+                preferences[key] = normalized
+            }
+        }
     }
 
     fun getRecoveryUpdateEnabled(): Boolean = DeviceInfoUtils.isRecoveryUpdateEnabled
