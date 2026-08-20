@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19adc04a_2e99a390",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-08-20T07:36:18Z",
+      "side": 1,
+      "message": "move fonts related stuffs to some Typography.kt",
+      "revId": "8adb2c3cbaf2650442b5066132465d23a3bd359c",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
