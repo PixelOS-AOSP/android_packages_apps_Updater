@@ -22,6 +22,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.progressindicator.CircularProgressIndicator;
+
 import net.pixelos.ota.controller.UpdaterController;
 import net.pixelos.ota.controller.UpdaterService;
 import net.pixelos.ota.data.Update;
@@ -146,6 +148,13 @@ public class UpdatesActivity extends UpdatesScaffoldActivity implements UpdateIm
                 .create();
 
         importDialog.show();
+
+        CircularProgressIndicator progressBar =
+                importDialog.findViewById(R.id.progressBar);
+        if (progressBar != null) {
+            progressBar.setIndicatorColor(getDynamicPrimaryColor());
+            progressBar.setTrackColor(getDynamicTrackColor());
+        }
     }
 
     @Override

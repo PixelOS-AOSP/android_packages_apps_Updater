@@ -6,11 +6,15 @@
 package net.pixelos.ota
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
@@ -19,6 +23,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.android.settingslib.spa.framework.compose.LocalNavController
@@ -83,6 +88,19 @@ abstract class UpdatesScaffoldActivity : ComponentActivity() {
     protected fun setUpdaterController(controller: UpdaterController?) {
         activeUpdaterController = controller
         notifyControllerStateChanged()
+    }
+
+    protected fun getDynamicPrimaryColor(): Int =
+        dynamicColorScheme().primary.toArgb()
+
+    protected fun getDynamicTrackColor(): Int =
+        dynamicColorScheme().surfaceContainerHighest.toArgb()
+
+    private fun dynamicColorScheme(): ColorScheme {
+        val dark =
+            (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
+                Configuration.UI_MODE_NIGHT_YES
+        return if (dark) dynamicDarkColorScheme(this) else dynamicLightColorScheme(this)
     }
 
     protected fun notifyControllerStateChanged() {
