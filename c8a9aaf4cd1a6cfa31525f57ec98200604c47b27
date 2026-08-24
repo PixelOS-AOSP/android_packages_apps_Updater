@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "076c1f9c_ecdea30a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-08-24T07:06:50Z",
+      "side": 1,
+      "message": "Remove XML, move to Compose.",
+      "revId": "c8a9aaf4cd1a6cfa31525f57ec98200604c47b27",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
