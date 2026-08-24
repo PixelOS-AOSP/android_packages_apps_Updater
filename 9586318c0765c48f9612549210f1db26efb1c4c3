@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a09bd864_60ffa9d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-08-24T07:46:50Z",
+      "side": 1,
+      "message": "Make the progress dialog in itself a generic one is what I meant.",
+      "revId": "9586318c0765c48f9612549210f1db26efb1c4c3",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
