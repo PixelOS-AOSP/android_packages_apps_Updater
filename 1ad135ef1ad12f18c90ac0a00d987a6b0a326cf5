@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d86dfb80_c9a6538c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-08-24T07:36:21Z",
+      "side": 1,
+      "message": "Make it more generic",
+      "revId": "1ad135ef1ad12f18c90ac0a00d987a6b0a326cf5",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
