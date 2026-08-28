@@ -16,6 +16,23 @@
       "message": "lgtm",
       "revId": "7a2720aa3d292800eed5f503aca9d01a842cd379",
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "403cc6e3_ef17b548",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-08-28T10:18:31Z",
+      "side": 1,
+      "message": "move app/src/main/java/net/pixelos/ota/ui/IndeterminateProgressDialog.kt to app/src/main/java/net/pixelos/ota/ui/common/\n\nRename IndeterminateProgressDialog to ProgressDialog",
+      "revId": "7a2720aa3d292800eed5f503aca9d01a842cd379",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
     }
   ]
 }
