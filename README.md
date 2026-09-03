@@ -121,28 +121,9 @@ The runtime contract is:
 
 The response body is capped at 1 MiB, redirects are disabled, and a non-successful HTTP response,
 invalid JSON, or any invalid entry rejects the whole response. Unknown JSON fields are ignored by
-the app for forward compatibility; the publication validator below rejects them to catch mistakes,
-except for `additional_images`.
+the app for forward compatibility, except for `additional_images`.
 When a valid feed no longer contains an online update, the stale online row and its temporary file
 are removed while locally imported packages are preserved.
-
-### Generate and validate OTA JSON
-
-`tools/pixelos_feed.py` uses only the Python standard library. It reads authoritative values from
-the OTA ZIP and computes size and SHA-256 itself:
-
-```sh
-tools/pixelos_feed.py generate-ota PixelOS_device-17.0-build.zip \
-  --url https://downloads.example.org/device/PixelOS_device-17.0-build.zip \
-  --version 17.0 \
-  --output device.json
-
-tools/pixelos_feed.py validate-ota device.json \
-  --artifact PixelOS_device-17.0-build.zip
-```
-
-Run the validator in official-devices CI before publishing each JSON file. Artifact comparison
-checks filename, timestamp, patch level, SDK level, `ota_property_files`, size, and SHA-256.
 
 ## Device changelog
 
@@ -155,29 +136,6 @@ https://raw.githubusercontent.com/PixelOS-AOSP/official_devices/{branch}/API/upd
 The app shows explicit loading, empty, failure, and loaded states. Responses must be successful,
 must not redirect, and are capped at 256 KiB. A changelog is cached in memory by branch and device;
 the menu action opens the same current-device document in a browser.
-
-## Local developer package import
-
-`push-update.sh` registers a local full OTA on a rooted development device:
-
-```sh
-./push-update.sh PixelOS_device-17.0-build.zip [UNVERIFIED] [SERIAL]
-```
-
-The script accepts only `PixelOS_DEVICE-VERSION-*.zip`, verifies the connected
-`ro.custom.device`, validates OTA metadata through `tools/pixelos_feed.py`, computes SHA-256, checks
-for Room schema version 4 and duplicate IDs, fills the current database columns, and writes the
-package to `/data/system_updates`. Launch Updater once first so Room creates or migrates the
-database. This script is for local engineering devices; it is not a feed publication mechanism.
-
-## Verification
-
-Run the host-side metadata tests without an Android build:
-
-```sh
-python3 -m unittest discover -s tools/tests -v
-sh -n push-update.sh
-```
 
 ## Building with Android Studio
 
