@@ -159,7 +159,11 @@ class UpdateActionHandler(
 
             UpdateActionType.EXPORT -> exportUpdate(update)
 
-            UpdateActionType.VIEW_DOWNLOADS -> update.downloadUrl?.let { url ->
+            UpdateActionType.VIEW_DOWNLOADS -> {
+                val url = activity.getString(
+                    R.string.download_page_url,
+                    DeviceInfoUtils.device,
+                )
                 activity.startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
             }
 
