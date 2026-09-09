@@ -107,15 +107,18 @@ class ABUpdateInstaller {
         public void onPayloadApplicationComplete(int errorCode) {
             if (errorCode != UpdateEngine.ErrorCodeConstants.SUCCESS) {
                 installationDone(false);
-                if (mUpdaterController.fallbackIncrementalToFull(mDownloadId)) {
-                    return;
-                }
+                // Mark the failure before falling back, otherwise an incremental that
+                // cannot apply on this device stays eligible and gets picked again on
+                // every later attempt.
                 Update update = mUpdaterController.getUpdate(mDownloadId);
-                mUpdaterController.setUpdate(mDownloadId, update.toBuilder()
-                        .setInstallProgress(0)
-                        .setStatus(UpdateStatus.INSTALLATION_FAILED)
-                        .build());
+                if (update != null) {
+                    mUpdaterController.setUpdate(mDownloadId, update.toBuilder()
+                            .setInstallProgress(0)
+                            .setStatus(UpdateStatus.INSTALLATION_FAILED)
+                            .build());
+                }
                 mUpdaterController.notifyUpdateChange(mDownloadId);
+                mUpdaterController.fallbackIncrementalToFull(mDownloadId);
             }
         }
     };
