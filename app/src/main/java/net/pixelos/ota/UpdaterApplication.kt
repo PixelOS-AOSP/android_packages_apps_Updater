@@ -6,9 +6,11 @@
 package net.pixelos.ota
 
 import android.app.Application
+import android.util.Log
 import com.android.settingslib.spa.framework.common.SettingsPageProviderRepository
 import com.android.settingslib.spa.framework.common.SpaEnvironment
 import com.android.settingslib.spa.framework.common.SpaEnvironmentFactory
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import net.pixelos.ota.certifiedprops.CertifiedPropsRepository
@@ -24,8 +26,11 @@ import net.pixelos.ota.notifications.NotificationHelper
 import net.pixelos.ota.util.BatteryMonitor
 import net.pixelos.ota.util.NetworkMonitor
 
+private const val TAG = "UpdaterApplication"
+
 class UpdaterApplication : Application() {
     private val coroutineScope = MainScope()
+    private var updatesResyncJob: Job? = null
     private val database by lazy { UpdatesDatabase.getInstance(applicationContext) }
     private val networkDataSource by lazy { UpdatesNetworkDataSource(applicationContext) }
     private val localDataSource by lazy { UpdatesLocalDataSource(database.updateDao()) }
@@ -49,6 +54,24 @@ class UpdaterApplication : Application() {
             localDataSource = localDataSource,
             userPreferencesRepository = userPreferencesRepository,
         )
+    }
+
+    /**
+     * Re-syncs the update list from the feed. Used when the stored updates no longer
+     * describe what the server offers, such as an incremental left behind after its full
+     * package was cancelled. Fire-and-forget, and a no-op while a sync is already running.
+     */
+    fun requestUpdatesResync() {
+        if (updatesResyncJob?.isActive == true) {
+            return
+        }
+        updatesResyncJob = coroutineScope.launch {
+            try {
+                updatesRepository.fetchUpdates()
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to re-sync updates", e)
+            }
+        }
     }
 
     override fun onCreate() {

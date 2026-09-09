@@ -334,6 +334,34 @@ public class UpdaterController {
             mDownloads.remove(downloadId);
             notifyUpdateDelete(downloadId);
         }
+        resyncIfIncrementalOrphaned();
+    }
+
+    /**
+     * An incremental is only installable while the full package it falls back to is still
+     * around. Cancelling or deleting that full package drops its row, leaving an
+     * incremental that can never recover on its own, so pull the list from the feed again.
+     */
+    private void resyncIfIncrementalOrphaned() {
+        JSONObject links = getIncrementalLinks();
+        Iterator<String> fullIds = links.keys();
+        while (fullIds.hasNext()) {
+            String fullId = fullIds.next();
+            if (mDownloads.containsKey(fullId)) {
+                continue;
+            }
+            String deltaUrl = links.optString(fullId, null);
+            if (deltaUrl == null) {
+                continue;
+            }
+            for (DownloadEntry entry : mDownloads.values()) {
+                if (deltaUrl.equals(entry.mUpdate.getDownloadUrl())) {
+                    Log.d(TAG, "Incremental left without its full package, re-syncing");
+                    ((UpdaterApplication) mContext).requestUpdatesResync();
+                    return;
+                }
+            }
+        }
     }
 
     public boolean addUpdate(Update update) {
@@ -659,13 +687,20 @@ public class UpdaterController {
     }
 
     public String getDisplayUpdateId() {
+        String spentIncrementalFullId = null;
         for (DownloadEntry entry : mDownloads.values()) {
             Update delta = getIncrementalForFull(entry.mUpdate.getDownloadId());
-            if (delta != null && isDeltaUsable(delta)) {
+            if (delta == null) {
+                continue;
+            }
+            if (isDeltaUsable(delta)) {
                 return delta.getDownloadId();
             }
+            // The incremental is spent, so offer the full package it pairs with rather
+            // than leaving the choice to list order.
+            spentIncrementalFullId = entry.mUpdate.getDownloadId();
         }
-        return null;
+        return spentIncrementalFullId;
     }
 
     public boolean fallbackIncrementalToFull(String failedIncrementalId) {
