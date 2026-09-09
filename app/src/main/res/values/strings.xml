@@ -22,6 +22,8 @@
     <string name="updater_server_url" translatable="false">https://raw.githubusercontent.com/PixelOS-AOSP/official_devices/{branch}/API/updater/{device}.json</string>
     <string name="changelog_url" translatable="false">https://raw.githubusercontent.com/PixelOS-AOSP/official_devices/{branch}/API/updater/changelogs/{device}.md</string>
     <string name="certified_prop_url" translatable="false">https://raw.githubusercontent.com/PixelOS-AOSP/official_devices/{branch}/API/updater/CertifiedProps/certified_build_props.apk</string>
+    <!-- Downloads page for a device. %1$s is ro.custom.device. -->
+    <string name="download_page_url" translatable="false">https://pixelos.net/download/%1$s</string>
 
     <string name="verification_failed_notification">Verification failed</string>
     <string name="verifying_download_notification">Verifying update</string>
