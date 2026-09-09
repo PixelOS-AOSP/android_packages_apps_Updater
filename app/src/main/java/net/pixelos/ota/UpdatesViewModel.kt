@@ -15,7 +15,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import net.pixelos.ota.data.ChangelogState
@@ -57,6 +59,7 @@ class UpdatesViewModel(
     private val appStateRepository = updaterApplication.appStateRepository
     private val changelogRepository = updaterApplication.changelogRepository
     private val networkMonitor = updaterApplication.networkMonitor
+    private val userPreferencesRepository = updaterApplication.userPreferencesRepository
     private var changelogJob: Job? = null
 
     init {
@@ -81,6 +84,16 @@ class UpdatesViewModel(
                 .collect { networkState ->
                     _uiState.update { it.copy(isOnline = networkState.isOnline) }
                 }
+        }
+
+        // The stored updates are built from this preference, so the sizes and entries on
+        // screen only match it again after a re-sync. Drop the value the flow replays on
+        // collection, otherwise opening the screen would always trigger a fetch.
+        viewModelScope.launch {
+            userPreferencesRepository.incrementalUpdatesFlow
+                .distinctUntilChanged()
+                .drop(1)
+                .collect { fetchUpdates() }
         }
     }
 
