@@ -58,6 +58,9 @@ class UpdaterApplication : Application() {
         coroutineScope.launch {
             userPreferencesRepository.migrateLegacyPreferences()
         }
+        coroutineScope.launch {
+            updatesRepository.pruneInstalledUpdates()
+        }
         SpaEnvironmentFactory.reset(object : SpaEnvironment(applicationContext) {
             override val pageProviderRepository = lazy {
                 SettingsPageProviderRepository(emptyList())
