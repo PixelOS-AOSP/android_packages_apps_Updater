@@ -7,12 +7,16 @@ package net.pixelos.ota.controller;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
 
+import net.pixelos.ota.R;
 import net.pixelos.ota.UpdaterApplication;
 import net.pixelos.ota.data.Update;
 import net.pixelos.ota.data.UpdateStatus;
@@ -726,6 +730,10 @@ public class UpdaterController {
         if (full == null) {
             return false;
         }
+        // The install the user started was the small one. Say that it is now the whole
+        // package, since the size and the wait both change under them.
+        new Handler(Looper.getMainLooper()).post(() -> Toast.makeText(mContext,
+                R.string.toast_incremental_fallback, Toast.LENGTH_LONG).show());
         String fullId = full.getDownloadId();
         if (full.hasVerifiedPackage()) {
             ABUpdateInstaller.getInstance(mContext, this,

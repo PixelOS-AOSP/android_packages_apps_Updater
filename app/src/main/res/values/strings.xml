@@ -36,6 +36,7 @@
     <string name="download_switch_confirm_message">Another update is currently downloading. Starting this one will pause the other.</string>
     <string name="update_failed_notification">Update failed</string>
     <string name="incremental_update_failed_notification">Incremental update failed</string>
+    <string name="toast_incremental_fallback">Incremental update failed, installing the full update instead</string>
     <string name="installation_suspended_notification">Installation suspended</string>
 
     <string name="new_updates_found_title">New updates</string>
