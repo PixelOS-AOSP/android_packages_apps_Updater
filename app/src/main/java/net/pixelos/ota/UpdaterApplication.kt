@@ -81,6 +81,11 @@ class UpdaterApplication : Application() {
         coroutineScope.launch {
             userPreferencesRepository.migrateLegacyPreferences()
         }
+        coroutineScope.launch {
+            // The build only changes across a reboot, so this is the moment an update
+            // stops being an update and becomes the system the user is running.
+            updatesRepository.pruneInstalledUpdates()
+        }
         SpaEnvironmentFactory.reset(object : SpaEnvironment(applicationContext) {
             override val pageProviderRepository = lazy {
                 SettingsPageProviderRepository(emptyList())
