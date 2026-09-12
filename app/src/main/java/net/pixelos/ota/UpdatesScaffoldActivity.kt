@@ -170,6 +170,17 @@ private fun UpdatesScaffoldContent(
         }
     }
 
+    // A failed incremental is only a detour: the full package it pairs with still
+    // applies, and the app is already switching to it, so it reads nothing like a plain
+    // install failure.
+    val hasFailedIncremental = remember(liveUpdates, updaterController, controllerStateVersion) {
+        val controller = updaterController ?: return@remember false
+        liveUpdates.any {
+            it.status == UpdateStatus.INSTALLATION_FAILED &&
+                    controller.isIncremental(it.downloadId)
+        }
+    }
+
     val model = uiState.updatesCheckModel
     val checkUiState = rememberUpdatesCheckUiState(model.state)
     val isChecking = checkUiState.displayedState is UpdatesCheckState.Checking
@@ -188,15 +199,27 @@ private fun UpdatesScaffoldContent(
             displayedCheckState = checkUiState.displayedState,
             isPreparing = isPreparing,
             hasUpdateItems = updateItems.isNotEmpty(),
+            hasFailedIncremental = hasFailedIncremental,
         ),
-        supportingText = when (checkUiState.displayedState) {
-            UpdatesCheckState.NoInternet ->
+        supportingText = when {
+            hasFailedIncremental -> stringResource(
+                if (networkState.isOnline) {
+                    R.string.incremental_update_error_fallback
+                } else {
+                    R.string.incremental_update_error_offline
+                }
+            )
+
+            checkUiState.displayedState is UpdatesCheckState.NoInternet ->
                 stringResource(R.string.check_your_internet_connection)
 
-            UpdatesCheckState.Error -> stringResource(R.string.updates_check_failed)
+            checkUiState.displayedState is UpdatesCheckState.Error ->
+                stringResource(R.string.updates_check_failed)
+
             else -> null
         },
-        supportingTextIsError = checkUiState.displayedState is UpdatesCheckState.NoInternet ||
+        supportingTextIsError = hasFailedIncremental ||
+                checkUiState.displayedState is UpdatesCheckState.NoInternet ||
                 checkUiState.displayedState is UpdatesCheckState.Error,
         isBusy = isBusy,
         canCheckForUpdates = model.canCheckForUpdates,
@@ -227,9 +250,12 @@ private fun getHeadline(
     displayedCheckState: UpdatesCheckState,
     isPreparing: Boolean,
     hasUpdateItems: Boolean,
+    hasFailedIncremental: Boolean,
 ): String = when {
     updates.any { it.status == UpdateStatus.UPDATED_NEED_REBOOT } ->
         stringResource(R.string.installing_update_finished)
+
+    hasFailedIncremental -> stringResource(R.string.incremental_update_error_title)
 
     updates.any { it.status == UpdateStatus.INSTALLATION_FAILED } ->
         stringResource(R.string.installing_update_error)

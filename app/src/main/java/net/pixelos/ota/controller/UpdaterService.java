@@ -433,7 +433,9 @@ public class UpdaterService extends Service {
                 mNotificationBuilder.setStyle(null);
                 mNotificationBuilder.setSmallIcon(android.R.drawable.stat_sys_warning);
                 mNotificationBuilder.setProgress(0, 0, false);
-                String text = getString(R.string.installing_update_error);
+                String text = mUpdaterController.isIncremental(update.getDownloadId()) ?
+                        getString(R.string.incremental_update_failed_notification) :
+                        getString(R.string.installing_update_error);
                 mNotificationBuilder.setContentText(text);
                 mNotificationBuilder.setTicker(text);
                 mNotificationBuilder.setOngoing(false);

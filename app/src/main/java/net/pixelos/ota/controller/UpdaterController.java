@@ -658,24 +658,42 @@ public class UpdaterController {
         return null;
     }
 
-    public Update getFullFallback(String downloadId) {
-        DownloadEntry failed = mDownloads.get(downloadId);
-        if (failed == null || failed.mUpdate.getDownloadUrl() == null) {
+    /**
+     * The id of the full package the given update is an incremental of, or null if it is
+     * not an incremental. Nothing on the update itself says so, the pairing only lives in
+     * the feed.
+     */
+    private String getFullIdForIncremental(String downloadId) {
+        DownloadEntry entry = mDownloads.get(downloadId);
+        if (entry == null || entry.mUpdate.getDownloadUrl() == null) {
             return null;
         }
-        String deltaUrl = failed.mUpdate.getDownloadUrl();
+        String deltaUrl = entry.mUpdate.getDownloadUrl();
         JSONObject links = getIncrementalLinks();
         Iterator<String> fullIds = links.keys();
         while (fullIds.hasNext()) {
             String fullId = fullIds.next();
             if (deltaUrl.equals(links.optString(fullId, null))) {
-                DownloadEntry full = mDownloads.get(fullId);
-                if (full != null && full.mUpdate.isAvailableOnline()) {
-                    return full.mUpdate;
-                }
+                return fullId;
             }
         }
         return null;
+    }
+
+    public boolean isIncremental(String downloadId) {
+        return getFullIdForIncremental(downloadId) != null;
+    }
+
+    public Update getFullFallback(String downloadId) {
+        String fullId = getFullIdForIncremental(downloadId);
+        if (fullId == null) {
+            return null;
+        }
+        DownloadEntry full = mDownloads.get(fullId);
+        if (full == null || !full.mUpdate.isAvailableOnline()) {
+            return null;
+        }
+        return full.mUpdate;
     }
 
     private static boolean isDeltaUsable(Update delta) {

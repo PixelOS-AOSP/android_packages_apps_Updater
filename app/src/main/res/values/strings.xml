@@ -35,6 +35,7 @@
     <string name="download_switch_confirm_title">Pause active download?</string>
     <string name="download_switch_confirm_message">Another update is currently downloading. Starting this one will pause the other.</string>
     <string name="update_failed_notification">Update failed</string>
+    <string name="incremental_update_failed_notification">Incremental update failed</string>
     <string name="installation_suspended_notification">Installation suspended</string>
 
     <string name="new_updates_found_title">New updates</string>
@@ -81,6 +82,9 @@
     <string name="changelog_failed">Recent changes are temporarily unavailable.</string>
     <string name="changelog_empty">No changelog was provided for this build.</string>
     <string name="updates_check_failed_title">Couldn\'t check for update</string>
+    <string name="incremental_update_error_title">Couldn\'t install the incremental update</string>
+    <string name="incremental_update_error_fallback">The full update will be installed instead.</string>
+    <string name="incremental_update_error_offline">Connect to the internet to download the full update.</string>
     <string name="check_for_update">Check for update</string>
     <string name="header_last_check">Last successful check for update:</string>
     <string name="header_android_version_full">Android version: <xliff:g id="version" example="16">%1$s</xliff:g></string>
