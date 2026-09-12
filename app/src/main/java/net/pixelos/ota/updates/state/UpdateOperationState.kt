@@ -28,6 +28,7 @@ enum class UpdateOperationPhase(
     FINALIZING(R.string.finalizing_package),
     INSTALLATION_SUSPENDED(R.string.installation_suspended_notification),
     INSTALLATION_FAILED(R.string.update_failed_notification),
+    INCREMENTAL_FAILED(R.string.incremental_update_failed_notification),
     WAITING_FOR_REBOOT(R.string.installing_update_finished),
 }
 
@@ -94,7 +95,14 @@ data class UpdateOperationState(
                     }
 
                 status == UpdateStatus.INSTALLATION_SUSPENDED -> UpdateOperationPhase.INSTALLATION_SUSPENDED
-                status == UpdateStatus.INSTALLATION_FAILED -> UpdateOperationPhase.INSTALLATION_FAILED
+                // A failed incremental is not a failed update: the full package it pairs
+                // with still applies, so it gets to say so on its own.
+                status == UpdateStatus.INSTALLATION_FAILED ->
+                    if (controller.isIncremental(downloadId)) {
+                        UpdateOperationPhase.INCREMENTAL_FAILED
+                    } else {
+                        UpdateOperationPhase.INSTALLATION_FAILED
+                    }
 
                 else -> UpdateOperationPhase.IDLE
             }
