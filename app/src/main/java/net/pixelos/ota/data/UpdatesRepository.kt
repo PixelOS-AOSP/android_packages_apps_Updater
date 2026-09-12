@@ -95,6 +95,26 @@ class UpdatesRepository(
         return System.currentTimeMillis()
     }
 
+    /**
+     * Drops the stored updates that the running build already carries, deleting their
+     * packages along the way. The feed stops advertising a build once it is installed, so
+     * without this the list would keep offering it until the next successful fetch, and
+     * never while offline. Local updates go too, their imported copy included.
+     */
+    suspend fun pruneInstalledUpdates() {
+        if (DeviceInfoUtils.isDowngradingAllowed) return
+
+        withContext(Dispatchers.IO) {
+            localDataSource.getUpdates()
+                .filter { it.timestamp <= DeviceInfoUtils.buildDateTimestamp }
+                .forEach {
+                    Log.d(TAG, "${it.name} is already installed, removing")
+                    it.file?.delete()
+                    localDataSource.removeUpdate(it.downloadId)
+                }
+        }
+    }
+
     private fun persistIncrementalLinks(network: List<NetworkUpdate>) {
         val links = JSONObject()
         network.forEach { update ->
