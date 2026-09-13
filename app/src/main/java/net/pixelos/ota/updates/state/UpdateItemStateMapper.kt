@@ -55,7 +55,10 @@ class UpdateItemStateMapper(
 
             state.isInstalling -> ProgressState.Determinate(
                 percent = update.installProgress.toFloat(),
-                downloadedSize = "",
+                downloadedSize = context.getString(
+                    R.string.list_update_size,
+                    Formatter.formatShortFileSize(context, update.fileSize),
+                ),
                 eta = "",
             )
 
@@ -174,7 +177,12 @@ class UpdateItemStateMapper(
                 update.version,
             ),
             status = state.titleRes?.let { context.getString(it) } ?: "",
-            fileSize = Formatter.formatShortFileSize(context, update.fileSize),
+            // Shown before the update starts, when an incremental may still end up as its
+            // full package.
+            fileSize = Formatter.formatShortFileSize(
+                context,
+                updaterController.getFullFallback(update.downloadId)?.fileSize ?: update.fileSize,
+            ),
             androidUpdateInfo = when {
                 update.osSdkLevel > DeviceInfoUtils.sdkLevel ->
                     context.getString(R.string.list_major_android_upgrade)
