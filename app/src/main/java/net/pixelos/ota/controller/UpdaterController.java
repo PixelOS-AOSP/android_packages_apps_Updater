@@ -7,12 +7,17 @@ package net.pixelos.ota.controller;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.PowerManager;
+import android.os.ServiceSpecificException;
 import android.os.SystemClock;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
 
+import net.pixelos.ota.R;
 import net.pixelos.ota.UpdaterApplication;
 import net.pixelos.ota.data.Update;
 import net.pixelos.ota.data.UpdateStatus;
@@ -20,21 +25,19 @@ import net.pixelos.ota.data.UserPreferencesRepository;
 import net.pixelos.ota.data.source.local.UpdatesLocalDataSource;
 import net.pixelos.ota.data.source.local.UpdatesDatabase;
 import net.pixelos.ota.download.DownloadClient;
-import net.pixelos.ota.misc.Constants;
 import net.pixelos.ota.misc.Utils;
+import net.pixelos.ota.util.InstallUtils;
+import net.pixelos.ota.util.NetworkMonitor;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class UpdaterController {
 
@@ -52,6 +55,7 @@ public class UpdaterController {
 
     private final Context mContext;
     private final UpdatesLocalDataSource mUpdatesLocalDataSource;
+    private final UserPreferencesRepository mUserPreferencesRepository;
 
     private final PowerManager.WakeLock mWakeLock;
 
@@ -75,6 +79,7 @@ public class UpdaterController {
     private UpdaterController(Context context, UserPreferencesRepository userPreferencesRepository) {
         mUpdatesLocalDataSource =
                 new UpdatesLocalDataSource(UpdatesDatabase.getInstance(context).updateDao());
+        mUserPreferencesRepository = userPreferencesRepository;
         mDownloadRoot = Utils.getDownloadPath(context);
         PowerManager powerManager = context.getSystemService(PowerManager.class);
         mWakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Updater:wakelock");
@@ -201,7 +206,7 @@ public class UpdaterController {
             }
 
             @Override
-            public void onFailure(boolean cancelled) {
+            public void onFailure(boolean cancelled, int responseCode) {
                 if (cancelled) {
                     Log.d(TAG, "Download cancelled");
                     // Already notified
@@ -210,10 +215,15 @@ public class UpdaterController {
                     if (entry != null) {
                         Log.e(TAG, "Download failed");
                         removeDownloadClient(entry);
-                        synchronized (entry) {
-                            entry.mUpdate = entry.mUpdate.withStatus(UpdateStatus.PAUSED_ERROR);
+                        if (entry.mUpdate.isIncremental()
+                                && responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
+                            onIncrementalFailed(entry.mUpdate);
+                        } else {
+                            synchronized (entry) {
+                                entry.mUpdate = entry.mUpdate.withStatus(UpdateStatus.PAUSED_ERROR);
+                            }
+                            notifyUpdateChange(downloadId);
                         }
-                        notifyUpdateChange(downloadId);
                     }
                 }
                 tryReleaseWakelock();
@@ -269,6 +279,7 @@ public class UpdaterController {
             if (entry != null) {
                 Update update = entry.mUpdate;
                 File file = update.getFile();
+                boolean installNow = false;
                 if (file.exists() && verifyPackage(file)) {
                     file.setReadable(true, false);
                     synchronized (entry) {
@@ -280,14 +291,14 @@ public class UpdaterController {
                     if (downloadId.equals(pendingFullId)) {
                         PreferenceManager.getDefaultSharedPreferences(mContext).edit()
                                 .remove(PREF_PENDING_FULL_ID).apply();
-                        ABUpdateInstaller.getInstance(mContext, this,
-                                ((UpdaterApplication) mContext).getUserPreferencesRepository())
-                                .install(downloadId);
+                        installNow = true;
                     }
+                } else if (update.isIncremental()) {
+                    mVerifyingUpdates.remove(downloadId);
+                    onIncrementalFailed(update);
+                    return;
                 } else {
-                    if (!fallbackIncrementalToFull(downloadId)) {
-                        mUpdatesLocalDataSource.removeUpdate(downloadId);
-                    }
+                    mUpdatesLocalDataSource.removeUpdate(downloadId);
                     synchronized (entry) {
                         entry.mUpdate = entry.mUpdate.toBuilder()
                                 .setProgress(0)
@@ -297,6 +308,9 @@ public class UpdaterController {
                 }
                 mVerifyingUpdates.remove(downloadId);
                 notifyUpdateChange(downloadId);
+                if (installNow) {
+                    installUpdate(downloadId);
+                }
             }
         }).start();
     }
@@ -364,6 +378,7 @@ public class UpdaterController {
                             .setPayloadSize(updateInfo.getPayloadSize())
                             .setPayloadPropertiesOffset(updateInfo.getPayloadPropertiesOffset())
                             .setPayloadPropertiesSize(updateInfo.getPayloadPropertiesSize())
+                            .setFullDownloadId(updateInfo.getFullDownloadId())
                             .build();
                 }
             }
@@ -607,83 +622,93 @@ public class UpdaterController {
         return entry != null ? entry.mUpdate : null;
     }
 
-    private JSONObject getIncrementalLinks() {
-        String raw = PreferenceManager.getDefaultSharedPreferences(mContext)
-                .getString(Constants.PREF_INCREMENTAL_LINKS, "{}");
-        try {
-            return new JSONObject(raw);
-        } catch (JSONException e) {
-            return new JSONObject();
-        }
-    }
-
-    public Update getIncrementalForFull(String fullDownloadId) {
-        String deltaUrl = getIncrementalLinks().optString(fullDownloadId, null);
-        if (deltaUrl == null) {
-            return null;
-        }
-        for (DownloadEntry entry : mDownloads.values()) {
-            if (deltaUrl.equals(entry.mUpdate.getDownloadUrl())) {
-                return entry.mUpdate;
-            }
-        }
-        return null;
-    }
-
-    public Update getFullFallback(String downloadId) {
-        DownloadEntry failed = mDownloads.get(downloadId);
-        if (failed == null || failed.mUpdate.getDownloadUrl() == null) {
-            return null;
-        }
-        String deltaUrl = failed.mUpdate.getDownloadUrl();
-        JSONObject links = getIncrementalLinks();
-        Iterator<String> fullIds = links.keys();
-        while (fullIds.hasNext()) {
-            String fullId = fullIds.next();
-            if (deltaUrl.equals(links.optString(fullId, null))) {
-                DownloadEntry full = mDownloads.get(fullId);
-                if (full != null && full.mUpdate.isAvailableOnline()) {
-                    return full.mUpdate;
-                }
-            }
-        }
-        return null;
-    }
-
-    private static boolean isDeltaUsable(Update delta) {
-        UpdateStatus status = delta.getStatus();
-        return status != UpdateStatus.INSTALLATION_FAILED
-                && status != UpdateStatus.VERIFICATION_FAILED
-                && status != UpdateStatus.INSTALLATION_CANCELLED
-                && status != UpdateStatus.DELETED;
-    }
-
+    /** The incremental to offer ahead of its full package, or null to let list order decide. */
     public String getDisplayUpdateId() {
         for (DownloadEntry entry : mDownloads.values()) {
-            Update delta = getIncrementalForFull(entry.mUpdate.getDownloadId());
-            if (delta != null && isDeltaUsable(delta)) {
-                return delta.getDownloadId();
+            if (entry.mUpdate.isIncremental()
+                    && entry.mUpdate.getStatus() != UpdateStatus.DELETED) {
+                return entry.mUpdate.getDownloadId();
             }
         }
         return null;
     }
 
-    public boolean fallbackIncrementalToFull(String failedIncrementalId) {
-        Update full = getFullFallback(failedIncrementalId);
-        if (full == null) {
-            return false;
+    /** A failed incremental is not left failed: its full package takes over instead. */
+    void onInstallFailed(String downloadId) {
+        Update update = getUpdate(downloadId);
+        if (update == null) {
+            return;
         }
-        String fullId = full.getDownloadId();
-        if (full.hasVerifiedPackage()) {
-            ABUpdateInstaller.getInstance(mContext, this,
-                    ((UpdaterApplication) mContext).getUserPreferencesRepository())
-                    .install(fullId);
+        if (update.isIncremental()) {
+            onIncrementalFailed(update);
+            return;
+        }
+        setUpdate(downloadId, update.toBuilder()
+                .setInstallProgress(0)
+                .setStatus(UpdateStatus.INSTALLATION_FAILED)
+                .build());
+        notifyUpdateChange(downloadId);
+    }
+
+    private void onIncrementalFailed(Update incremental) {
+        String incrementalId = incremental.getDownloadId();
+        String fullId = incremental.getFullDownloadId();
+        Log.d(TAG, "Incremental " + incrementalId + " failed, falling back to " + fullId);
+        mUserPreferencesRepository.addIncrementalFailedFullIdBlocking(fullId);
+        // Report it deleted rather than dropping it outright, so the service lets go of the
+        // ongoing install notification. The entry goes once the list no longer carries it.
+        DownloadEntry entry = mDownloads.get(incrementalId);
+        synchronized (entry) {
+            entry.mUpdate = entry.mUpdate.toBuilder()
+                    .setStatus(UpdateStatus.DELETED)
+                    .setProgress(0)
+                    .setInstallProgress(0)
+                    .build();
+        }
+        deleteUpdateAsync(incremental);
+        notifyUpdateChange(incrementalId);
+
+        Update full = getUpdate(fullId);
+        boolean needsNetwork = !full.hasVerifiedPackage();
+        if (needsNetwork && !canFetchWithoutAsking()) {
+            // The screen explains the wait; the user starts the full update from there.
+            return;
+        }
+        new Handler(Looper.getMainLooper()).post(() -> Toast.makeText(mContext,
+                R.string.toast_incremental_fallback, Toast.LENGTH_LONG).show());
+        if (!needsNetwork || InstallUtils.canStreamUpdate(full,
+                mUserPreferencesRepository.getStreamUpdatesBlocking())) {
+            installUpdate(fullId);
         } else {
             PreferenceManager.getDefaultSharedPreferences(mContext).edit()
                     .putString(PREF_PENDING_FULL_ID, fullId).apply();
             startDownload(fullId);
         }
-        return true;
+    }
+
+    /** Whether a full package may be fetched without the user having agreed to it. */
+    private boolean canFetchWithoutAsking() {
+        NetworkMonitor.NetworkState network =
+                ((UpdaterApplication) mContext).getNetworkMonitor().getCurrentNetworkState();
+        return network.isOnline() && !(network.isMetered()
+                && mUserPreferencesRepository.getMeteredNetworkWarningBlocking());
+    }
+
+    private void installUpdate(String downloadId) {
+        Update update = getUpdate(downloadId);
+        ABUpdateInstaller installer =
+                ABUpdateInstaller.getInstance(mContext, this, mUserPreferencesRepository);
+        try {
+            if (InstallUtils.canStreamUpdate(update,
+                    mUserPreferencesRepository.getStreamUpdatesBlocking())) {
+                installer.installStreaming(downloadId);
+            } else {
+                installer.install(downloadId);
+            }
+        } catch (ServiceSpecificException e) {
+            Log.e(TAG, "Could not install " + downloadId, e);
+            onInstallFailed(downloadId);
+        }
     }
 
     public void setUpdate(String downloadId, Update update) {

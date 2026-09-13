@@ -13,6 +13,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.preference.PreferenceManager
 import kotlinx.coroutines.flow.Flow
@@ -38,6 +39,7 @@ private object UserPreferencesKeys {
     val AUTO_DELETE = booleanPreferencesKey("auto_delete_updates")
     val CHECK_INTERVAL = stringPreferencesKey("check_interval")
     val INCREMENTAL_UPDATES = booleanPreferencesKey("incremental_updates")
+    val INCREMENTAL_FAILED_FULL_IDS = stringSetPreferencesKey("incremental_failed_full_ids")
     val METERED_NETWORK_WARNING = booleanPreferencesKey("metered_network_warning")
     val PERIODIC_CHECK_ENABLED = booleanPreferencesKey("periodic_check_enabled")
     val STREAM_UPDATES = booleanPreferencesKey("stream_updates")
@@ -129,6 +131,32 @@ class UserPreferencesRepository(context: Context) {
 
     suspend fun setIncrementalUpdates(value: Boolean) {
         userPreferences.edit { it[UserPreferencesKeys.INCREMENTAL_UPDATES] = value }
+    }
+
+    /** Full packages whose incremental failed on this device, so it is not offered again. */
+    val incrementalFailedFullIdsFlow: Flow<Set<String>> = userPreferencesFlow.map { preferences ->
+        preferences[UserPreferencesKeys.INCREMENTAL_FAILED_FULL_IDS].orEmpty()
+    }
+
+    suspend fun getIncrementalFailedFullIds(): Set<String> = incrementalFailedFullIdsFlow.first()
+
+    fun addIncrementalFailedFullIdBlocking(fullDownloadId: String) {
+        runBlocking {
+            userPreferences.edit { preferences ->
+                preferences[UserPreferencesKeys.INCREMENTAL_FAILED_FULL_IDS] =
+                    preferences[UserPreferencesKeys.INCREMENTAL_FAILED_FULL_IDS].orEmpty() +
+                            fullDownloadId
+            }
+        }
+    }
+
+    /** Forgets failures for full packages the feed no longer offers. */
+    suspend fun retainIncrementalFailedFullIds(fullDownloadIds: Set<String>) {
+        userPreferences.edit { preferences ->
+            preferences[UserPreferencesKeys.INCREMENTAL_FAILED_FULL_IDS] =
+                preferences[UserPreferencesKeys.INCREMENTAL_FAILED_FULL_IDS].orEmpty() intersect
+                        fullDownloadIds
+        }
     }
 
     val meteredNetworkWarningFlow: Flow<Boolean> = userPreferencesFlow.map { preferences ->

@@ -31,7 +31,12 @@ data class Update(
     val timestamp: Long = 0,
     val type: String? = null,
     val version: String = "",
+    /** The full package this update is an incremental of, or null for a full package. */
+    val fullDownloadId: String? = null,
 ) {
+    val isIncremental: Boolean
+        get() = fullDownloadId != null
+
     fun withAvailableOnline(v: Boolean) = copy(isAvailableOnline = v)
     fun withDownloadId(v: String) = copy(downloadId = v)
     fun withDownloadUrl(v: String?) = copy(downloadUrl = v)
@@ -76,6 +81,7 @@ data class Update(
         private var timestamp: Long = 0,
         private var type: String? = null,
         private var version: String = "",
+        private var fullDownloadId: String? = null,
     ) {
         constructor(update: Update) : this(
             update.isAvailableOnline, update.downloadId, update.downloadUrl,
@@ -84,7 +90,7 @@ data class Update(
             update.payloadMetadataOffset, update.payloadMetadataSize, update.payloadOffset,
             update.payloadSize, update.payloadPropertiesOffset, update.payloadPropertiesSize,
             update.progress, update.speed, update.status, update.timestamp, update.type,
-            update.version,
+            update.version, update.fullDownloadId,
         )
 
         fun setAvailableOnline(v: Boolean) = apply { isAvailableOnline = v }
@@ -110,11 +116,13 @@ data class Update(
         fun setTimestamp(v: Long) = apply { timestamp = v }
         fun setType(v: String?) = apply { type = v }
         fun setVersion(v: String) = apply { version = v }
+        fun setFullDownloadId(v: String?) = apply { fullDownloadId = v }
         fun build() = Update(
             isAvailableOnline, downloadId, downloadUrl, eta, file, fileSize,
             isFinalizing, installProgress, name, osPatchLevel, osSdkLevel, payloadMetadataOffset,
             payloadMetadataSize, payloadOffset, payloadSize, payloadPropertiesOffset,
             payloadPropertiesSize, progress, speed, status, timestamp, type, version,
+            fullDownloadId,
         )
     }
 

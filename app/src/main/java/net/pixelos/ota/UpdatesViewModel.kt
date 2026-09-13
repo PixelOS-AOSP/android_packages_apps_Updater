@@ -15,7 +15,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import net.pixelos.ota.data.ChangelogState
@@ -35,6 +37,7 @@ class UpdatesViewModel(
         val lastCheckedTimestamp: Long = 0L,
         val hasUpdateCheckFailed: Boolean = false,
         val changelogState: ChangelogState = ChangelogState.Idle,
+        val incrementalFailedFullIds: Set<String> = emptySet(),
     ) {
         val updatesCheckModel = UpdatesCheckModel(
             state = when {
@@ -57,6 +60,7 @@ class UpdatesViewModel(
     private val appStateRepository = updaterApplication.appStateRepository
     private val changelogRepository = updaterApplication.changelogRepository
     private val networkMonitor = updaterApplication.networkMonitor
+    private val userPreferencesRepository = updaterApplication.userPreferencesRepository
     private var changelogJob: Job? = null
 
     init {
@@ -81,6 +85,22 @@ class UpdatesViewModel(
                 .collect { networkState ->
                     _uiState.update { it.copy(isOnline = networkState.isOnline) }
                 }
+        }
+
+        viewModelScope.launch {
+            userPreferencesRepository.incrementalFailedFullIdsFlow.collect { ids ->
+                _uiState.update { it.copy(incrementalFailedFullIds = ids) }
+            }
+        }
+
+        // The stored updates are built from this preference, so they only match it again
+        // after a check. Drop the value the flow replays on collection, otherwise opening the
+        // screen would always trigger one.
+        viewModelScope.launch {
+            userPreferencesRepository.incrementalUpdatesFlow
+                .distinctUntilChanged()
+                .drop(1)
+                .collect { fetchUpdates() }
         }
     }
 

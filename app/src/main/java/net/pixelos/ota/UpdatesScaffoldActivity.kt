@@ -126,6 +126,9 @@ private fun UpdatesScaffoldContent(
     val streamUpdatesEnabled by userPreferencesRepository.streamUpdatesFlow.collectAsState(
         initial = true,
     )
+    val meteredNetworkWarning by userPreferencesRepository.meteredNetworkWarningFlow.collectAsState(
+        initial = true,
+    )
 
     // Room only keeps the coarse persistent status, so a downloading update reads back as
     // PAUSED and a starting one never reads back at all. Take the live status from the
@@ -182,21 +185,36 @@ private fun UpdatesScaffoldContent(
             updateItems.firstOrNull { it.downloadId == id }
         } ?: updateItems.firstOrNull()
 
+    // After a failed incremental the app moves on to the full package by itself, unless that
+    // means downloading it offline or over a metered network. Only then is it left waiting.
+    val isFullUpdateWaiting = activeItem != null &&
+            activeItem.progress == null &&
+            activeItem.downloadId in uiState.incrementalFailedFullIds &&
+            !activeItem.isLocal &&
+            (!networkState.isOnline || networkState.isMetered && meteredNetworkWarning)
+    val isFullUpdateWaitingOffline = isFullUpdateWaiting && !networkState.isOnline
+
     SystemUpdateScreen(
         headline = getHeadline(
             updates = liveUpdates,
             displayedCheckState = checkUiState.displayedState,
             isPreparing = isPreparing,
             hasUpdateItems = updateItems.isNotEmpty(),
+            isFullUpdateWaiting = isFullUpdateWaiting,
         ),
-        supportingText = when (checkUiState.displayedState) {
-            UpdatesCheckState.NoInternet ->
+        supportingText = when {
+            isFullUpdateWaitingOffline -> stringResource(R.string.incremental_update_offline)
+
+            checkUiState.displayedState is UpdatesCheckState.NoInternet ->
                 stringResource(R.string.check_your_internet_connection)
 
-            UpdatesCheckState.Error -> stringResource(R.string.updates_check_failed)
+            checkUiState.displayedState is UpdatesCheckState.Error ->
+                stringResource(R.string.updates_check_failed)
+
             else -> null
         },
-        supportingTextIsError = checkUiState.displayedState is UpdatesCheckState.NoInternet ||
+        supportingTextIsError = isFullUpdateWaitingOffline ||
+                checkUiState.displayedState is UpdatesCheckState.NoInternet ||
                 checkUiState.displayedState is UpdatesCheckState.Error,
         isBusy = isBusy,
         canCheckForUpdates = model.canCheckForUpdates,
@@ -227,6 +245,7 @@ private fun getHeadline(
     displayedCheckState: UpdatesCheckState,
     isPreparing: Boolean,
     hasUpdateItems: Boolean,
+    isFullUpdateWaiting: Boolean,
 ): String = when {
     updates.any { it.status == UpdateStatus.UPDATED_NEED_REBOOT } ->
         stringResource(R.string.installing_update_finished)
@@ -241,6 +260,8 @@ private fun getHeadline(
 
     displayedCheckState is UpdatesCheckState.Checking ->
         stringResource(R.string.checking_for_update_title)
+
+    isFullUpdateWaiting -> stringResource(R.string.incremental_update_failed_title)
 
     displayedCheckState is UpdatesCheckState.NoInternet ||
             displayedCheckState is UpdatesCheckState.Error ->

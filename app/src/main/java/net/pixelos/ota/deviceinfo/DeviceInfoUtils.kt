@@ -32,6 +32,9 @@ object DeviceInfoUtils : SettingsLibDeviceInfoUtils() {
     val buildDateTimestamp: Long = SystemProperties.getLong(PROP_BUILD_DATE, 0)
 
     @JvmStatic
+    val buildIncremental: String = Build.VERSION.INCREMENTAL
+
+    @JvmStatic
     val buildVersion: String = SystemProperties.get(PROP_BUILD_VERSION, "")
 
     @JvmStatic

@@ -40,6 +40,8 @@ data class NetworkUpdateFile(
     @SerialName("os_patch_level") val osPatchLevel: String,
     @SerialName("os_sdk_level") val osSdkLevel: Int,
     @SerialName("ota_property_files") val otaPropertyFiles: String? = null,
+    // Incremental only: the ro.build.version.incremental of the build it applies on top of.
+    @SerialName("pre_build_incremental") val preBuildIncremental: String? = null,
     // @SerialName("sha1") val sha1: String,
     @SerialName("sha256") val sha256: String,
     @SerialName("size") val size: Long,
@@ -129,6 +131,6 @@ private fun NetworkUpdate.toUpdate(file: NetworkUpdateFile): Update {
 fun NetworkUpdate.toUpdate(): Update = toUpdate(files[0])
 
 fun NetworkUpdate.toIncrementalUpdate(): Update? {
-    val file = incremental?.firstOrNull() ?: return null
-    return toUpdate(file)
+    val file = incremental?.single() ?: return null
+    return toUpdate(file).copy(fullDownloadId = files[0].sha256)
 }

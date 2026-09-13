@@ -5,29 +5,23 @@
 
 package net.pixelos.ota.data
 
-import android.content.Context
 import android.util.Log
-import androidx.preference.PreferenceManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerializationException
 import net.pixelos.ota.data.source.local.UpdatesLocalDataSource
-import net.pixelos.ota.data.source.network.NetworkUpdate
 import net.pixelos.ota.data.source.network.UpdatesNetworkDataSource
 import net.pixelos.ota.data.source.network.toIncrementalUpdate
 import net.pixelos.ota.data.source.network.toUpdate
 import net.pixelos.ota.deviceinfo.DeviceInfoUtils
-import net.pixelos.ota.misc.Constants
 import net.pixelos.ota.notifications.NotificationHelper
 import net.pixelos.ota.util.NetworkMonitor
-import org.json.JSONObject
 import java.io.IOException
 
 private const val TAG = "UpdatesRepository"
 
 class UpdatesRepository(
-    private val context: Context,
     private val networkMonitor: NetworkMonitor,
     private val notificationHelper: NotificationHelper,
     private val networkDataSource: UpdatesNetworkDataSource,
@@ -50,13 +44,29 @@ class UpdatesRepository(
 
         val networkUpdates = withContext(Dispatchers.IO) {
             val network = networkDataSource.fetchUpdates()
-            val incrementalUpdatesEnabled = userPreferencesRepository.getIncrementalUpdates()
-            persistIncrementalLinks(if (incrementalUpdatesEnabled) network else emptyList())
-            val deltaUrls = network.mapNotNull { it.incremental?.firstOrNull()?.url }.toSet()
-            network.flatMap { update ->
-                val incremental = update.toIncrementalUpdate().takeIf { incrementalUpdatesEnabled }
-                listOfNotNull(update.toUpdate(), incremental)
-            }.filter { filterUpdates(it, deltaUrls) }
+            val fullUpdates = network.map { it.toUpdate() }.filter { filterUpdates(it) }
+            val fullIds = fullUpdates.map { it.downloadId }.toSet()
+
+            userPreferencesRepository.retainIncrementalFailedFullIds(fullIds)
+            val incrementalFailedFullIds = userPreferencesRepository.getIncrementalFailedFullIds()
+            val offerIncrementals = DeviceInfoUtils.isABDevice &&
+                    userPreferencesRepository.getIncrementalUpdates()
+
+            val incrementalUpdates = if (offerIncrementals) {
+                network.mapNotNull { update ->
+                    // An incremental only applies on top of the build it was generated from.
+                    update.toIncrementalUpdate()?.takeIf {
+                        it.fullDownloadId in fullIds &&
+                                it.fullDownloadId !in incrementalFailedFullIds &&
+                                update.incremental!!.single().preBuildIncremental ==
+                                DeviceInfoUtils.buildIncremental
+                    }
+                }
+            } else {
+                emptyList()
+            }
+
+            fullUpdates + incrementalUpdates
         }
 
         val networkIds = networkUpdates.map { it.downloadId }.toSet()
@@ -115,28 +125,12 @@ class UpdatesRepository(
         }
     }
 
-    private fun persistIncrementalLinks(network: List<NetworkUpdate>) {
-        val links = JSONObject()
-        network.forEach { update ->
-            update.incremental?.firstOrNull()?.let { delta ->
-                links.put(update.files[0].sha256, delta.url)
-            }
-        }
-        PreferenceManager.getDefaultSharedPreferences(context).edit()
-            .putString(Constants.PREF_INCREMENTAL_LINKS, links.toString()).apply()
-    }
-
-    private fun filterUpdates(update: Update, deltaUrls: Set<String>): Boolean {
+    private fun filterUpdates(update: Update): Boolean {
         val isCurrentBuild = update.timestamp == DeviceInfoUtils.buildDateTimestamp
         val isOlderBuild = update.timestamp < DeviceInfoUtils.buildDateTimestamp
 
         if (!DeviceInfoUtils.isDowngradingAllowed && (isOlderBuild || isCurrentBuild)) {
             Log.d(TAG, "${update.name} is not newer than the current build")
-            return false
-        }
-
-        if (update.downloadUrl in deltaUrls && !DeviceInfoUtils.isABDevice) {
-            Log.d(TAG, "${update.name} is incremental but this device is not A/B")
             return false
         }
 

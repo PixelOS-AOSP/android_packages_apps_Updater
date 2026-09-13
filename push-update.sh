@@ -9,7 +9,7 @@ set -u
 updates_dir=/data/system_updates
 package_name=net.pixelos.ota
 database_path=/data/user/0/$package_name/databases/updates.db
-expected_database_version=4
+expected_database_version=5
 root_enabled=0
 
 usage() {

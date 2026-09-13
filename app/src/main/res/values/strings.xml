@@ -81,6 +81,9 @@
     <string name="changelog_failed">Recent changes are temporarily unavailable.</string>
     <string name="changelog_empty">No changelog was provided for this build.</string>
     <string name="updates_check_failed_title">Couldn\'t check for update</string>
+    <string name="incremental_update_failed_title">Incremental update failed</string>
+    <string name="incremental_update_offline">Connect to the internet to download the full update</string>
+    <string name="toast_incremental_fallback">Installing the full update instead</string>
     <string name="check_for_update">Check for update</string>
     <string name="header_last_check">Last successful check for update:</string>
     <string name="header_android_version_full">Android version: <xliff:g id="version" example="16">%1$s</xliff:g></string>

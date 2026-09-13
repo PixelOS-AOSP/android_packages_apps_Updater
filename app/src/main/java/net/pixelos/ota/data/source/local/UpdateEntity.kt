@@ -70,7 +70,10 @@ data class UpdateEntity(
     val payloadPropertiesSize: Long?,
 
     @ColumnInfo(name = "download_url")
-    val downloadUrl: String?
+    val downloadUrl: String?,
+
+    @ColumnInfo(name = "full_download_id")
+    val fullDownloadId: String?
 )
 
 fun Update.toEntity() = UpdateEntity(
@@ -90,7 +93,8 @@ fun Update.toEntity() = UpdateEntity(
     payloadSize = payloadSize,
     payloadPropertiesOffset = payloadPropertiesOffset,
     payloadPropertiesSize = payloadPropertiesSize,
-    downloadUrl = downloadUrl
+    downloadUrl = downloadUrl,
+    fullDownloadId = fullDownloadId
 )
 
 fun UpdateEntity.toUpdate() = Update(
@@ -110,5 +114,6 @@ fun UpdateEntity.toUpdate() = Update(
     payloadSize = payloadSize,
     payloadPropertiesOffset = payloadPropertiesOffset,
     payloadPropertiesSize = payloadPropertiesSize,
-    downloadUrl = downloadUrl
+    downloadUrl = downloadUrl,
+    fullDownloadId = fullDownloadId
 )
