@@ -284,10 +284,8 @@ public class UpdaterController {
                                 ((UpdaterApplication) mContext).getUserPreferencesRepository())
                                 .install(downloadId);
                     }
-                } else {
-                    if (!fallbackIncrementalToFull(downloadId)) {
-                        mUpdatesLocalDataSource.removeUpdate(downloadId);
-                    }
+                } else if (!failIncremental(downloadId, UpdateStatus.VERIFICATION_FAILED)) {
+                    mUpdatesLocalDataSource.removeUpdate(downloadId);
                     synchronized (entry) {
                         entry.mUpdate = entry.mUpdate.toBuilder()
                                 .setProgress(0)
@@ -659,26 +657,56 @@ public class UpdaterController {
     }
 
     public String getDisplayUpdateId() {
+        String spentIncrementalFullId = null;
         for (DownloadEntry entry : mDownloads.values()) {
             Update delta = getIncrementalForFull(entry.mUpdate.getDownloadId());
-            if (delta != null && isDeltaUsable(delta)) {
+            if (delta == null) {
+                continue;
+            }
+            if (isDeltaUsable(delta)) {
                 return delta.getDownloadId();
             }
+            spentIncrementalFullId = entry.mUpdate.getDownloadId();
         }
-        return null;
+        return spentIncrementalFullId;
     }
 
-    public boolean fallbackIncrementalToFull(String failedIncrementalId) {
-        Update full = getFullFallback(failedIncrementalId);
+    /** Marks an install failed. A failed incremental hands over to its full package instead. */
+    void failInstall(String downloadId) {
+        if (failIncremental(downloadId, UpdateStatus.INSTALLATION_FAILED)) {
+            return;
+        }
+        setUpdate(downloadId, getUpdate(downloadId).toBuilder()
+                .setInstallProgress(0)
+                .setStatus(UpdateStatus.INSTALLATION_FAILED)
+                .build());
+        notifyUpdateChange(downloadId);
+    }
+
+    /**
+     * Marks an incremental failed with the given status and moves on to its full package:
+     * installed if already downloaded, otherwise downloaded when there is a connection.
+     * Returns false if the update is not an incremental.
+     */
+    boolean failIncremental(String downloadId, UpdateStatus status) {
+        Update full = getFullFallback(downloadId);
         if (full == null) {
             return false;
         }
+        setUpdate(downloadId, getUpdate(downloadId).toBuilder()
+                .setProgress(0)
+                .setInstallProgress(0)
+                .setStatus(status)
+                .build());
+        notifyUpdateChange(downloadId);
+
         String fullId = full.getDownloadId();
         if (full.hasVerifiedPackage()) {
             ABUpdateInstaller.getInstance(mContext, this,
                     ((UpdaterApplication) mContext).getUserPreferencesRepository())
                     .install(fullId);
-        } else {
+        } else if (((UpdaterApplication) mContext).getNetworkMonitor()
+                .getCurrentNetworkState().isOnline()) {
             PreferenceManager.getDefaultSharedPreferences(mContext).edit()
                     .putString(PREF_PENDING_FULL_ID, fullId).apply();
             startDownload(fullId);

@@ -107,15 +107,7 @@ class ABUpdateInstaller {
         public void onPayloadApplicationComplete(int errorCode) {
             if (errorCode != UpdateEngine.ErrorCodeConstants.SUCCESS) {
                 installationDone(false);
-                if (mUpdaterController.fallbackIncrementalToFull(mDownloadId)) {
-                    return;
-                }
-                Update update = mUpdaterController.getUpdate(mDownloadId);
-                mUpdaterController.setUpdate(mDownloadId, update.toBuilder()
-                        .setInstallProgress(0)
-                        .setStatus(UpdateStatus.INSTALLATION_FAILED)
-                        .build());
-                mUpdaterController.notifyUpdateChange(mDownloadId);
+                mUpdaterController.failInstall(mDownloadId);
             }
         }
     };
@@ -190,10 +182,7 @@ class ABUpdateInstaller {
     public void install(File file, String downloadId) {
         if (!file.exists()) {
             Log.e(TAG, "The given update doesn't exist");
-            Update update = mUpdaterController.getUpdate(downloadId);
-            mUpdaterController.setUpdate(downloadId,
-                    update.withStatus(UpdateStatus.INSTALLATION_FAILED));
-            mUpdaterController.notifyUpdateChange(downloadId);
+            mUpdaterController.failInstall(downloadId);
             return;
         }
 
@@ -216,10 +205,7 @@ class ABUpdateInstaller {
             zipFile.close();
         } catch (IOException | IllegalArgumentException e) {
             Log.e(TAG, "Could not prepare " + file, e);
-            Update update = mUpdaterController.getUpdate(downloadId);
-            mUpdaterController.setUpdate(downloadId,
-                    update.withStatus(UpdateStatus.INSTALLATION_FAILED));
-            mUpdaterController.notifyUpdateChange(mDownloadId);
+            mUpdaterController.failInstall(downloadId);
             return;
         }
 
@@ -247,9 +233,7 @@ class ABUpdateInstaller {
                         update.getPayloadSize(), headerKeyValuePairs);
             } catch (IOException | ServiceSpecificException e) {
                 Log.e(TAG, "Could not prepare streaming update", e);
-                mUpdaterController.setUpdate(downloadId,
-                        update.withStatus(UpdateStatus.INSTALLATION_FAILED));
-                mUpdaterController.notifyUpdateChange(downloadId);
+                mUpdaterController.failInstall(downloadId);
             }
         }, "UpdaterStreamingInstall").start();
     }
@@ -267,10 +251,7 @@ class ABUpdateInstaller {
             mBound = mUpdateEngine.bind(mUpdateEngineCallback);
             if (!mBound) {
                 Log.e(TAG, "Could not bind");
-                Update update = mUpdaterController.getUpdate(mDownloadId);
-                mUpdaterController.setUpdate(mDownloadId,
-                        update.withStatus(UpdateStatus.INSTALLATION_FAILED));
-                mUpdaterController.notifyUpdateChange(mDownloadId);
+                mUpdaterController.failInstall(mDownloadId);
                 return;
             }
         }
