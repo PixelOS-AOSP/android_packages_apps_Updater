@@ -7,12 +7,16 @@ package net.pixelos.ota.controller;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
 
+import net.pixelos.ota.R;
 import net.pixelos.ota.UpdaterApplication;
 import net.pixelos.ota.data.Update;
 import net.pixelos.ota.data.UpdateStatus;
@@ -706,16 +710,23 @@ public class UpdaterController {
 
         String fullId = full.getDownloadId();
         if (full.hasVerifiedPackage()) {
+            showFullUpdateToast();
             ABUpdateInstaller.getInstance(mContext, this,
                     ((UpdaterApplication) mContext).getUserPreferencesRepository())
                     .install(fullId);
         } else if (((UpdaterApplication) mContext).getNetworkMonitor()
                 .getCurrentNetworkState().isOnline()) {
+            showFullUpdateToast();
             PreferenceManager.getDefaultSharedPreferences(mContext).edit()
                     .putString(PREF_PENDING_FULL_ID, fullId).apply();
             startDownload(fullId);
         }
         return true;
+    }
+
+    private void showFullUpdateToast() {
+        new Handler(Looper.getMainLooper()).post(() -> Toast.makeText(mContext,
+                R.string.toast_incremental_fallback, Toast.LENGTH_LONG).show());
     }
 
     public void setUpdate(String downloadId, Update update) {
