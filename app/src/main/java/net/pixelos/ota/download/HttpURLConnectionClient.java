@@ -86,7 +86,7 @@ public class HttpURLConnectionClient implements DownloadClient {
 
     private void downloadFileResumeInternal() {
         if (!mDestination.exists()) {
-            mCallback.onFailure(false);
+            mCallback.onFailure(false, 0);
             return;
         }
         long offset = mDestination.length();
@@ -289,7 +289,7 @@ public class HttpURLConnectionClient implements DownloadClient {
                     Log.d(TAG, "The server fulfilled the partial content request");
                 } else if (mResume || !isSuccessCode(responseCode)) {
                     Log.e(TAG, "The server replied with code " + responseCode);
-                    mCallback.onFailure(isInterrupted());
+                    mCallback.onFailure(isInterrupted(), responseCode);
                     return;
                 }
 
@@ -317,14 +317,14 @@ public class HttpURLConnectionClient implements DownloadClient {
                     outputStream.flush();
 
                     if (isInterrupted()) {
-                        mCallback.onFailure(true);
+                        mCallback.onFailure(true, 0);
                     } else {
                         mCallback.onSuccess();
                     }
                 }
             } catch (IOException e) {
                 Log.e(TAG, "Error downloading file", e);
-                mCallback.onFailure(isInterrupted());
+                mCallback.onFailure(isInterrupted(), 0);
             } finally {
                 mClient.disconnect();
             }

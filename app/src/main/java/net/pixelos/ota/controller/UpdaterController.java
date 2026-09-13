@@ -25,6 +25,7 @@ import net.pixelos.ota.misc.Utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -201,7 +202,7 @@ public class UpdaterController {
             }
 
             @Override
-            public void onFailure(boolean cancelled) {
+            public void onFailure(boolean cancelled, int responseCode) {
                 if (cancelled) {
                     Log.d(TAG, "Download cancelled");
                     // Already notified
@@ -210,10 +211,13 @@ public class UpdaterController {
                     if (entry != null) {
                         Log.e(TAG, "Download failed");
                         removeDownloadClient(entry);
-                        synchronized (entry) {
-                            entry.mUpdate = entry.mUpdate.withStatus(UpdateStatus.PAUSED_ERROR);
+                        if (responseCode != HttpURLConnection.HTTP_NOT_FOUND
+                                || !failIncremental(downloadId, UpdateStatus.INSTALLATION_FAILED)) {
+                            synchronized (entry) {
+                                entry.mUpdate = entry.mUpdate.withStatus(UpdateStatus.PAUSED_ERROR);
+                            }
+                            notifyUpdateChange(downloadId);
                         }
-                        notifyUpdateChange(downloadId);
                     }
                 }
                 tryReleaseWakelock();
