@@ -182,21 +182,35 @@ private fun UpdatesScaffoldContent(
             updateItems.firstOrNull { it.downloadId == id }
         } ?: updateItems.firstOrNull()
 
+    // A failed incremental hands over to its full package, so it is not an install error.
+    val failedIncrementals = liveUpdates.filter {
+        (it.status == UpdateStatus.INSTALLATION_FAILED ||
+                it.status == UpdateStatus.VERIFICATION_FAILED) &&
+                updaterController?.getFullFallback(it.downloadId) != null
+    }
+    val isWaitingForConnection = failedIncrementals.isNotEmpty() && !networkState.isOnline
+
     SystemUpdateScreen(
         headline = getHeadline(
-            updates = liveUpdates,
+            updates = liveUpdates - failedIncrementals,
             displayedCheckState = checkUiState.displayedState,
             isPreparing = isPreparing,
             hasUpdateItems = updateItems.isNotEmpty(),
+            isWaitingForConnection = isWaitingForConnection,
         ),
-        supportingText = when (checkUiState.displayedState) {
-            UpdatesCheckState.NoInternet ->
+        supportingText = when {
+            isWaitingForConnection -> stringResource(R.string.incremental_update_offline)
+
+            checkUiState.displayedState is UpdatesCheckState.NoInternet ->
                 stringResource(R.string.check_your_internet_connection)
 
-            UpdatesCheckState.Error -> stringResource(R.string.updates_check_failed)
+            checkUiState.displayedState is UpdatesCheckState.Error ->
+                stringResource(R.string.updates_check_failed)
+
             else -> null
         },
-        supportingTextIsError = checkUiState.displayedState is UpdatesCheckState.NoInternet ||
+        supportingTextIsError = isWaitingForConnection ||
+                checkUiState.displayedState is UpdatesCheckState.NoInternet ||
                 checkUiState.displayedState is UpdatesCheckState.Error,
         isBusy = isBusy,
         canCheckForUpdates = model.canCheckForUpdates,
@@ -227,6 +241,7 @@ private fun getHeadline(
     displayedCheckState: UpdatesCheckState,
     isPreparing: Boolean,
     hasUpdateItems: Boolean,
+    isWaitingForConnection: Boolean,
 ): String = when {
     updates.any { it.status == UpdateStatus.UPDATED_NEED_REBOOT } ->
         stringResource(R.string.installing_update_finished)
@@ -241,6 +256,8 @@ private fun getHeadline(
 
     displayedCheckState is UpdatesCheckState.Checking ->
         stringResource(R.string.checking_for_update_title)
+
+    isWaitingForConnection -> stringResource(R.string.incremental_update_failed_title)
 
     displayedCheckState is UpdatesCheckState.NoInternet ||
             displayedCheckState is UpdatesCheckState.Error ->
