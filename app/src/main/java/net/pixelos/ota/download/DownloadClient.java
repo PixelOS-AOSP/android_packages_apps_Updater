@@ -14,7 +14,8 @@ public interface DownloadClient {
 
         void onSuccess();
 
-        void onFailure(boolean cancelled);
+        /** responseCode is the HTTP status the server refused the download with, or 0. */
+        void onFailure(boolean cancelled, int responseCode);
     }
 
     interface ProgressListener {
