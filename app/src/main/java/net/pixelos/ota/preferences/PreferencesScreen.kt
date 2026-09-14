@@ -142,16 +142,16 @@ private fun PreferencesContent(
     }
 
     Category(title = stringResource(R.string.pref_category_download_install)) {
-        if (isABDevice) {
-            SwitchPreference(object : SwitchPreferenceModel {
-                override val title = stringResource(R.string.menu_incremental_updates)
-                override val summary = { incrementalUpdatesSummary }
-                override val checked = { incrementalUpdates }
-                override val onCheckedChange: (Boolean) -> Unit = { value ->
-                    coroutineScope.launch { repository.setIncrementalUpdates(value) }
-                }
-            })
+        SwitchPreference(object : SwitchPreferenceModel {
+            override val title = stringResource(R.string.menu_incremental_updates)
+            override val summary = { incrementalUpdatesSummary }
+            override val checked = { incrementalUpdates }
+            override val onCheckedChange: (Boolean) -> Unit = { value ->
+                coroutineScope.launch { repository.setIncrementalUpdates(value) }
+            }
+        })
 
+        if (isABDevice) {
             SwitchPreference(object : SwitchPreferenceModel {
                 override val title = stringResource(R.string.menu_stream_updates)
                 override val summary = { streamUpdatesSummary }
