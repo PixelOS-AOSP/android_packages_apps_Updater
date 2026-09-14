@@ -6,6 +6,9 @@
 package net.pixelos.ota.data
 
 import android.content.Context
+import android.os.Build
+import android.os.UpdateEngine
+import android.ota.nano.OtaPackageMetadata.OtaMetadata
 import android.util.Log
 import androidx.preference.PreferenceManager
 import kotlinx.coroutines.Dispatchers
@@ -15,13 +18,17 @@ import kotlinx.serialization.SerializationException
 import net.pixelos.ota.data.source.local.UpdatesLocalDataSource
 import net.pixelos.ota.data.source.network.NetworkUpdate
 import net.pixelos.ota.data.source.network.UpdatesNetworkDataSource
+import net.pixelos.ota.data.source.network.parsePackageFileRanges
 import net.pixelos.ota.data.source.network.toIncrementalUpdate
 import net.pixelos.ota.data.source.network.toUpdate
 import net.pixelos.ota.deviceinfo.DeviceInfoUtils
+import net.pixelos.ota.download.SingleRangeHttpFetcher
 import net.pixelos.ota.misc.Constants
+import net.pixelos.ota.misc.Utils
 import net.pixelos.ota.notifications.NotificationHelper
 import net.pixelos.ota.util.NetworkMonitor
 import org.json.JSONObject
+import java.io.File
 import java.io.IOException
 
 private const val TAG = "UpdatesRepository"
@@ -50,13 +57,16 @@ class UpdatesRepository(
 
         val networkUpdates = withContext(Dispatchers.IO) {
             val network = networkDataSource.fetchUpdates()
-            val incrementalUpdatesEnabled = userPreferencesRepository.getIncrementalUpdates()
-            persistIncrementalLinks(if (incrementalUpdatesEnabled) network else emptyList())
-            val deltaUrls = network.mapNotNull { it.incremental?.firstOrNull()?.url }.toSet()
+            val applicable = if (userPreferencesRepository.getIncrementalUpdates()) {
+                network.filter { isIncrementalApplicable(it) }
+            } else {
+                emptyList()
+            }
+            persistIncrementalLinks(applicable)
             network.flatMap { update ->
-                val incremental = update.toIncrementalUpdate().takeIf { incrementalUpdatesEnabled }
+                val incremental = update.toIncrementalUpdate().takeIf { update in applicable }
                 listOfNotNull(update.toUpdate(), incremental)
-            }.filter { filterUpdates(it, deltaUrls) }
+            }.filter { filterUpdates(it) }
         }
 
         val networkIds = networkUpdates.map { it.downloadId }.toSet()
@@ -121,17 +131,42 @@ class UpdatesRepository(
             .putString(Constants.PREF_INCREMENTAL_LINKS, links.toString()).apply()
     }
 
-    private fun filterUpdates(update: Update, deltaUrls: Set<String>): Boolean {
+    /**
+     * Checks that the incremental applies to the running build: update_engine verifies A/B
+     * payloads, and non-A/B packages must list this build as their source.
+     */
+    private fun isIncrementalApplicable(update: NetworkUpdate): Boolean {
+        val delta = update.incremental?.firstOrNull() ?: return false
+        val ranges = delta.otaPropertyFiles?.parsePackageFileRanges(delta.size) ?: return false
+        val fetcher = SingleRangeHttpFetcher(delta.url)
+        return try {
+            if (DeviceInfoUtils.isABDevice) {
+                val range = ranges[Constants.AB_PAYLOAD_METADATA_PATH] ?: return false
+                val metadata = File(Utils.getDownloadPath(context), "${delta.sha256}.metadata")
+                try {
+                    metadata.writeBytes(fetcher.download(range.offset, range.size))
+                    metadata.setReadable(true, false)
+                    UpdateEngine().verifyPayloadMetadata(metadata.path)
+                } finally {
+                    metadata.delete()
+                }
+            } else {
+                val range = ranges[Constants.OTA_METADATA_PB_PATH] ?: return false
+                val metadata = OtaMetadata.parseFrom(fetcher.download(range.offset, range.size))
+                Build.FINGERPRINT in metadata.precondition.build
+            }
+        } catch (e: Exception) {
+            Log.w(TAG, "${delta.filename} can't be applied to this build", e)
+            false
+        }
+    }
+
+    private fun filterUpdates(update: Update): Boolean {
         val isCurrentBuild = update.timestamp == DeviceInfoUtils.buildDateTimestamp
         val isOlderBuild = update.timestamp < DeviceInfoUtils.buildDateTimestamp
 
         if (!DeviceInfoUtils.isDowngradingAllowed && (isOlderBuild || isCurrentBuild)) {
             Log.d(TAG, "${update.name} is not newer than the current build")
-            return false
-        }
-
-        if (update.downloadUrl in deltaUrls && !DeviceInfoUtils.isABDevice) {
-            Log.d(TAG, "${update.name} is incremental but this device is not A/B")
             return false
         }
 
