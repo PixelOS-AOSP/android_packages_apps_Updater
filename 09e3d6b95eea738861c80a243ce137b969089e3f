@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebfcd55c_dc24c1a2",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/UpdaterController.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-09-15T09:11:21Z",
+      "side": 1,
+      "message": "rename this function, failInstall is very vague naming.",
+      "revId": "09e3d6b95eea738861c80a243ce137b969089e3f",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f106faf3_e1033311",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/UpdaterController.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-09-15T09:11:21Z",
+      "side": 1,
+      "message": "Move it to where it was before.",
+      "revId": "09e3d6b95eea738861c80a243ce137b969089e3f",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fc7cc96_6c0f3b57",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/UpdaterController.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-09-15T09:11:21Z",
+      "side": 1,
+      "message": "Move it to where it was before.",
+      "revId": "09e3d6b95eea738861c80a243ce137b969089e3f",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
