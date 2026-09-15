@@ -18,6 +18,24 @@
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52f406e9_afbe0b21",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/UpdaterController.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-15T11:21:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebfcd55c_dc24c1a2",
+      "revId": "09e3d6b95eea738861c80a243ce137b969089e3f",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f106faf3_e1033311",
@@ -35,6 +53,24 @@
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18597586_a7f0f669",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/UpdaterController.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-15T11:21:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f106faf3_e1033311",
+      "revId": "09e3d6b95eea738861c80a243ce137b969089e3f",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3fc7cc96_6c0f3b57",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-09-15T09:11:21Z",
       "side": 1,
       "message": "Move it to where it was before.",
+      "revId": "09e3d6b95eea738861c80a243ce137b969089e3f",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34985670_5dc67b34",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/UpdaterController.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-15T11:21:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fc7cc96_6c0f3b57",
       "revId": "09e3d6b95eea738861c80a243ce137b969089e3f",
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
     }
