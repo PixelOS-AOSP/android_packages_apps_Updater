@@ -16,6 +16,24 @@
       "message": "Would this not delete the file even if user has the option \"Auto-delete updates\" disabled?",
       "revId": "98a5429542bd9de0956e9408d447304b18c193cb",
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d85993b_315a2576",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-17T19:11:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d2f8907_036d553f",
+      "revId": "98a5429542bd9de0956e9408d447304b18c193cb",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
     }
   ]
 }
