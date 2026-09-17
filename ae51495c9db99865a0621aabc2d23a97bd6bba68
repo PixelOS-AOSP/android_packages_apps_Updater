@@ -16,6 +16,24 @@
       "message": "Will we ever face this considering everything is automated? If incremental is not there, JSON value would simply be empty for incremental, no?",
       "revId": "ae51495c9db99865a0621aabc2d23a97bd6bba68",
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7be066c8_18342a20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-17T09:31:19Z",
+      "side": 1,
+      "message": "We might delete a dropped devices\u0027 folder from our S3 bucket (or GH Release, whatever we decide to use), thereby causing the incremental to 404.",
+      "parentUuid": "276fd99d_b37f7d51",
+      "revId": "ae51495c9db99865a0621aabc2d23a97bd6bba68",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
     }
   ]
 }
