@@ -16,6 +16,24 @@
       "message": "Remove the preference as whole, and default to incrementals and full zip as fallback? Keeping user flow simple as possible and we don\u0027t really have to depend on this change anymore.",
       "revId": "8fcc98bf77fedf94cb2aeae4bb4fbae5b1b29617",
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "386cd3ea_b9ff80b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-17T09:31:54Z",
+      "side": 1,
+      "message": "Yeah agreed, will do and edit the blog to reflect the same",
+      "parentUuid": "40654984_a26c8fcf",
+      "revId": "8fcc98bf77fedf94cb2aeae4bb4fbae5b1b29617",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
     }
   ]
 }
