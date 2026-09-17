@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f79aad5_764fb43f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-17T12:49:25Z",
+      "side": 1,
+      "message": "Need review from maintainers of A-Only devices",
+      "revId": "4ef2961b6d2627fb8c4345d4bda843793f8771d7",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
