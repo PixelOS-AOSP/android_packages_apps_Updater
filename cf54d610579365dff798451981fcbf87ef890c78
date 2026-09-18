@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11a4e17d_331c48b8",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/UpdaterController.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-09-18T03:57:13Z",
+      "side": 1,
+      "message": "no need, the function itself is pretty self explanatory.",
+      "revId": "cf54d610579365dff798451981fcbf87ef890c78",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cffb0528_294be88a",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/UpdaterController.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-09-18T03:57:13Z",
+      "side": 1,
+      "message": "rename to some better variable.",
+      "range": {
+        "startLine": 679,
+        "startChar": 15,
+        "endLine": 679,
+        "endChar": 21
+      },
+      "revId": "cf54d610579365dff798451981fcbf87ef890c78",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39c716ea_354fe537",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/UpdaterController.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-09-18T03:57:13Z",
+      "side": 1,
+      "message": "Create UpdateBuilder instead?",
+      "range": {
+        "startLine": 679,
+        "startChar": 24,
+        "endLine": 683,
+        "endChar": 24
+      },
+      "revId": "cf54d610579365dff798451981fcbf87ef890c78",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
