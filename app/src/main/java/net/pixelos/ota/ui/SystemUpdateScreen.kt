@@ -96,6 +96,8 @@ fun SystemUpdateScreen(
         topBar = {
             SystemUpdateTopBar(
                 onBackClick = onBackClick,
+                canCheckForUpdates = canCheckForUpdates,
+                onCheckClick = onCheckClick,
                 onLocalUpdateClick = onLocalUpdateClick,
                 onPreferencesClick = onPreferencesClick,
                 updateOverflowActions = updateItem?.actions?.overflow ?: emptyList(),
@@ -388,6 +390,8 @@ private fun ScreenHeader(headline: String) {
 @Composable
 private fun SystemUpdateTopBar(
     onBackClick: () -> Unit,
+    canCheckForUpdates: Boolean,
+    onCheckClick: () -> Unit,
     onLocalUpdateClick: () -> Unit,
     onPreferencesClick: () -> Unit,
     updateOverflowActions: List<UpdateAction> = emptyList(),
@@ -442,6 +446,14 @@ private fun SystemUpdateTopBar(
                 expanded = menuExpanded,
                 onDismissRequest = { menuExpanded = false },
             ) {
+                DropdownMenuItem(
+                    text = { Text(stringResource(R.string.check_for_update)) },
+                    enabled = canCheckForUpdates,
+                    onClick = {
+                        menuExpanded = false
+                        onCheckClick()
+                    },
+                )
                 DropdownMenuItem(
                     text = { Text(stringResource(R.string.local_update_import)) },
                     onClick = {
