@@ -28,6 +28,9 @@ public class HttpURLConnectionClient implements DownloadClient {
     // Ref: mozilla-mobile/firefox-android AbstractFetchDownloadService.CHUNK_SIZE
     private static final int CHUNK_SIZE = 32 * 1024;
 
+    private static final int HTTP_CONNECTION_TIMEOUT = 30000;
+    private static final int HTTP_READ_TIMEOUT = 30000;
+
     private HttpURLConnection mClient;
 
     private final File mDestination;
@@ -49,7 +52,7 @@ public class HttpURLConnectionClient implements DownloadClient {
             DownloadClient.ProgressListener progressListener,
             DownloadClient.DownloadCallback callback,
             boolean useDuplicateLinks) throws IOException {
-        mClient = (HttpURLConnection) new URL(url).openConnection();
+        mClient = openConnection(new URL(url));
         mDestination = destination;
         mProgressListener = progressListener;
         mCallback = callback;
@@ -102,6 +105,13 @@ public class HttpURLConnectionClient implements DownloadClient {
 
         mDownloadThread = new DownloadThread(resume);
         mDownloadThread.start();
+    }
+
+    private static HttpURLConnection openConnection(URL url) throws IOException {
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setConnectTimeout(HTTP_CONNECTION_TIMEOUT);
+        connection.setReadTimeout(HTTP_READ_TIMEOUT);
+        return connection;
     }
 
     private static boolean isSuccessCode(int statusCode) {
@@ -192,7 +202,7 @@ public class HttpURLConnectionClient implements DownloadClient {
         private void changeClientUrl(URL newUrl) throws IOException {
             String range = mClient.getRequestProperty("Range");
             mClient.disconnect();
-            mClient = (HttpURLConnection) newUrl.openConnection();
+            mClient = openConnection(newUrl);
             if (range != null) {
                 mClient.setRequestProperty("Range", range);
             }
