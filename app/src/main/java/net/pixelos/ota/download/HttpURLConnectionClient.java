@@ -8,13 +8,18 @@ import android.os.SystemClock;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.DigestOutputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Comparator;
+import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -282,6 +287,7 @@ public class HttpURLConnectionClient implements DownloadClient {
         public void run() {
             boolean justResumed = false;
             try {
+                MessageDigest digest = MessageDigest.getInstance("SHA-256");
                 mClient.setInstanceFollowRedirects(!mUseDuplicateLinks);
                 mClient.connect();
                 int responseCode = mClient.getResponseCode();
@@ -301,11 +307,22 @@ public class HttpURLConnectionClient implements DownloadClient {
                     return;
                 }
 
+                if (mResume) {
+                    try (InputStream partial = new FileInputStream(mDestination)) {
+                        byte[] b = new byte[CHUNK_SIZE];
+                        int count;
+                        while ((count = partial.read(b)) > 0) {
+                            digest.update(b, 0, count);
+                        }
+                    }
+                }
+
                 mCallback.onResponse(new Headers());
 
                 try (
                         InputStream inputStream = mClient.getInputStream();
-                        OutputStream outputStream = new FileOutputStream(mDestination, mResume)
+                        OutputStream outputStream = new DigestOutputStream(
+                                new FileOutputStream(mDestination, mResume), digest)
                 ) {
                     mTotalBytes = mClient.getContentLengthLong() + mTotalBytesRead;
                     byte[] b = new byte[CHUNK_SIZE];
@@ -329,10 +346,10 @@ public class HttpURLConnectionClient implements DownloadClient {
                     if (isInterrupted()) {
                         mCallback.onFailure(true);
                     } else {
-                        mCallback.onSuccess();
+                        mCallback.onSuccess(HexFormat.of().formatHex(digest.digest()));
                     }
                 }
-            } catch (IOException e) {
+            } catch (IOException | NoSuchAlgorithmException e) {
                 Log.e(TAG, "Error downloading file", e);
                 mCallback.onFailure(isInterrupted());
             } finally {

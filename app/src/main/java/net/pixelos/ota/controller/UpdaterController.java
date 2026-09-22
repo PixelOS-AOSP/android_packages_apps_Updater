@@ -20,6 +20,7 @@ import net.pixelos.ota.data.UpdateStatus;
 import net.pixelos.ota.data.UserPreferencesRepository;
 import net.pixelos.ota.data.source.local.UpdatesLocalDataSource;
 import net.pixelos.ota.data.source.local.UpdatesDatabase;
+import net.pixelos.ota.deviceinfo.DeviceInfoUtils;
 import net.pixelos.ota.download.DownloadClient;
 import net.pixelos.ota.misc.Constants;
 import net.pixelos.ota.misc.Utils;
@@ -27,6 +28,7 @@ import net.pixelos.ota.misc.Utils;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.security.SignatureException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -188,7 +190,7 @@ public class UpdaterController {
             }
 
             @Override
-            public void onSuccess() {
+            public void onSuccess(String sha256) {
                 Log.d(TAG, "Download complete");
                 DownloadEntry entry = mDownloads.get(downloadId);
                 if (entry != null) {
@@ -196,7 +198,7 @@ public class UpdaterController {
                         entry.mUpdate = entry.mUpdate.withStatus(UpdateStatus.VERIFYING);
                     }
                     removeDownloadClient(entry);
-                    verifyUpdateAsync(downloadId);
+                    verifyUpdateAsync(downloadId, sha256);
                     notifyUpdateChange(downloadId);
                     tryReleaseWakelock();
                 }
@@ -276,14 +278,14 @@ public class UpdaterController {
     }
 
     @SuppressLint("SetWorldReadable")
-    private void verifyUpdateAsync(final String downloadId) {
+    private void verifyUpdateAsync(final String downloadId, final String sha256) {
         mVerifyingUpdates.add(downloadId);
         new Thread(() -> {
             DownloadEntry entry = mDownloads.get(downloadId);
             if (entry != null) {
                 Update update = entry.mUpdate;
                 File file = update.getFile();
-                if (file.exists() && verifyPackage(file)) {
+                if (file.exists() && verifyPackage(file, downloadId, sha256)) {
                     file.setReadable(true, false);
                     synchronized (entry) {
                         entry.mUpdate = entry.mUpdate.withStatus(UpdateStatus.VERIFIED);
@@ -304,9 +306,17 @@ public class UpdaterController {
         }).start();
     }
 
-    private boolean verifyPackage(File file) {
+    private boolean verifyPackage(File file, String downloadId, String sha256) {
         try {
-            android.os.RecoverySystem.verifyPackage(file, null, null);
+            // update_engine verifies the payload signature while applying it, so a
+            // download matching the advertised checksum doesn't need to be read again.
+            if (sha256 != null && DeviceInfoUtils.isABDevice()) {
+                if (!sha256.equals(downloadId)) {
+                    throw new SignatureException("Checksum mismatch: " + sha256);
+                }
+            } else {
+                android.os.RecoverySystem.verifyPackage(file, null, null);
+            }
             Log.e(TAG, "Verification successful");
             return true;
         } catch (Exception e) {
@@ -475,7 +485,7 @@ public class UpdaterController {
         if (isFullyDownloaded(update)) {
             Log.d(TAG, "File already downloaded, starting verification");
             entry.mUpdate = entry.mUpdate.withStatus(UpdateStatus.VERIFYING);
-            verifyUpdateAsync(downloadId);
+            verifyUpdateAsync(downloadId, null);
             notifyUpdateChange(downloadId);
         } else {
             DownloadClient downloadClient;

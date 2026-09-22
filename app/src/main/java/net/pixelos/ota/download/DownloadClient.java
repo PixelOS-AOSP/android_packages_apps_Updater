@@ -12,7 +12,7 @@ public interface DownloadClient {
     interface DownloadCallback {
         void onResponse(Headers headers);
 
-        void onSuccess();
+        void onSuccess(String sha256);
 
         void onFailure(boolean cancelled);
 
