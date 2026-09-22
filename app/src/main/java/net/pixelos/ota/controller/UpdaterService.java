@@ -83,6 +83,7 @@ public class UpdaterService extends Service {
                 NotificationHelper.CHANNEL_ONGOING);
         mNotificationBuilder.setSmallIcon(R.drawable.ic_notification);
         mNotificationBuilder.setShowWhen(false);
+        mNotificationBuilder.setRequestPromotedOngoing(true);
         mNotificationStyle = new NotificationCompat.BigTextStyle();
         mNotificationBuilder.setStyle(mNotificationStyle);
 
@@ -259,6 +260,11 @@ public class UpdaterService extends Service {
     }
 
     private void handleUpdateStatusChange(Update update) {
+        // Only progress updates fill these in.
+        mNotificationBuilder.setSubText(null);
+        mNotificationBuilder.setContentText(null);
+        mNotificationBuilder.setShortCriticalText(null);
+
         switch (update.getStatus()) {
             case DELETED: {
                 stopForeground(STOP_FOREGROUND_DETACH);
@@ -465,16 +471,21 @@ public class UpdaterService extends Service {
     private void handleDownloadProgressChange(Update update) {
         int progress = update.getProgress();
         mNotificationBuilder.setProgress(100, progress, false);
+        mNotificationBuilder.setStyle(new NotificationCompat.ProgressStyle()
+                .setStyledByProgress(true)
+                .setProgress(progress));
 
         String percent = NumberFormat.getPercentInstance().format(progress / 100.f);
-        mNotificationStyle.setSummaryText(percent);
+        mNotificationBuilder.setSubText(percent);
 
         setNotificationTitle(update);
 
         String speed = Formatter.formatFileSize(this, update.getSpeed());
         CharSequence eta = StringUtil.formatETA(this, update.getEta() * 1000);
-        mNotificationStyle.bigText(
+        mNotificationBuilder.setContentText(
                 getString(R.string.text_download_speed, eta, speed));
+        mNotificationBuilder.setShortCriticalText(
+                update.getEta() > 0 ? eta.toString() : null);
 
         mNotificationManager.notify(NOTIFICATION_ID, mNotificationBuilder.build());
     }
@@ -484,9 +495,19 @@ public class UpdaterService extends Service {
         int progress = update.getInstallProgress();
         mNotificationBuilder.setProgress(100, progress, false);
         String percent = NumberFormat.getPercentInstance().format(progress / 100.f);
-        mNotificationStyle.setSummaryText(percent);
+        mNotificationBuilder.setSubText(percent);
         boolean notAB = UpdateInstaller.isInstalling();
-        mNotificationStyle.bigText(notAB ? getString(R.string.dialog_prepare_zip_message) :
+        NotificationCompat.ProgressStyle style = new NotificationCompat.ProgressStyle()
+                .setStyledByProgress(true)
+                .setProgress(progress);
+        if (!notAB) {
+            for (int weight : ABUpdateInstaller.getInstance(this, mUpdaterController,
+                    mUserPreferencesRepository).getStageWeights()) {
+                style.addProgressSegment(new NotificationCompat.ProgressStyle.Segment(weight));
+            }
+        }
+        mNotificationBuilder.setStyle(style);
+        mNotificationBuilder.setContentText(notAB ? getString(R.string.dialog_prepare_zip_message) :
                 update.isFinalizing() ?
                         getString(R.string.finalizing_package) :
                         getString(R.string.preparing_ota_first_boot));
