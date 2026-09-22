@@ -50,7 +50,7 @@ public class UpdaterController {
 
     private static UpdaterController sUpdaterController;
 
-    private static final int MAX_REPORT_INTERVAL_MS = 1000;
+    private static final int REPORT_INTERVAL_MS = 250;
 
     private final Context mContext;
     private final UpdatesLocalDataSource mUpdatesLocalDataSource;
@@ -240,7 +240,6 @@ public class UpdaterController {
     private DownloadClient.ProgressListener getProgressListener(final String downloadId) {
         return new DownloadClient.ProgressListener() {
             private long mLastUpdate = 0;
-            private int mProgress = 0;
 
             @Override
             public void update(long bytesRead, long contentLength, long speed, long eta) {
@@ -260,9 +259,8 @@ public class UpdaterController {
                     return;
                 }
                 final long now = SystemClock.elapsedRealtime();
-                int progress = Math.round(bytesRead * 100f / contentLength);
-                if (progress != mProgress || mLastUpdate - now > MAX_REPORT_INTERVAL_MS) {
-                    mProgress = progress;
+                if (now - mLastUpdate >= REPORT_INTERVAL_MS) {
+                    int progress = Math.round(bytesRead * 100f / contentLength);
                     mLastUpdate = now;
                     synchronized (entry) {
                         entry.mUpdate = entry.mUpdate.toBuilder()
