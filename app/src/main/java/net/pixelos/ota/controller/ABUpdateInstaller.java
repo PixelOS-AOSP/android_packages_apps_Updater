@@ -6,6 +6,7 @@ package net.pixelos.ota.controller;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.PowerManager;
 import android.os.ServiceSpecificException;
 import android.os.UpdateEngine;
 import android.os.UpdateEngineCallback;
@@ -40,6 +41,8 @@ class ABUpdateInstaller {
     private static final String PREF_INSTALLING_AB_ID = "installing_ab_id";
     private static final String PREF_INSTALLING_SUSPENDED_AB_ID = "installing_suspended_ab_id";
 
+    private static final long WAKELOCK_TIMEOUT = 60 * 60 * 1000;
+
     private static ABUpdateInstaller sInstance = null;
 
     private final UpdaterController mUpdaterController;
@@ -49,6 +52,10 @@ class ABUpdateInstaller {
 
     private final UpdateEngine mUpdateEngine;
     private boolean mBound;
+
+    // update_engine doesn't keep the device awake, so the installation barely
+    // progresses while the device is suspended.
+    private final PowerManager.WakeLock mWakeLock;
 
     private boolean mFinalizing;
     private int mProgress;
@@ -156,6 +163,9 @@ class ABUpdateInstaller {
         mUserPreferencesRepository = userPreferencesRepository;
         mContext = context.getApplicationContext();
         mUpdateEngine = new UpdateEngine();
+        mWakeLock = mContext.getSystemService(PowerManager.class).newWakeLock(
+                PowerManager.PARTIAL_WAKE_LOCK, "Updater:ABUpdateInstaller");
+        mWakeLock.setReferenceCounted(false);
     }
 
     static synchronized ABUpdateInstaller getInstance(Context context,
@@ -276,6 +286,7 @@ class ABUpdateInstaller {
             }
             throw e;
         }
+        mWakeLock.acquire(WAKELOCK_TIMEOUT);
 
         Update update = mUpdaterController.getUpdate(mDownloadId);
         mUpdaterController.setUpdate(mDownloadId,
@@ -312,6 +323,7 @@ class ABUpdateInstaller {
     }
 
     private void installationDone(boolean needsReboot) {
+        mWakeLock.release();
         String id = needsReboot ? mDownloadId : null;
         PreferenceManager.getDefaultSharedPreferences(mContext).edit()
                 .putString(Constants.PREF_NEEDS_REBOOT_ID, id)
@@ -352,6 +364,7 @@ class ABUpdateInstaller {
         }
 
         mUpdateEngine.suspend();
+        mWakeLock.release();
 
         Update update = mUpdaterController.getUpdate(mDownloadId);
         mUpdaterController.setUpdate(mDownloadId,
@@ -376,6 +389,7 @@ class ABUpdateInstaller {
         }
 
         mUpdateEngine.resume();
+        mWakeLock.acquire(WAKELOCK_TIMEOUT);
 
         Update update = mUpdaterController.getUpdate(mDownloadId);
         mUpdaterController.setUpdate(mDownloadId, update.toBuilder()
