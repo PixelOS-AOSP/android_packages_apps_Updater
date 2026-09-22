@@ -8,6 +8,8 @@ package net.pixelos.ota.updates.action
 import android.app.Activity
 import android.content.Intent
 import android.os.PowerManager
+import android.os.StatFs
+import android.text.format.Formatter
 import androidx.compose.ui.text.AnnotatedString
 import net.pixelos.ota.R
 import net.pixelos.ota.UpdaterApplication
@@ -37,8 +39,10 @@ class UpdateActionHandler(
         val downloadId = update.downloadId
         when (action.type) {
             UpdateActionType.START_DOWNLOAD -> runWithActiveDownloadWarning(update) {
-                runDownloadWithMeteredWarning {
-                    updaterController.startDownload(downloadId)
+                runDownloadWithDiskSpaceCheck(update) {
+                    runDownloadWithMeteredWarning {
+                        updaterController.startDownload(downloadId)
+                    }
                 }
             }
 
@@ -47,8 +51,10 @@ class UpdateActionHandler(
                 if (updaterController.isFullyDownloaded(update)) {
                     updaterController.resumeDownload(downloadId)
                 } else {
-                    runDownloadWithMeteredWarning {
-                        updaterController.resumeDownload(downloadId)
+                    runDownloadWithDiskSpaceCheck(update) {
+                        runDownloadWithMeteredWarning {
+                            updaterController.resumeDownload(downloadId)
+                        }
                     }
                 }
             }
@@ -175,6 +181,28 @@ class UpdateActionHandler(
             title = activity.getString(R.string.download_switch_confirm_title),
             message = activity.getString(R.string.download_switch_confirm_message),
             onConfirm = downloadAction,
+        )
+    }
+
+    private fun runDownloadWithDiskSpaceCheck(update: Update, downloadAction: () -> Unit) {
+        val required = update.fileSize - (update.file?.length() ?: 0L)
+        val available = StatFs(Utils.getDownloadPath(activity).path).availableBytes
+        if (available >= required) {
+            downloadAction()
+            return
+        }
+
+        showDialog(
+            AlertDialogState(
+                title = activity.getString(R.string.dialog_disk_space_title),
+                text = AnnotatedString(
+                    activity.getString(
+                        R.string.dialog_disk_space_message,
+                        Formatter.formatShortFileSize(activity, available),
+                        Formatter.formatShortFileSize(activity, required),
+                    )
+                ),
+            )
         )
     }
 
