@@ -43,6 +43,11 @@ class ABUpdateInstaller {
 
     private static final long WAKELOCK_TIMEOUT = 60 * 60 * 1000;
 
+    // Share of the progress for applying, verifying and finalizing the payload.
+    // Streaming also downloads the payload while applying it.
+    private static final int[] STAGE_WEIGHTS = {40, 5, 55};
+    private static final int[] STAGE_WEIGHTS_STREAMING = {60, 5, 35};
+
     private static ABUpdateInstaller sInstance = null;
 
     private final UpdaterController mUpdaterController;
@@ -57,6 +62,7 @@ class ABUpdateInstaller {
     // progresses while the device is suspended.
     private final PowerManager.WakeLock mWakeLock;
 
+    private boolean mStreaming;
     private boolean mFinalizing;
     private int mProgress;
 
@@ -73,13 +79,24 @@ class ABUpdateInstaller {
 
             switch (status) {
                 case UpdateEngine.UpdateStatusConstants.DOWNLOADING:
+                case UpdateEngine.UpdateStatusConstants.VERIFYING:
                 case UpdateEngine.UpdateStatusConstants.FINALIZING: {
                     if (update.getStatus() != UpdateStatus.INSTALLING) {
                         update = update.withStatus(UpdateStatus.INSTALLING);
                         mUpdaterController.setUpdate(mDownloadId, update);
                         mUpdaterController.notifyUpdateChange(mDownloadId);
                     }
-                    mProgress = Math.round(percent * 100);
+                    int[] weights = getStageWeights();
+                    int offset = 0;
+                    int weight = weights[0];
+                    if (status == UpdateEngine.UpdateStatusConstants.VERIFYING) {
+                        offset = weights[0];
+                        weight = weights[1];
+                    } else if (status == UpdateEngine.UpdateStatusConstants.FINALIZING) {
+                        offset = weights[0] + weights[1];
+                        weight = weights[2];
+                    }
+                    mProgress = offset + Math.round(percent * weight);
                     mFinalizing = status == UpdateEngine.UpdateStatusConstants.FINALIZING;
                     update = update.toBuilder()
                             .setInstallProgress(mProgress)
@@ -222,6 +239,7 @@ class ABUpdateInstaller {
             return;
         }
 
+        mStreaming = false;
         String zipFileUri = "file://" + file.getAbsolutePath();
         applyUpdate(zipFileUri, offset, 0, headerKeyValuePairs);
     }
@@ -233,6 +251,7 @@ class ABUpdateInstaller {
         }
 
         mDownloadId = downloadId;
+        mStreaming = true;
 
         Update update = mUpdaterController.getUpdate(mDownloadId);
         String downloadUrl = update.getDownloadUrl();
@@ -250,6 +269,10 @@ class ABUpdateInstaller {
                 mUpdaterController.notifyUpdateChange(downloadId);
             }
         }, "UpdaterStreamingInstall").start();
+    }
+
+    int[] getStageWeights() {
+        return mStreaming ? STAGE_WEIGHTS_STREAMING : STAGE_WEIGHTS;
     }
 
     private String[] fetchPayloadProperties(String downloadUrl, long offset, long size)
