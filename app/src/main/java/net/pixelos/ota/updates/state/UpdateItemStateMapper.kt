@@ -51,7 +51,7 @@ class UpdateItemStateMapper(
                 eta = "",
             )
 
-            state.isVerifying || state.isFinalizing -> ProgressState.Indeterminate
+            state.isVerifying -> ProgressState.Indeterminate
 
             state.isInstalling -> ProgressState.Determinate(
                 percent = update.installProgress.toFloat(),
