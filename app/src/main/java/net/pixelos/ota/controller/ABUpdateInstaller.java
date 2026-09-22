@@ -10,6 +10,7 @@ import android.os.PowerManager;
 import android.os.ServiceSpecificException;
 import android.os.UpdateEngine;
 import android.os.UpdateEngineCallback;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -40,6 +41,7 @@ class ABUpdateInstaller {
 
     private static final String PREF_INSTALLING_AB_ID = "installing_ab_id";
     private static final String PREF_INSTALLING_SUSPENDED_AB_ID = "installing_suspended_ab_id";
+    private static final String PREF_NEEDS_REBOOT_BOOT_COUNT = "needs_reboot_boot_count";
 
     private static final long WAKELOCK_TIMEOUT = 60 * 60 * 1000;
 
@@ -137,16 +139,30 @@ class ABUpdateInstaller {
         }
     };
 
+    private static int getBootCount(Context context) {
+        return Settings.Global.getInt(context.getContentResolver(), Settings.Global.BOOT_COUNT, 0);
+    }
+
+    // The id is only cleared once BOOT_COMPLETED is handled, so it's still set
+    // for a while after the reboot. The boot count tells whether it happened.
+    private static String getNeedsRebootId(Context context) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        if (pref.getInt(PREF_NEEDS_REBOOT_BOOT_COUNT, -1) != getBootCount(context)) {
+            return null;
+        }
+        return pref.getString(Constants.PREF_NEEDS_REBOOT_ID, null);
+    }
+
     static synchronized boolean isInstallingUpdate(Context context) {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         return pref.getString(ABUpdateInstaller.PREF_INSTALLING_AB_ID, null) != null ||
-                pref.getString(Constants.PREF_NEEDS_REBOOT_ID, null) != null;
+                getNeedsRebootId(context) != null;
     }
 
     static synchronized boolean isInstallingUpdate(Context context, String downloadId) {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         return downloadId.equals(pref.getString(ABUpdateInstaller.PREF_INSTALLING_AB_ID, null)) ||
-                TextUtils.equals(pref.getString(Constants.PREF_NEEDS_REBOOT_ID, null), downloadId);
+                TextUtils.equals(getNeedsRebootId(context), downloadId);
     }
 
     static synchronized boolean isInstallingUpdateSuspended(Context context) {
@@ -155,9 +171,7 @@ class ABUpdateInstaller {
     }
 
     static synchronized boolean isWaitingForReboot(Context context, String downloadId) {
-        String waitingId = PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(Constants.PREF_NEEDS_REBOOT_ID, null);
-        return TextUtils.equals(waitingId, downloadId);
+        return TextUtils.equals(getNeedsRebootId(context), downloadId);
     }
 
     private boolean shouldEnablePerformanceMode(boolean userPreferenceEnabled) {
@@ -360,6 +374,7 @@ class ABUpdateInstaller {
         String id = needsReboot ? mDownloadId : null;
         PreferenceManager.getDefaultSharedPreferences(mContext).edit()
                 .putString(Constants.PREF_NEEDS_REBOOT_ID, id)
+                .putInt(PREF_NEEDS_REBOOT_BOOT_COUNT, getBootCount(mContext))
                 .remove(PREF_INSTALLING_AB_ID)
                 .apply();
     }
