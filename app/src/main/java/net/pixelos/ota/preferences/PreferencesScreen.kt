@@ -75,6 +75,7 @@ private fun PreferencesContent(
 ) {
     val coroutineScope = rememberCoroutineScope()
     val abPerfMode by repository.abPerfModeFlow.collectAsStateWithLifecycle(false)
+    val abWakeLock by repository.abWakeLockFlow.collectAsStateWithLifecycle(true)
     val batteryState by batteryMonitor.batteryState.collectAsStateWithLifecycle(
         batteryMonitor.currentBatteryState
     )
@@ -93,6 +94,7 @@ private fun PreferencesContent(
     val meteredNetworkWarningSummary = stringResource(R.string.menu_metered_network_warning_summary)
     val abPerfModeSummary = stringResource(R.string.menu_ab_perf_mode_summary)
     val abPerfModeChargingSummary = stringResource(R.string.menu_ab_perf_mode_summary_charging)
+    val abWakeLockSummary = stringResource(R.string.menu_ab_wake_lock_summary)
     val updateRecoverySummary = stringResource(R.string.menu_update_recovery_summary)
     val selectedCheckInterval = remember(checkInterval) {
         object : IntState {
@@ -183,6 +185,17 @@ private fun PreferencesContent(
                 override val checked = { batteryState.isAcCharging || abPerfMode }
                 override val onCheckedChange: (Boolean) -> Unit = { value ->
                     coroutineScope.launch { repository.setAbPerfMode(value) }
+                }
+            })
+        }
+
+        if (isABDevice) {
+            SwitchPreference(object : SwitchPreferenceModel {
+                override val title = stringResource(R.string.menu_ab_wake_lock)
+                override val summary = { abWakeLockSummary }
+                override val checked = { abWakeLock }
+                override val onCheckedChange: (Boolean) -> Unit = { value ->
+                    coroutineScope.launch { repository.setAbWakeLock(value) }
                 }
             })
         }

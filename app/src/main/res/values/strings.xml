@@ -119,6 +119,8 @@
     <string name="menu_ab_perf_mode">Prioritize update process</string>
     <string name="menu_ab_perf_mode_summary">Speed up updates at the cost of device performance</string>
     <string name="menu_ab_perf_mode_summary_charging">Enabled automatically while charging on AC power</string>
+    <string name="menu_ab_wake_lock">Keep awake while installing</string>
+    <string name="menu_ab_wake_lock_summary">Keep the CPU awake when installing an update, so it finishes quickly even with the screen off</string>
     <string name="menu_update_recovery">Update recovery</string>
     <string name="menu_update_recovery_summary">Update recovery partition along with the OS</string>
 

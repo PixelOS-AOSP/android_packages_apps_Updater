@@ -35,6 +35,7 @@ private val Context.userPreferencesDataStore: DataStore<Preferences> by preferen
 
 private object UserPreferencesKeys {
     val AB_PERF_MODE = booleanPreferencesKey("ab_perf_mode")
+    val AB_WAKE_LOCK = booleanPreferencesKey("ab_wake_lock")
     val AUTO_DELETE = booleanPreferencesKey("auto_delete_updates")
     val CHECK_INTERVAL = stringPreferencesKey("check_interval")
     val METERED_NETWORK_WARNING = booleanPreferencesKey("metered_network_warning")
@@ -106,6 +107,18 @@ class UserPreferencesRepository(context: Context) {
 
     suspend fun setAbPerfMode(value: Boolean) {
         userPreferences.edit { it[UserPreferencesKeys.AB_PERF_MODE] = value }
+    }
+
+    val abWakeLockFlow: Flow<Boolean> = userPreferencesFlow.map { preferences ->
+        preferences[UserPreferencesKeys.AB_WAKE_LOCK] ?: true
+    }
+
+    suspend fun getAbWakeLock(): Boolean = abWakeLockFlow.first()
+
+    fun getAbWakeLockBlocking(): Boolean = runBlocking { getAbWakeLock() }
+
+    suspend fun setAbWakeLock(value: Boolean) {
+        userPreferences.edit { it[UserPreferencesKeys.AB_WAKE_LOCK] = value }
     }
 
     val autoDeleteFlow: Flow<Boolean> = userPreferencesFlow.map { preferences ->
