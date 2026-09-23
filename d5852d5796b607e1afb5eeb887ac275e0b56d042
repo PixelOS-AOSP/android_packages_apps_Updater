@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07a7a036_21503936",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-09-23T13:37:56Z",
+      "side": 1,
+      "message": "cleanup, you just have to acquire and release before / after installation.",
+      "revId": "d5852d5796b607e1afb5eeb887ac275e0b56d042",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
