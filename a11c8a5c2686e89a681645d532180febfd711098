@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "616da198_f46101d9",
+        "filename": "app/src/main/java/net/pixelos/ota/controller/UpdaterController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-09-23T13:45:51Z",
+      "side": 1,
+      "message": "this is no longer updated now. is that intended?\ndoesnt this feel like unnecessary diff",
+      "revId": "a11c8a5c2686e89a681645d532180febfd711098",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
