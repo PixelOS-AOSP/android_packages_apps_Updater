@@ -16,6 +16,24 @@
       "message": "how? if the download exceeded timeout duration, it would simply fail though.",
       "revId": "53cbbc3036be83c9890f6102e8b3ce2409706b71",
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0991d35_46cb47b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-23T14:30:42Z",
+      "side": 1,
+      "message": "it is only when the download is stalled (ie. no data is downloaded at all presently), the downloads can otherwise take any long, it should not matter",
+      "parentUuid": "ba18be77_6f9bb9e3",
+      "revId": "53cbbc3036be83c9890f6102e8b3ce2409706b71",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
     }
   ]
 }
