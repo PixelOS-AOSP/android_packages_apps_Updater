@@ -16,6 +16,24 @@
       "message": "pretty sure the download will just fail fine and is self explanatory.",
       "revId": "e91e17c3c4d3e9f8cc34b708d5e5c6edbfe81d31",
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e94de993_0b256253",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-23T14:31:57Z",
+      "side": 1,
+      "message": "it will fail after downloading",
+      "parentUuid": "171243c6_0144f60c",
+      "revId": "e91e17c3c4d3e9f8cc34b708d5e5c6edbfe81d31",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
     }
   ]
 }
