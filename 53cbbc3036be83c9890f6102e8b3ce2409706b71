@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba18be77_6f9bb9e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2026-09-23T13:42:48Z",
+      "side": 1,
+      "message": "how? if the download exceeded timeout duration, it would simply fail though.",
+      "revId": "53cbbc3036be83c9890f6102e8b3ce2409706b71",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    }
+  ]
+}
