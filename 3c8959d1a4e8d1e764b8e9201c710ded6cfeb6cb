@@ -16,6 +16,24 @@
       "message": "previous setup is fine, no need of alot of unnecessary changes just for same output.",
       "revId": "3c8959d1a4e8d1e764b8e9201c710ded6cfeb6cb",
       "serverId": "58543e18-2196-4633-8043-7787712585ad"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "763451e3_3fffcdd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-29T04:54:41Z",
+      "side": 1,
+      "message": "It is not the same output. Once an A/B update gets downloaded, it reads the whole zip once more for \"verifying\" step. However, since we stream the OTA by default, might be redundant.",
+      "parentUuid": "9c2145e4_0b71a67a",
+      "revId": "3c8959d1a4e8d1e764b8e9201c710ded6cfeb6cb",
+      "serverId": "58543e18-2196-4633-8043-7787712585ad"
     }
   ]
 }
